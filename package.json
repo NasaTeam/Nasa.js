@@ -1,0 +1,38 @@
+{
+  "name": "nasa.js",
+  "version": "0.0.0-alpha",
+  "homepage": "https://github.com/cssmagic/nasa.js",
+  "author": "cssmagic <cssmagic.cn@gmail.com>",
+  "description": "Util Library for DApp development on Nebulas Blockchain.",
+  "main": "./src/index.js",
+  "keywords": [
+    "nebulas",
+    "blockchain",
+    "dapp"
+  ],
+  "license": "LGPL-3.0",
+  "scripts": {
+    "clean": "rm -rf ./www/dist/*",
+    "dev": "npm run development",
+    "prod": "npm run production",
+    "development": "npm run clean && cross-env NODE_ENV=development npm run mix",
+    "watch": "npm run clean && cross-env NODE_ENV=development npm run mix -- --watch",
+    "production": "cross-env NODE_ENV=production npm run mix",
+    "mix": "webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "cmui-gearbox": "^0.7.1",
+    "underscore": "^1.8.3",
+    "zepto.js": "1.*",
+    "browser-sync": "^2.24.4",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "cross-env": "^3.2.3",
+    "glob": "^7.0.3",
+    "laravel-mix": "^2.1.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "webpack": "^3.11.0"
+  }
+}
