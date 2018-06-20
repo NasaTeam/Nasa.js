@@ -214,7 +214,9 @@ Promise。处理结果如下：
 * Fulfilled：用户
 * Rejected：
 
-### `Nasa.user.getAvatar(addr)`
+### ~~`Nasa.user.getAvatar(addr)`~~
+
+> ⚠️ 计划中，暂未实现！
 
 获取指定用户的头像。头像生成算法与 “星云钱包 Chrome 扩展” 一致。
 
@@ -224,7 +226,7 @@ Promise。处理结果如下：
 
 #### 返回值
 
-* 图片数据。采用 Base64 编码，并已加 `data:` 协议前缀，可以直接填充到 `<img>` 元素的 `src` 属性，当然也可以赋值给元素的 `.style.backgroundImage` 属性。
+* 字符串。采用 Base64 编码的图片数据，并已加 `data:` 协议前缀。可以直接填充到 `<img>` 元素的 `src` 属性，也可以赋值给元素的 `.style.backgroundImage` 属性。
 
 ## 浏览器环境
 
