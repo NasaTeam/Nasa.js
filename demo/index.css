@@ -460,18 +460,18 @@ button.cm-btn {
   border-style: solid;
 }
 .cm-btn {
-  color: #0082f1;
+  color: #46b8da;
 }
 /* --------------------------------------------- */
 /** status **/
 html.no-touch .cm-btn:not(.disabled):not(:disabled):not(.active):not(:active):hover {
-  border-color: #0062b5;
-  background-color: #0062b5;
+  border-color: #2493b4;
+  background-color: #2493b4;
 }
 .cm-btn:not(.disabled):not(:disabled):active,
 .cm-btn.active {
-  border-color: #003460;
-  background-color: #004178;
+  border-color: #1d7690;
+  background-color: #1f7f9c;
 }
 body {
   overflow-x: hidden;
@@ -503,7 +503,7 @@ body > footer {
 }
 body > section {
   margin-top: 20px;
-  padding: 0.5em 20px 1.5em;
+  padding: 1em 20px 1.5em;
   background-color: #fff;
 }
 body > section > h2 {
@@ -526,8 +526,9 @@ section.intro {
   display: block;
   box-sizing: border-box;
   width: 100%;
-  border: 1px solid #0082f1;
+  font-family: Menlo, Consolas, monospace;
+  border: 1px solid #999;
   border-radius: 4px;
-  padding: 5px;
+  padding: 5px 10px;
   line-height: 28px;
 }

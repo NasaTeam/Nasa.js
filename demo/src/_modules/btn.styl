@@ -29,7 +29,9 @@ btn()
 		button&
 			border-style solid
 
-	$cm-btn-color = $cm-color-primary
+	$cm-btn-color = #46b8da
+	//$cm-btn-color = #4cae4c
+	//$cm-btn-color = #555
 	.cm-btn
 		&
 			color $cm-btn-color
@@ -48,8 +50,8 @@ btn()
 
 	// active
 	-btn-active-style($color)
-		border-color darken($color, 60%)
-		background-color darken($color, 50%)
+		border-color darken($color, 40%)
+		background-color darken($color, 35%)
 
 	.cm-btn:not(.disabled):not(:disabled):active
 	.cm-btn.active
