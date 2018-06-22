@@ -40,6 +40,7 @@ if (program.MIX_PROXY) {
 			'./demo/*.css',
 			'./demo/*.js',
 			'./dist/**/*.js',
+			'./.tmp/nasa*.js',
 		],
 		// notify: false,
 		browser: [],
@@ -47,7 +48,7 @@ if (program.MIX_PROXY) {
 }
 
 // tasks - js
-mix.js('./src/index.js', './dist/nasa.js')
+mix.js('./src/index.js', './.tmp/nasa-core.js')
 
 // task - css
 // mix.stylus('./demo/index.styl', './demo/')

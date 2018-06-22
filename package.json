@@ -12,7 +12,7 @@
   ],
   "license": "LGPL-3.0",
   "scripts": {
-    "clean": "rm -rf ./www/dist/*",
+    "clean": "rm -rf ./dist/*",
     "dev": "npm run development",
     "prod": "npm run production",
     "development": "npm run clean && cross-env NODE_ENV=development npm run mix",
