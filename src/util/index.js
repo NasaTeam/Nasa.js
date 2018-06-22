@@ -7,3 +7,9 @@ function isValidTxHash(str) {
 function isValidPayId(str) {
 	return /^\w{32}$/.test(str)
 }
+
+export {
+	isValidAddr,
+	isValidTxHash,
+	isValidPayId,
+}
