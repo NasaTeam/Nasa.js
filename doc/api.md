@@ -197,15 +197,16 @@ Nasa.contract.set({
 
 * `envName` -- 字符串。环境名。取值参见 [“常量 → 环境名”](#const--env) 段落。
 
-### `Nasa.env.get()`
+### `Nasa.env.get()` <a name="env--get">&nbsp;</a>
 
 获取当前环境。
 
 其它 API 会用到此 API，比如 [`Nasa.contract.get()`](#contract--get)。
 
+
 ## 用户
 
-### `Nasa.user.getAddr()`
+### `Nasa.user.getAddr()` <a name="user--getAddr">&nbsp;</a>
 
 获取当前用户的钱包地址。此功能依赖 “星云钱包 Chrome 扩展” 来实现，因此只在 PC 端有效；如果扩展移除了相关接口，则此 API 也将失效。
 
