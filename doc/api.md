@@ -64,7 +64,7 @@ Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 
 ## 核心功能 <a name="core">&nbsp;</a>
 
-### `Nasa.call(contractAddr, fnName, args = [], value = '0')` <a name="core--call">&nbsp;</a>
+### `Nasa.call(contractAddr, fnName, args = [], options = {})` <a name="core--call">&nbsp;</a>
 
 调用合约方法，并向链写入数据，因此需要以交易的方式实现（一般称作 “写入型调用” 或 “交易型调用”）。
 
@@ -73,12 +73,14 @@ Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 * `contractAddr` -- 字符串。合约地址。如果你用 [`Nasa.contract.set()`](#contract--set) API 配置了合约，则这里也可以传入合约名；如果你配置了默认合约，且此参数为空值或假值时，将取默认合约。
 * `fnName` -- 字符串。合约方法名。
 * `args` -- 数组。传给合约方法的参数。
+* `options` -- 对象。附加选项。可选的 key 如下：
+	* `value` -- 字符串。转账数额（单位 NAS）。
 
 #### 返回值
 
 Promise。处理结果如下：
 
-* Fulfilled：交易流水号，可通过 [`Nasa.checkTx()`](#core--checkTx) 查询交易结果和调用结果
+* Fulfilled：字符串。交易流水号，可通过 [`Nasa.checkTx()`](#core--checkTx) 查询交易状态和调用结果。
 * Rejected：
 	* 当参数错误时抛 xxx 错误
 	* 用户取消时抛 xxx 错误
@@ -97,7 +99,7 @@ Promise。处理结果如下：
 
 Promise。处理结果如下：
 
-* Fulfilled：调用结果
+* Fulfilled：对象。调用结果。
 * Rejected：
 	* 当参数错误时抛 xxx 错误
 	* 网络错误时抛 xxx 错误
@@ -116,7 +118,7 @@ Promise。处理结果如下：
 
 Promise。处理结果如下：
 
-* Fulfilled：交易详细信息
+* Fulfilled：对象。交易详细信息。
 * Rejected：
 	* 当参数错误时抛 xxx 错误
 	* 网络错误时抛 xxx 错误
@@ -170,8 +172,6 @@ Nasa.contract.set({
 	}
 })
 ```
-
-
 
 ### `Nasa.contract.get(contractName = 'default')` <a name="contract--get">&nbsp;</a>
 

@@ -15,7 +15,7 @@ npm install nasa.js
 * 详细的使用说明参见 ~~此文档~~。
 * 完整的 API 文档详见 ~~此文档~~。
 
-## 存在的意义是什么？
+## 价值是什么？
 
 > 星云官方 JS SDK（neb.js 和 nebPay）功能完备，我为什么还要使用 Nasa.js？
 
@@ -75,6 +75,17 @@ Nasa.js 的 dist 文件已经把所有外部依赖都打包进来了，因此可
 来给 Nasa.js [提 issue](https://github.com/cssmagic/Nasa.js/issues/new) 吧！
 
 ***
+
+## Thanks
+
+Nasa.js is based on these open source projects:
+
+* [nebPay](https://github.com/nebulasio/nebPay)
+* [Gearbox](https://github.com/CMUI/gearbox)
+
+Nasa.js team is using JetBrains IDE (WebStorm) with Open Source License:
+
+* [![WebStorm Logo](https://user-images.githubusercontent.com/5830104/32258214-2f230426-bef4-11e7-8a5f-1b4f9e116e87.png)](https://www.jetbrains.com/webstorm/)
 
 ## License
 
