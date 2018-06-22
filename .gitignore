@@ -27,6 +27,5 @@ package-lock.json
 
 _stuff/
 dist/
-demo/
 .env
 mix-manifest.json

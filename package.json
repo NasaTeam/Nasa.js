@@ -23,16 +23,17 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "cmui-gearbox": "^0.7.1",
-    "underscore": "^1.8.3",
-    "zepto.js": "1.*",
     "browser-sync": "^2.24.4",
     "browser-sync-webpack-plugin": "^2.2.2",
+    "cmui": "^2.0.3",
+    "cmui-gearbox": "^0.7.1",
     "cross-env": "^3.2.3",
     "glob": "^7.0.3",
     "laravel-mix": "^2.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "webpack": "^3.11.0"
+    "underscore": "^1.8.3",
+    "webpack": "^3.11.0",
+    "zepto.js": "1.*"
   }
 }

@@ -50,6 +50,6 @@ if (program.MIX_PROXY) {
 // tasks - js
 mix.js('./src/index.js', './.tmp/nasa-core.js')
 
-// task - css
-// mix.stylus('./demo/index.styl', './demo/')
+// task - demo - css
+mix.stylus('./demo/src/index.styl', './demo/')
 

@@ -1,0 +1,67 @@
+@import '../../node_modules/cmui/src/css/core/index'
+@import './_modules/var'
+@import './_modules/btn'
+-cm-core-common($cm-color-stage-backdrop, $cm-color-stage)
+-cm-core-icon()
+-cm-core-btn()
+
+
+////////////////////  element  ////////////////////
+@import './btn'
+btn()
+
+////////////////////  basic  ////////////////////
+body
+	overflow-x hidden
+
+a
+	text-decoration none
+	/html.no-touch &:hover
+		text-decoration underline
+
+////////////////////  page  ////////////////////
+body
+	margin 0 auto
+	max-width 640px
+	background-color $cm-color-stage
+
+	> header
+		padding 10px $cm-content-padding
+		text-align center
+		color #eee
+		$headerBg = #333
+		background-color $headerBg
+		background-image linear-gradient(to bottom, lighten($headerBg, 15%), darken($headerBg, 15%))
+		h1
+			font-size 1.75em
+	> footer
+		padding $cm-content-padding 0
+		text-align center
+
+body > section
+	margin-top $cm-section-gap
+	padding 0.5em $cm-content-padding 1.5em
+	background-color $cm-color-bg
+	> h2
+		font-size 1.5em
+		margin-bottom 0.5em
+	hr
+		color $cm-color-splitter
+		margin 1em 0
+	h3
+		margin-top 1em
+		margin-bottom 0.5em
+
+
+section.intro
+	text-align center
+.api-descr
+	input
+		margin-bottom 0.5em
+		display block
+		box-sizing border-box
+		width 100%
+		border 1px solid $cm-color-primary
+		border-radius $cm-border-radius
+		padding 5px
+		line-height 28px

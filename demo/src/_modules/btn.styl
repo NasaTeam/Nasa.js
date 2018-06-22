@@ -1,0 +1,56 @@
+// size
+$cm-btn-height = 40px
+$cm-btn-padding-h = 5px
+$cm-btn-fs = $cm-font-size
+$cm-btn-br = $cm-border-radius
+
+btn()
+	.cm-btn
+		&
+			padding-left $cm-btn-padding-h
+			padding-right $cm-btn-padding-h
+			$-h = $cm-btn-height
+			height $-h
+			line-height ($-h - 2)
+			font-size $cm-btn-fs
+			border 1px solid
+			border-radius $cm-btn-br
+			background-color currentColor
+			html.cmui a&:hover
+				text-decoration none	// to prevent default link style
+		// 使用 color 来设置按钮的主题色，按钮文本的颜色需要另行设置
+		// 因 -webkit-text-fill-color 在桌面端存在兼容性问题，这里用 ::first-line 来设置文本颜色
+		// 注：CMUI Core 已经为按钮设置了 “文本不换行” 的样式，所以 ::first-line 适用
+		// ref: http://www.zhangxinxu.com/wordpress/2016/11/development-ui-component-based-on-css-color/
+		&::first-line
+			color white
+
+		input&
+		button&
+			border-style solid
+
+	$cm-btn-color = $cm-color-primary
+	.cm-btn
+		&
+			color $cm-btn-color
+
+	/* --------------------------------------------- */
+	/** status **/
+	// hover
+	-btn-hover-style($color)
+		$c = darken($color, 25%)
+		border-color $c
+		background-color $c
+
+	html.no-touch
+		.cm-btn:not(.disabled):not(:disabled):not(.active):not(:active):hover
+			-btn-hover-style($cm-btn-color)
+
+	// active
+	-btn-active-style($color)
+		border-color darken($color, 60%)
+		background-color darken($color, 50%)
+
+	.cm-btn:not(.disabled):not(:disabled):active
+	.cm-btn.active
+		-btn-active-style($cm-btn-color)
