@@ -50,6 +50,8 @@ Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 * `Nasa.error.SERVER_ERROR` -- 服务器错误
 * `Nasa.error.REQUEST_TIMEOUT` -- 请求超时
 * `Nasa.error.TX_REJECTED_BY_USER` -- 交易被用户取消
+* `Nasa.error.EXTENSION_NOT_INSTALLED` -- “星云钱包 Chrome 扩展” 未安装
+* `Nasa.error.EXTENSION_TIMEOUT` -- “星云钱包 Chrome 扩展” 响应超时
 
 ### 环境名 <a name="const--env">&nbsp;</a>
 
@@ -211,8 +213,16 @@ Nasa.contract.set({
 
 Promise。处理结果如下：
 
-* Fulfilled：用户
+* Fulfilled：字符串。用户地址。
+
 * Rejected：
+
+	错误原因 | 错误消息
+	---|---
+	当前浏览器不是桌面版 Chrome | `Nasa.error.EXTENSION_NOT_INSTALLED`
+	当前浏览器没有安装 “星云钱包 Chrome 扩展” | `Nasa.error.EXTENSION_NOT_INSTALLED`
+	“星云钱包 Chrome 扩展” 没有导入钱包 | `Nasa.error.EXTENSION_TIMEOUT`
+	“星云钱包 Chrome 扩展” 不再支持此功能 | `Nasa.error.EXTENSION_TIMEOUT`
 
 ### ~~`Nasa.user.getAvatar(addr)`~~
 

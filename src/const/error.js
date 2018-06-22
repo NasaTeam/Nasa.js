@@ -1,4 +1,7 @@
-export const NETWORK_ERROR = 'NETWORK_ERROR'
-export const SERVER_ERROR = 'SERVER_ERROR'
-export const REQUEST_TIMEOUT = 'REQUEST_TIMEOUT'
-export const TX_REJECTED_BY_USER = 'TX_REJECTED_BY_USER'
+export const NETWORK_ERROR = 'network error'
+export const SERVER_ERROR = 'server error'
+export const REQUEST_TIMEOUT = 'request timeout'
+export const TX_REJECTED_BY_USER = 'tx rejected by user'
+
+export const EXTENSION_NOT_INSTALLED = 'extension not installed'
+export const EXTENSION_TIMEOUT = 'extension timeout'
