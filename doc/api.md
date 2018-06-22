@@ -260,6 +260,12 @@ Promise。处理结果如下：
 
 布尔值。当前浏览器是否是桌面版 Chrome。基于 User Agent 字符串来判断。
 
+### `Nasa.ua.isWeChat()`
+
+#### 返回值
+
+布尔值。当前浏览器是否是微信。基于 User Agent 字符串来判断。
+
 ### `Nasa.ua.isWalletExtensionInstalled()`
 
 #### 返回值
