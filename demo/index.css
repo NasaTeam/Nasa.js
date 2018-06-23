@@ -521,14 +521,22 @@ body > section h3 {
 section.intro {
   text-align: center;
 }
-.api-descr input {
+.api-descr input,
+.api-descr select {
   margin-bottom: 0.5em;
   display: block;
   box-sizing: border-box;
   width: 100%;
-  font-family: Menlo, Consolas, monospace;
-  border: 1px solid #999;
   border-radius: 4px;
+  border: 1px solid #999;
+}
+.api-descr input {
   padding: 5px 10px;
   line-height: 28px;
+  font-family: Menlo, Consolas, monospace;
+}
+.api-descr select {
+  padding: 9px 10px;
+  height: 40px;
+  line-height: 20px;
 }

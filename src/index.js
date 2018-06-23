@@ -1,8 +1,9 @@
 import { nebPay, BigNumber, blockies } from './external-dependency'
-import { env, error } from './const/index'
+import { error } from './const/index'
 import * as ua from './ua/index'
 import * as util from './util/index'
 import * as user from './user/index'
+import * as env from './env/index'
 
 // ns
 const Nasa = {
@@ -12,13 +13,14 @@ const Nasa = {
 	blockies,
 
 	// const
-	env,
 	error,
 
 	// modules
 	ua,
 	util,
 	user,
+	env,
+
 
 }
 

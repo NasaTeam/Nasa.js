@@ -7,9 +7,19 @@
 
 
 ////////////////////  env  ////////////////////
-
-
-
+$('#env--set').on('click', function () {
+	const $select = $(this).siblings('select')
+	const value = $select.val().trim()
+	if (value) {
+		Nasa.env.set(value)
+		alert(`Did set '${value}' as current env.`)
+	} else {
+		alert('Error: Please select an env name first.')
+	}
+})
+$('#env--get').on('click', function () {
+	alert(`Current env is '${Nasa.env.get()}'.`)
+})
 
 
 ////////////////////  user  ////////////////////
