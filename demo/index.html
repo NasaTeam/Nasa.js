@@ -15,15 +15,48 @@
 	<a href="https://github.com/cssmagic/Nasa.js" target="_blank">View on GitHub</a>
 </section>
 <section>
+	<h2>Contract</h2>
+	<section>
+		<h3><code>Nasa.contract.set()</code></h3>
+		<div class="api-descr">
+			<textarea placeholder="input contract addr in specific format...">
+{
+	"default": {
+		"local":   "n10000contract0000addr0000default01x",
+		"testnet": "n10000contract0000addr0000default02",
+		"mainnet": "n10000contract0000addr0000default03"
+	},
+	"contract_article": {
+		"local":   "n10000contract0000addr0000article01",
+		"testnet": "n10000contract0000addr0000article02",
+		"mainnet": "n10000contract0000addr0000article03"
+	},
+	"contract_comment": {
+		"local":   "n10000contract0000addr0000comment01",
+		"testnet": "n10000contract0000addr0000comment02",
+		"mainnet": "n10000contract0000addr0000comment03"
+	}
+}
+			</textarea>
+			<button class="cm-btn" id="contract--set">Set</button>
+		</div>
+		<h3><code>Nasa.contract.get()</code></h3>
+		<div class="api-descr">
+			<input type="text" placeholder="input a contract name..." value="default">
+			<button class="cm-btn" id="contract--get">Get</button>
+		</div>
+	</section>
+</section>
+<section>
 	<h2>Env</h2>
 	<section>
 		<h3><code>Nasa.env.set()</code></h3>
 		<div class="api-descr">
 			<select name="env">
 				<option value="">Select & set as current...</option>
-				<option value="mainnet">Nasa.env.MAIN</option>
+				<option value="local"  >Nasa.env.LOCAL</option>
 				<option value="testnet">Nasa.env.TEST</option>
-				<option value="local">Nasa.env.LOCAL</option>
+				<option value="mainnet">Nasa.env.MAIN</option>
 			</select>
 			<button class="cm-btn" id="env--set">Set</button>
 		</div>

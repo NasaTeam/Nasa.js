@@ -165,13 +165,17 @@ Nasa.contract.set({
 		mainnet: '...contract...addr...',
 	},
 	contract_article: {
-		...
+		/* ... */
 	},
 	contract_comment: {
-		...
+		/* ... */
 	}
 })
 ```
+
+#### 注意事项
+
+* 不合法的环境名和合约地址会被丢弃。
 
 ### `Nasa.contract.get(contractName = 'default')` <a name="contract--get">&nbsp;</a>
 
@@ -183,7 +187,9 @@ Nasa.contract.set({
 
 #### 返回值
 
-合约地址。此 API 会自动匹配 “当前环境”——即你通过 [`Nasa.env.set()`](#env--set) API 指定的环境。
+字符串。合约地址。此 API 会自动匹配 “当前环境”——即你通过 [`Nasa.env.set()`](#env--set) API 指定的环境。
+
+如果该合约未定义当前环境下的地址，则返回空字符串。
 
 ## 环境配置
 

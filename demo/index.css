@@ -521,22 +521,34 @@ body > section h3 {
 section.intro {
   text-align: center;
 }
-.api-descr input,
-.api-descr select {
+.api-descr input[type='text'],
+.api-descr select,
+.api-descr textarea {
   margin-bottom: 0.5em;
   display: block;
   box-sizing: border-box;
   width: 100%;
+  color: inherit;
   border-radius: 4px;
   border: 1px solid #999;
 }
-.api-descr input {
+.api-descr input[type='text'],
+.api-descr textarea {
   padding: 5px 10px;
-  line-height: 28px;
   font-family: Menlo, Consolas, monospace;
+}
+.api-descr input[type='text'] {
+  line-height: 28px;
 }
 .api-descr select {
   padding: 9px 10px;
   height: 40px;
   line-height: 20px;
+}
+.api-descr textarea {
+  -moz-tab-size: 4;
+       tab-size: 4;
+  font-size: 14px;
+  line-height: 1.2;
+  min-height: 151.20000000000002px;
 }

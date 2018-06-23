@@ -6,16 +6,12 @@ export const TESTNET = TEST
 
 let _currentEnv = MAIN
 
-function set(envName) {
+function set(envName = '') {
 	envName = String(envName)
-	if ([
-		MAIN,
-		TEST,
-		LOCAL,
-	].includes(envName)) {
+	if ([MAIN, TEST, LOCAL].indexOf(envName) !== -1) {
 		_currentEnv = envName
 	} else {
-		console.error('[Nasa.js] wrong env name!')
+		console.error('[Nasa.js] Wrong env name!')
 	}
 }
 

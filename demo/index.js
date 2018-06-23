@@ -2,8 +2,33 @@
 'use strict'
 
 ////////////////////  contract  ////////////////////
+$('#contract--set').on('click', function () {
+	const $textarea = $(this).siblings('textarea')
+	const value = $textarea.val().trim()
+	let config
+	try {
+		const input = `config = ${value}`
+		eval(input)
+	} catch (e) {
+		alert('Error: Syntax error in your input!')
+	}
 
-
+	if (typeof config !== 'undefined') {
+		Nasa.contract.set(config)
+		alert(`Did set contracts.`)
+	}
+})
+$('#contract--get').on('click', function () {
+	const $input = $(this).siblings('input[type="text"]')
+	const value = $input.val().trim()
+	const addr = Nasa.contract.get(value) || '(not found)'
+	const msg = [
+		`Contract name: '${value || '(default)'}'`,
+		`Current env:   '${Nasa.env.get()}'`,
+		`Contract addr: '${addr}'`,
+	].join('\n')
+	alert(msg)
+})
 
 
 ////////////////////  env  ////////////////////
@@ -14,11 +39,11 @@ $('#env--set').on('click', function () {
 		Nasa.env.set(value)
 		alert(`Did set '${value}' as current env.`)
 	} else {
-		alert('Error: Please select an env name first.')
+		alert('Error: Please select an env name first!')
 	}
 })
 $('#env--get').on('click', function () {
-	alert(`Current env is '${Nasa.env.get()}'.`)
+	alert(`Current env: '${Nasa.env.get()}'.`)
 })
 
 

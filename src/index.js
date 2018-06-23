@@ -4,6 +4,7 @@ import * as ua from './ua/index'
 import * as util from './util/index'
 import * as user from './user/index'
 import * as env from './env/index'
+import * as contract from './contract/index'
 
 // ns
 const Nasa = {
@@ -20,7 +21,7 @@ const Nasa = {
 	util,
 	user,
 	env,
-
+	contract,
 
 }
 

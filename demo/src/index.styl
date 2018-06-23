@@ -56,19 +56,28 @@ body > section
 section.intro
 	text-align center
 .api-descr
-	input
+	input[type='text']
 	select
+	textarea
 		margin-bottom 0.5em
 		display block
 		box-sizing border-box
 		width 100%
+		color inherit
 		border-radius $cm-border-radius
 		border 1px solid $cm-color-fg-x-light
-	input
+	input[type='text']
+	textarea
 		padding 5px 10px
-		line-height 28px
 		font-family Menlo, Consolas, monospace
+	input[type='text']
+		line-height 28px
 	select
 		padding 9px 10px
 		height 40px
 		line-height 20px
+	textarea
+		tab-size 4
+		font-size $cm-font-size-s
+		line-height 1.2
+		min-height ($cm-font-size-s * 1.2 * 9)
