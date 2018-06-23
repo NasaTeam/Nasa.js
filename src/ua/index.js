@@ -1,6 +1,7 @@
 import {
 	supportFetch,
 	supportStringIncludes,
+	supportArrayIncludes,
 } from './detect-feature'
 
 export {
@@ -12,8 +13,9 @@ export {
 
 
 function isSupported() {
-	return supportFetch() &&
-		supportStringIncludes()
+	return supportFetch()
+		&& supportStringIncludes()
+		// && supportArrayIncludes()
 }
 
 function isWalletExtensionInstalled() {
