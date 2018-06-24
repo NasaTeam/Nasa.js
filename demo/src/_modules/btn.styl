@@ -56,3 +56,10 @@ btn()
 	.cm-btn:not(.disabled):not(:disabled):active
 	.cm-btn.active
 		-btn-active-style($cm-btn-color)
+
+	// disabled
+	.cm-btn
+		&.disabled
+		&:disabled
+			&
+				color $cm-color-symbol !important

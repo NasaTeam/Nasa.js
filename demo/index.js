@@ -1,7 +1,31 @@
 /* global Nasa */
 'use strict'
 
+////////////////////  core  ////////////////////
+$('#checkTx').on('click', function () {
+	const $this = $(this)
+	const $input = $this.siblings('input[type="text"]')
+	const value = $input.val().trim()
+	const text = $this.text()
+	const DISABLED = 'disabled'
+	$this.text('Checking...')
+		.attr(DISABLED, DISABLED)
+	Nasa.checkTx(value)
+		.then((data) => {
+			alert(JSON.stringify(data, null, 4))
+			$this.text(text).removeAttr(DISABLED)
+		})
+		.catch((e) => {
+			alert(e.message)
+			$this.text(text).removeAttr(DISABLED)
+		})
+})
+
 ////////////////////  contract  ////////////////////
+// prepare textarea
+const $textarea = $('#contract--set').siblings('textarea')
+$textarea.html($textarea.html().trim())
+
 $('#contract--set').on('click', function () {
 	const $textarea = $(this).siblings('textarea')
 	const value = $textarea.val().trim()

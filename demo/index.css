@@ -473,6 +473,10 @@ html.no-touch .cm-btn:not(.disabled):not(:disabled):not(.active):not(:active):ho
   border-color: #1d7690;
   background-color: #1f7f9c;
 }
+.cm-btn.disabled,
+.cm-btn:disabled {
+  color: #ccc !important;
+}
 body {
   overflow-x: hidden;
 }
