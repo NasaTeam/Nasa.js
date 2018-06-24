@@ -5,6 +5,7 @@ import * as util from './util/index'
 import * as user from './user/index'
 import * as env from './env/index'
 import * as contract from './contract/index'
+import { checkTx } from './core/index'
 
 // ns
 const Nasa = {
@@ -15,6 +16,9 @@ const Nasa = {
 
 	// const
 	error,
+
+	// core
+	checkTx,
 
 	// modules
 	ua,

@@ -112,17 +112,47 @@ Promise。处理结果如下：
 
 #### 参数
 
-* `payId` -- 字符串。交易流水号。<!-- 如果此参数为空值或假值，则取最后一次交易的交易号。-->
+* `payId` -- 字符串。交易流水号（亦称 “交易序列号” 或 “serial number”）。<!-- 如果此参数为空值或假值，则取最后一次交易的交易号。-->
+
+> ⚠️ 注意：目前只支持查询 payId，不支持查询 txHash。
 
 #### 返回值
 
 Promise。处理结果如下：
 
-* Fulfilled：对象。交易详细信息。
+* Fulfilled：对象。交易详细信息，基本格式如下：
+
+	```json
+	{
+		"data": "...base64...",  // 就是 {Function, Args} 的 JSON 的 base64
+		"contract_address": "",
+		"type": "call",  // or "binary"
+		"nonce": 7,
+		"gas_price": "1000000",
+		"gas_limit": "200000",
+		"gas_used": "23702",
+		"chainId": 1001,
+		"from": "...user...addr...",
+		"to": "...contract...addr...",
+		"value": "0",
+		"hash": "...tx...hash...",
+		"status": 1,	// 0-失败 1-成功 2-待定
+		"timestamp": 1527525664,
+		"execute_result": "{}",	// 合约执行的返回值，JSON 格式。
+		"execute_error": "",
+		"result": {}  // 合约执行的返回值，JSON 已解析。
+	}
+	```
+
 * Rejected：
-	* 当参数错误时抛 xxx 错误
-	* 网络错误时抛 xxx 错误
-	* 合约执行错误时抛 xxx 错误
+
+	错误原因 | 错误消息
+	---|---
+	传入的 payId 参数无效 | `Nasa.error.INVALID_ARG`
+	交易错误（合约调用错误） | `Nasa.error.CALL_FAILED`
+	交易错误（转账错误） | `Nasa.error.TX_FAILED`
+	交易状态未知 | `Nasa.error.TX_STATUS_UNKNOWN`
+	查询超时（一分钟内都没有得到交易结果） | `Nasa.error.TX_TIMEOUT`
 
 ### ~~`Nasa.pay(addr, value = '0')`~~
 
