@@ -166,7 +166,7 @@ Promise。处理结果如下：
 	交易错误（合约调用错误） | `Nasa.error.CALL_FAILED`
 	交易错误（转账错误） | `Nasa.error.TX_FAILED`
 	交易状态未知 | `Nasa.error.TX_STATUS_UNKNOWN`
-	查询超时（一分钟内都没有得到交易结果） | `Nasa.error.TX_TIMEOUT`
+	查询超时（一分钟内都没有得到交易结果） | `Nasa.error.REQUEST_TIMEOUT`
 	网络错误 | `Nasa.error.NETWORK_ERROR`
 
 ### ~~`Nasa.pay(addr, value = '0')`~~

@@ -90,7 +90,7 @@ export function checkTx(sn) {
 			const interval = retryIntervals.shift()
 			if (!interval) {
 				// 所有重试机会已用完
-				reject(new Error(error.TX_TIMEOUT))
+				reject(new Error(error.REQUEST_TIMEOUT))
 
 				// TODO 考虑是不是把 "payId 不存在" 也作为一种错误
 				// 通过 lastCheckResult 来获取查询错误信息
