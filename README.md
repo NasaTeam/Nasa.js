@@ -27,21 +27,22 @@ npm install nasa.js
 ---|---|---|---|---
 完整对接星云 HTTP 接口 |  ✓ | 
 部署合约  |  ✓ | 
-向指定地址转账 | ✓ |  | ✓ <sup>[1]</sup> | ... <sup>[1]</sup> <sup>[2]</sup>
+向指定地址转账 | ✓ |  | ✓ <sup>[1]</sup> | ✓ <sup>[1]</sup> <sup>[2]</sup>
 调用合约（写入数据） | ✓ |  | ✓ <sup>[1]</sup> | ✓ <sup>[1]</sup>
 调用合约（查询数据） | ✓ | ✓ |  | ✓
 查询交易状态 | ✓ |  ✓ | ✓ | ✓
-兼容移动端 <sup>[4]</sup>  |   |  | ✓ | ✓
+手机页面唤起手机钱包 <sup>[4]</sup>  |   |  | ✓ | ✓
+手机钱包扫码交易  |   |  | ✓ | ✓ <sup>[2]</sup>
 获取当前用户钱包地址 |  |   |  | ✓ <sup>[5]</sup>
 管理合约地址与当前环境 |  |  |  | ✓
 分析当前浏览器环境 |   |  |  | ✓
 常用工具方法 <sup>[6]</sup> |   |  |  | ✓
 | |
-文件体积 <sup>[9]</sup> | 155 KiB | 9.7 KiB | 21 KiB| ≤ 40 KiB<br><sup>（开发中）</sup>
+文件体积 <sup>[9]</sup> | 155 KiB | 9.7 KiB | 21 KiB| ≤ 30 KiB<br><sup>（开发中）</sup>
 
-> * <sup>[1]</sup> 此功能通过调用 “星云钱包 Chrome 扩展” 或 “星云手机钱包 App” 来实现。
-> * <sup>[2]</sup> 此功能在开发计划中，后续版本很快支持。
-> * <sup>[4]</sup> 支持在手机浏览器（iOS Safari 或 Android Chrome 等）中调用 “星云手机钱包 App” 完成交易。
+> * <sup>[1]</sup> 此功能通过唤起 “星云钱包 Chrome 扩展” 或 “星云手机钱包 App” 来实现。
+> * <sup>[2]</sup> Nasa.js 暂未直接实现此功能。但由于 Nasa.js 打包了完整的 nebPay，开发者目前需要直接使用 nebPay 来实现此功能。
+> * <sup>[4]</sup> 在手机浏览器（iOS Safari 或 Android Chrome 等）中调用 “星云手机钱包 App” 完成交易。
 > * <sup>[5]</sup> 此功能依赖 “星云钱包 Chrome 扩展” 实现。
 > * <sup>[6]</sup> 包括判断地址、TxHash、交易流水号是否合法等工具方法。
 > * <sup>[9]</sup> 包含所有外部依赖的 dist 文件在 min + Gzip 之后的体积。

@@ -2,7 +2,33 @@
 'use strict'
 
 ////////////////////  core  ////////////////////
-$('#checkTx').on('click', function () {
+$('#core--query').on('click', function () {
+	const $this = $(this)
+	const contract = $this.siblings('input[name="contract"]').val().trim()
+	const fn = $this.siblings('input[name="fn"]').val().trim()
+	const inputArgs = $this.siblings('input[name="args"]').val().trim()
+	// form args
+	let args = []
+	if (inputArgs) {
+		try {
+			const input = `args = [${inputArgs}]`
+			eval(input)
+		} catch (e) {
+			alert('Error: Syntax error in args field!')
+			return
+		}
+	}
+
+	Nasa.query(contract, fn, args)
+		.then((data) => {
+			alert(JSON.stringify(data, null, 4))
+		})
+		.catch((e) => {
+			alert(e.message)
+		})
+})
+
+$('#core--checkTx').on('click', function () {
 	const $this = $(this)
 	const $input = $this.siblings('input[type="text"]')
 	const value = $input.val().trim()
@@ -35,6 +61,7 @@ $('#contract--set').on('click', function () {
 		eval(input)
 	} catch (e) {
 		alert('Error: Syntax error in your input!')
+		return
 	}
 
 	if (typeof config !== 'undefined') {

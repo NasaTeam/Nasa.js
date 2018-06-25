@@ -74,10 +74,10 @@ Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 * `fnName` -- 字符串。合约方法名。
 * `args` -- 数组。传给合约方法的参数。不需要转换成 JSON。示例如下：
 	* 不传参数 -- `[]`
-	* 传一个 `1` 参数 -- `[1]`
+	* 传一个参数 `1` -- `[1]`
 	* 传多个参数 `1, 2, 3` -- `[1, 2, 3]`
 * `options` -- 对象。附加选项。可选的 key 如下：
-	* `value` -- 字符串。转账数额（单位 NAS）。
+	* `value` -- 字符串。调用合约同时转账的数额（单位 NAS）。
 
 #### 返回值
 
@@ -118,7 +118,7 @@ Promise。处理结果如下：
 	> 
 	> * `'contract check failed'` -- 合约不存在
 	> * `'insufficient balance'` -- 用户钱包无余额
-	> * `'Call: TypeError: ...'` -- 合约函数的运行时错误
+	> * `'Call: TypeError: ...'` -- 合约函数运行时错误
 
 ### `Nasa.checkTx(payId)` <a name="core--checkTx">&nbsp;</a>
 
