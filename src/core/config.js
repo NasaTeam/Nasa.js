@@ -1,27 +1,33 @@
-/* global NebPay */
+import { NebPay } from '../external-dependency'
 import * as env from '../env/index'
 
 const DEFAULT_ADDR = 'n1bCep7RbeCWQk9EQo48V3TuXEdZLCS7eTn'
 
+const nebConfig = NebPay.config
+
 const NEBULAS = {
+	[env.LOCAL]: {
+		chainId: 100,
+		apiBaseUrl: 'http://localhost:8685/v1/',
+		apiPayId: nebConfig.testnetUrl,
+	},
 	[env.TEST]: {
-		apiBaseUrl: 'https://testnet.nebulas.io/v1/',
 		chainId: 1001,
+		apiBaseUrl: 'https://testnet.nebulas.io/v1/',
+		apiPayId: nebConfig.testnetUrl,
 	},
 	[env.MAIN]: {
-		apiBaseUrl: 'https://mainnet.nebulas.io/v1/',
 		chainId: 1,
-	},
-	[env.LOCAL]: {
-		apiBaseUrl: 'http://localhost:8685/v1/',
-		chainId: 100,
+		apiBaseUrl: 'https://mainnet.nebulas.io/v1/',
+		apiPayId: nebConfig.mainnetUrl,
 	},
 }
 
 function getDefaultOptions() {
-	const result = {}
-	if (env.get() === env.TEST) result.callback = NebPay.config.testnetUrl
-	return result
+	const options = {}
+	const currentEnv = env.get()
+	options.callback = NEBULAS[currentEnv].apiPayId
+	return options
 }
 
 export {

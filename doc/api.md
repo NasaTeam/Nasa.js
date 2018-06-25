@@ -140,7 +140,7 @@ Promise。处理结果如下：
 		"timestamp": 1527525664,
 		"execute_result": "{}",	// 合约执行的返回值，JSON 格式。
 		"execute_error": "",
-		"result": {}  // 合约执行的返回值，JSON 已解析。
+		"result": {}  // 👉 合约执行的返回值，Nasa.js 已帮你把 JSON 解析好了。
 	}
 	```
 
