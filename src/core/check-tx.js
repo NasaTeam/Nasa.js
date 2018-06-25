@@ -36,7 +36,7 @@ export function checkTx(sn) {
 		setTimeout(check, interval * 1000)
 
 		function check() {
-			nebPay.queryPayInfo(sn, config.getDefaultOptions())
+			nebPay.queryPayInfo(sn, config.getNebPayOptions())
 				.then((res) => {
 					checkingCount++
 					console.log(`checkTx result ${checkingCount}: `, typeof res, res)
@@ -52,7 +52,7 @@ export function checkTx(sn) {
 						// 本次查询成功
 						const txData = data.data
 						// 0: Failed. It means the transaction has been submitted on chain but its execution failed.
-						// 1: Successful. It means the transaction has been submitted on chain and its execution successeed.
+						// 1: Successful. It means the transaction has been submitted on chain and its execution succeed.
 						// 2: Pending. It means the transaction hasn't been packed into a block.
 						if (txData.status === 0) {
 							const errMsg = data.type === 'call' ? error.CALL_FAILED : error.TX_FAILED

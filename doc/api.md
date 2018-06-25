@@ -64,15 +64,18 @@ Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 
 ## 核心功能 <a name="core">&nbsp;</a>
 
-### `Nasa.call(contractAddr, fnName, args = [], options = {})` <a name="core--call">&nbsp;</a>
+### `Nasa.call(contract, fnName, args = [], options = {})` <a name="core--call">&nbsp;</a>
 
 调用合约方法，并向链写入数据，因此需要以交易的方式实现（一般称作 “写入型调用” 或 “交易型调用”）。
 
 #### 参数
 
-* `contractAddr` -- 字符串。合约地址。如果你用 [`Nasa.contract.set()`](#contract--set) API 配置了合约，则这里也可以传入合约名；如果你配置了默认合约，且此参数为空值或假值时，将取默认合约。
+* `contract` -- 字符串。合约地址。如果你用 [`Nasa.contract.set()`](#contract--set) API 配置了合约，则这里也可以传入合约名；如果你配置了默认合约，且此参数为空值或假值时，将取默认合约。
 * `fnName` -- 字符串。合约方法名。
-* `args` -- 数组。传给合约方法的参数。
+* `args` -- 数组。传给合约方法的参数。不需要转换成 JSON。示例如下：
+	* 不传参数 -- `[]`
+	* 传一个 `1` 参数 -- `[1]`
+	* 传多个参数 `1, 2, 3` -- `[1, 2, 3]`
 * `options` -- 对象。附加选项。可选的 key 如下：
 	* `value` -- 字符串。转账数额（单位 NAS）。
 
@@ -87,7 +90,7 @@ Promise。处理结果如下：
 	* 网络错误时抛 xxx 错误
 	* 合约执行错误时抛 xxx 错误
 
-### `Nasa.query(contractAddr, fnName, args = [])`
+### `Nasa.query(contract, fnName, args = [])`
 
 向合约查询数据，不需要向链写入数据，因此不需要发起交易（一般称作 “读取型调用” 或 “查询型调用”）。
 
@@ -99,12 +102,23 @@ Promise。处理结果如下：
 
 Promise。处理结果如下：
 
-* Fulfilled：对象。调用结果。
-* Rejected：
-	* 当参数错误时抛 xxx 错误
-	* 网络错误时抛 xxx 错误
-	* 合约执行错误时抛 xxx 错误
+* Fulfilled：合约调用结果。不需要解析 JSON。
 
+* Rejected：
+
+	错误原因 | 错误消息
+	---|---
+	传入的参数无效 | `Nasa.error.INVALID_ARG`
+	得到的响应无效 | `Nasa.error.INVALID_RESPONSE`
+	网络错误 | `Nasa.error.NETWORK_ERROR`
+	JSON 解析错误 | `Nasa.error.INVALID_JSON`
+	合约调用错误 | 错误信息 <sup>[*]</sup>
+
+	> <sup>[*]</sup> 可能有以下情况：
+	> 
+	> * `'contract check failed'` -- 合约不存在
+	> * `'insufficient balance'` -- 用户钱包无余额
+	> * `'Call: TypeError: ...'` -- 合约函数的运行时错误
 
 ### `Nasa.checkTx(payId)` <a name="core--checkTx">&nbsp;</a>
 
@@ -148,11 +162,12 @@ Promise。处理结果如下：
 
 	错误原因 | 错误消息
 	---|---
-	传入的 payId 参数无效 | `Nasa.error.INVALID_ARG`
+	传入的参数无效 | `Nasa.error.INVALID_ARG`
 	交易错误（合约调用错误） | `Nasa.error.CALL_FAILED`
 	交易错误（转账错误） | `Nasa.error.TX_FAILED`
 	交易状态未知 | `Nasa.error.TX_STATUS_UNKNOWN`
 	查询超时（一分钟内都没有得到交易结果） | `Nasa.error.TX_TIMEOUT`
+	网络错误 | `Nasa.error.NETWORK_ERROR`
 
 ### ~~`Nasa.pay(addr, value = '0')`~~
 

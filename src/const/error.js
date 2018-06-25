@@ -1,4 +1,6 @@
 export const INVALID_ARG = 'invalid arg'
+export const INVALID_RESPONSE = 'invalid response'
+export const INVALID_JSON = 'invalid json'
 
 export const NETWORK_ERROR = 'network error'
 export const SERVER_ERROR = 'server error'

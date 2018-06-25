@@ -23,13 +23,19 @@ const NEBULAS = {
 	},
 }
 
-function getDefaultOptions() {
-	const options = {}
+function get(key) {
 	const currentEnv = env.get()
-	options.callback = NEBULAS[currentEnv].apiPayId
+	return NEBULAS[currentEnv][key] || ''
+}
+
+function getNebPayOptions() {
+	const options = {}
+	options.callback = get('apiPayId')
 	return options
 }
 
 export {
-	getDefaultOptions,
+	DEFAULT_ADDR,
+	getNebPayOptions,
+	get,
 }
