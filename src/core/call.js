@@ -1,0 +1,85 @@
+/* global nebPay */
+import { nebPay } from '../external-dependency'
+import * as config from './config'
+import * as ua from '../ua/index'
+import { get as getContract } from '../contract/index'
+import { isValidAddr } from '../util'
+import * as error from '../const/error'
+
+export let _lastPayId = ''
+export let _lastTxHash = ''
+
+/*
+listener 拿到的响应（res）：
+
+如果钱包扩展没有导入钱包，这里的 res 是字符串 "error: please import wallet file"
+
+某次电脑崩溃重启后，Chrome 在启动时弹出一个 alert 框：'please import wallet file'。
+在首次发出查询型调用时，遇到这个错误：res 是这个字符串 'error: please import wallet file'。
+
+某次新打开网页，遇到 res 是这个字符串 'stream terminated by RST_STREAM with error code: REFUSED_STREAM' ，不过刷新一下就好了。
+
+如果用户取消交易，这里的 res 是字符串 'Error: Transaction rejected by user'
+
+如果用户已发出交易，这里的 res 是一个对象，结构是： {
+	txhash: "5b7a9db52a519da277f4ba6799a2ebce18becbbed0c54950cb60b181facf4cfb",  //64 位 hash
+	contract_address: ""	// 如果本次交易不是在部署合约，这个字段就是空字符串
+}
+*/
+
+export function call(contractAddr, fnName, args = [], options = {}) {
+	// get contract
+	const contract = isValidAddr(contractAddr) ?
+		contractAddr : getContract(contractAddr)
+
+	if (!contract || !fnName || !Array.isArray(args)) {
+		return Promise.reject(new Error(error.INVALID_ARG))
+	}
+
+	return new Promise((resolve, reject) => {
+		let payId
+		const to = contract
+		const value = options.value || '0'
+		let nebPayOptions = {
+			qrcode: { showQRCode: false },
+			listener: (res) => {
+				// console.log('listener: ', typeof res, res)
+
+				if (typeof res === 'string') {
+					res = res.toLowerCase()
+					// 如果用户取消交易
+					if (res.includes('rejected by user')) {
+						reject(new Error(error.TX_REJECTED_BY_USER))
+					}
+					// 如果服务器不稳定 (?)
+					if (res.includes('stream terminated')) {
+						reject(new Error(error.SERVER_ERROR))
+					}
+					// 如果钱包扩展没有导入钱包
+					if (res.includes('import wallet')) {
+						reject(new Error(error.EXTENSION_NOT_INSTALLED))
+					}
+					// 发生其它问题
+					const errMsg = res.startsWith('error:') ? res.slice(6).trim() : res
+					reject(new Error(errMsg))
+				}
+
+				// 如果用户已发出交易
+				if (res.txhash) {
+					_lastTxHash = res.txhash
+					resolve(payId)
+				}
+			},
+		}
+		nebPayOptions = Object.assign({}, config.getNebPayOptions(), nebPayOptions)
+
+		// 这里的 payId 是由 nebPay 生成的交易流水号，32 位 hash
+		// 对于交易型调用，只能通过这个流水号来查询交易结果
+		payId = nebPay.call(to, value, String(fnName), JSON.stringify(args), nebPayOptions)
+		// console.log('payId: ', payId)
+		_lastPayId = payId
+
+		// 对于没有安装钱包扩展的浏览器来说，listener 没有作用，只能把 payId 抛出来。
+		if (!ua.isWalletExtensionInstalled()) resolve(payId)
+	})
+}

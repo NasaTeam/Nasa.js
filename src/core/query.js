@@ -28,6 +28,10 @@ export function query(contractAddr, fnName, args = []) {
 		contractAddr : getContract(contractAddr)
 	if (!contract) return Promise.reject(new Error(error.INVALID_ARG))
 
+	if (!contract || !fnName || !Array.isArray(args)) {
+		return Promise.reject(new Error(error.INVALID_ARG))
+	}
+
 	const api = config.get('apiBaseUrl') + 'user/call'
 	const txParams = {
 		from: config.DEFAULT_ADDR,
@@ -38,7 +42,7 @@ export function query(contractAddr, fnName, args = []) {
 		gasLimit: '2000000',
 		type: 'call',
 		contract: {
-			'function': fnName,
+			'function': String(fnName),
 			args: JSON.stringify(args),
 		}
 	}

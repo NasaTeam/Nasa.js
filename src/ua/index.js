@@ -2,6 +2,7 @@ import {
 	supportFetch,
 	supportStringIncludes,
 	supportArrayIncludes,
+	supportObjectAssign,
 } from './detect-feature'
 
 export {
@@ -15,6 +16,7 @@ export {
 function isSupported() {
 	return supportFetch()
 		&& supportStringIncludes()
+		&& supportObjectAssign()
 		// && supportArrayIncludes()
 }
 
