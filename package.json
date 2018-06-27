@@ -1,9 +1,9 @@
 {
   "name": "nasa.js",
-  "version": "0.0.0-alpha",
+  "version": "0.1.0",
   "homepage": "https://github.com/cssmagic/nasa.js",
   "author": "cssmagic <cssmagic.cn@gmail.com>",
-  "description": "Util Library for DApp development on Nebulas Blockchain.",
+  "description": "Lightweight and friendly util library for DApp development on Nebulas Blockchain.",
   "main": "./dist/nasa.js",
   "keywords": [
     "nebulas",
