@@ -56,7 +56,7 @@ export function call(contractAddr, fnName, args = [], options = {}) {
 					}
 					// 如果钱包扩展没有导入钱包
 					if (res.includes('import wallet')) {
-						reject(new Error(error.EXTENSION_NOT_INSTALLED))
+						reject(new Error(error.EXTENSION_NO_WALLET))
 					}
 					// 发生其它问题
 					const errMsg = res.startsWith('error:') ? res.slice(6).trim() : res

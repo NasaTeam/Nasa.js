@@ -2,6 +2,7 @@
 import * as config from './config'
 import { isValidPayId } from '../util'
 import * as error from '../const/error'
+import * as ua from '../ua/index'
 
 /*
 当交易查询成功时，nebPay.queryPayInfo() 的返回值是一个 JSON 字符串，格式为： {
@@ -21,7 +22,7 @@ import * as error from '../const/error'
 }
  */
 
-export function checkTx(sn) {
+export function checkTx(sn, options = {}) {
 	if (!isValidPayId(sn)) return Promise.reject(new Error(error.INVALID_ARG))
 
 	return new Promise((resolve, reject) => {
@@ -30,15 +31,23 @@ export function checkTx(sn) {
 		let checkingCount = 0
 		let lastCheckResult
 
-		// 这里不应该立刻查询，因为此时服务器可能还没有收到交易记录
-		const interval = retryIntervals.shift()
-		setTimeout(check, interval * 1000)
+		if (options.noWait) {
+			// 如果 API 的使用者显式要求立刻查询，那就立刻发起查询
+			check()
+		} else if (ua.isWalletExtensionInstalled()) {
+			// 对于有钱包扩展的情况，在拿到流水号之后不应该立刻查询，因为此时服务器可能还没有收到交易记录
+			const interval = retryIntervals.shift()
+			setTimeout(check, interval * 1000)
+		} else {
+			// 其它情况下，立刻发起查询，因为可能钱包 App 已经支付完成了，不用等待
+			check()
+		}
 
 		function check() {
 			nebPay.queryPayInfo(sn, config.getNebPayOptions())
 				.then((res) => {
 					checkingCount++
-					console.log(`checkTx result ${checkingCount}: `, typeof res, res)
+					// console.log(`checkTx result ${checkingCount}: `, typeof res, res)
 
 					let data = {}
 					try {
@@ -91,9 +100,9 @@ export function checkTx(sn) {
 				// 所有重试机会已用完
 				reject(new Error(error.REQUEST_TIMEOUT))
 
-				// TODO 考虑是不是把 "payId 不存在" 也作为一种错误
+				// TODO 考虑是不是把持续的 "payId 不存在" 也作为一种错误
 				// 通过 lastCheckResult 来获取查询错误信息
-				// TODO 考虑是不是把 "网络错误" 也作为一种错误
+				// TODO 考虑是不是把持续的 "网络错误" 也作为一种错误
 			} else {
 				setTimeout(check, interval * 1000)
 			}

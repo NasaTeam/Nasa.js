@@ -13,3 +13,4 @@ export const CALL_FAILED = 'call failed'
 
 export const EXTENSION_NOT_INSTALLED = 'extension not installed'
 export const EXTENSION_TIMEOUT = 'extension timeout'
+export const EXTENSION_NO_WALLET = 'extension no wallet'
