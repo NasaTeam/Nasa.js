@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Nasa.js Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="stylesheet" href="./index.css">
 </head>
 
@@ -12,17 +13,41 @@
 </header>
 
 <section class="intro">
+	<p><span>Nasa.js 是星云链 DApp 客户端</span><span>开发框架，轻量，易用。</span></p>
 	<a href="https://github.com/cssmagic/Nasa.js" target="_blank">View on GitHub</a>
+	<span class="splitter">|</span>
+	<a href="https://github.com/cssmagic/Nasa.js/blob/master/doc/api.md" target="_blank">API Doc</a>
 </section>
 
 <section>
-	<h2>Core</h2>
+	<h2>Core API</h2>
 	<section>
-
+		<h3><code>Nasa.call()</code></h3>
+		<div class="api-descr">
+			<div class="text">
+				<p>以下预设参数指向某个主网合约提供的接口。</p>
+				<blockquote>
+					<p>此 Demo 仅用于 API 演示，请在以下环境下测试：</p>
+					<ul>
+						<li>桌面版 Chrome 浏览器，并安装 <a href="https://github.com/nebulasio/WebExtensionWallet" target="_blank">星云钱包扩展</a>。</li>
+						<li>手机浏览器（iOS Safari 或 Android Chrome），并安装 <a href="https://nano.nebulas.io/" target="_blank">星云手机钱包 App</a>。</li>
+					</ul>
+				</blockquote>
+			</div>
+			<input type="text" name="contract" placeholder="input your contract addr..." value="n1on7kaUoqxPrnzooWoKHdbp7DEx5CVWaJz">
+			<input type="text" name="fn" placeholder="input contract function name..." value="like">
+			<input type="text" name="args" placeholder="function args, separated by commas..." value="7">
+			<button class="cm-btn" id="core--call">Call</button>
+			<div class="extra">
+				<p>最后一次交易的流水号如下，您可以通过 <code>Nasa.checkTx()</code> 方法来查询交易结果。</p>
+				<input type="text" name="payId" value="">
+			</div>
+		</div>
+		<hr>
 		<h3><code>Nasa.query()</code></h3>
 		<div class="api-descr">
 			<div class="text">
-
+				<p>以下预设参数指向某个主网合约提供的接口。</p>
 			</div>
 			<input type="text" name="contract" placeholder="input your contract addr..." value="n1on7kaUoqxPrnzooWoKHdbp7DEx5CVWaJz">
 			<input type="text" name="fn" placeholder="input contract function name..." value="getMessageById">
@@ -32,6 +57,9 @@
 		<hr>
 		<h3><code>Nasa.checkTx()</code></h3>
 		<div class="api-descr">
+			<div class="text">
+				<p>以下默认参数是一个已经完成的主网交易流水号。</p>
+			</div>
 			<input type="text" placeholder="input a pay id..." value="BWH1voPIx1737CSlmheV2lzRSgRb6Ohh">
 			<button class="cm-btn" id="core--checkTx">Check</button>
 		</div>
@@ -162,7 +190,7 @@
 <script>
 void function () {
 	'use strict'
-	let isProduction = !location.host.includes('.test')
+	let isProduction = location.host === 'dapp.applinzi.com'
 	// isProduction = true
 	const jsProd = `
 		<script src="./nasa.js"><\/script>

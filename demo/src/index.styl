@@ -19,6 +19,13 @@ a
 	/html.no-touch &:hover
 		text-decoration underline
 
+code
+	font-family Menlo, Consolas, monospace
+p code
+	background-color $cm-color-stage
+	padding 0.1em 0.25em
+	border-radius 2px
+
 ////////////////////  page  ////////////////////
 body
 	margin 0 auto
@@ -43,18 +50,30 @@ body > section
 	padding 1em $cm-content-padding 1.5em
 	background-color $cm-color-bg
 	> h2
+		margin-bottom 1em
+		margin-left -20px
+		padding-left 10px
+		line-height 1.2
 		font-size 1.5em
-		margin-bottom 0.5em
+		border-left 10px solid $cm-color-fg-light
 	hr
 		color $cm-color-splitter
 		margin 1em 0
 	h3
 		margin-top 1em
 		margin-bottom 0.5em
+		font-size 1.1em
 
 	&.intro
 		padding-top 1.5em
 		text-align center
+		.splitter
+			margin 0 0.5em
+		p
+			margin-bottom 0.5em
+			@media screen and (max-width: 480px)
+				span
+					display block
 
 .api-descr
 	input[type='text']
@@ -82,3 +101,50 @@ body > section
 		font-size $cm-font-size-s
 		line-height 1.2
 		min-height ($cm-font-size-s * 1.2 * 9)
+
+	.text
+		margin-bottom 1em
+		p
+			margin 0.5em 0
+		blockquote
+			font-size $cm-font-size-s
+			color $cm-color-fg-light
+			border-left 5px solid $cm-color-splitter
+			padding-left 0.5em
+		ul
+			list-style disc
+			padding-left 2em
+		li
+			margin 0.3em 0
+
+	.extra
+		$bgColor = #cdf0ff
+		display none
+		position relative
+		margin-top 25px
+		padding 0.5em 1em
+		font-size $cm-font-size-s
+		background-color $bgColor
+		border-radius 10px
+		input[type='text']
+			padding 5px 10px
+			border-color #46b8da
+			line-height 20px
+		p
+			font-size $cm-font-size-s
+			margin 0.5em 0
+			code
+				background-color $cm-color-symbol
+
+		// arrow
+		&::before
+			$size = 20px
+			content ''
+			position absolute
+			size 0
+			border $size solid transparent
+			border-top-width 0
+			border-bottom-color $bgColor
+			left 50%
+			top (- $size)
+			margin-left (- $size)

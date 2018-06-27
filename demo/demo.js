@@ -2,15 +2,27 @@
 'use strict'
 
 ////////////////////  core  ////////////////////
-$('#core--query').on('click', function () {
+$('#core--call').on('click', function () {
+	// check env
+	if (
+		!Nasa.ua.isMobileDevice() &&
+		!(Nasa.ua.isDesktopChrome() && Nasa.ua.isWalletExtensionInstalled())
+	) {
+		alert('抱歉，暂不支持您当前的浏览器环境！')
+		return
+	}
+
 	const $this = $(this)
 	const contract = $this.siblings('input[name="contract"]').val().trim()
 	const fn = $this.siblings('input[name="fn"]').val().trim()
 	const inputArgs = $this.siblings('input[name="args"]').val().trim()
+	const $extra = $this.siblings('.extra')
+	const $inputPayId = $extra.find('input[name="payId"]')
 
 	const text = $this.text()
 	const DISABLED = 'disabled'
-	$this.text('Querying...')
+	const restoreBtn = () => {$this.text(text).removeAttr(DISABLED)}
+	$this.text('Calling contract...')
 		.attr(DISABLED, DISABLED)
 
 	// form args
@@ -20,6 +32,50 @@ $('#core--query').on('click', function () {
 			const input = `args = [${inputArgs}]`
 			eval(input)
 		} catch (e) {
+			restoreBtn()
+			alert('Error: Syntax error in args field!')
+			return
+		}
+	}
+
+	Nasa.call(contract, fn, args)
+		.then((payId) => {
+			restoreBtn()
+			$inputPayId.val(payId)
+			$extra.show()
+		})
+		.catch((e) => {
+			restoreBtn()
+			let msg = e.message
+			if (msg === Nasa.error.TX_REJECTED_BY_USER) {
+				msg = '您已取消交易！'
+			}
+			alert(msg)
+		})
+})
+
+
+
+$('#core--query').on('click', function () {
+	const $this = $(this)
+	const contract = $this.siblings('input[name="contract"]').val().trim()
+	const fn = $this.siblings('input[name="fn"]').val().trim()
+	const inputArgs = $this.siblings('input[name="args"]').val().trim()
+
+	const text = $this.text()
+	const DISABLED = 'disabled'
+	const restoreBtn = () => {$this.text(text).removeAttr(DISABLED)}
+	$this.text('Querying contract...')
+		.attr(DISABLED, DISABLED)
+
+	// form args
+	let args = []
+	if (inputArgs) {
+		try {
+			const input = `args = [${inputArgs}]`
+			eval(input)
+		} catch (e) {
+			restoreBtn()
 			alert('Error: Syntax error in args field!')
 			return
 		}
@@ -27,12 +83,12 @@ $('#core--query').on('click', function () {
 
 	Nasa.query(contract, fn, args)
 		.then((data) => {
+			restoreBtn()
 			alert(JSON.stringify(data, null, 4))
-			$this.text(text).removeAttr(DISABLED)
 		})
 		.catch((e) => {
+			restoreBtn()
 			alert(e.message)
-			$this.text(text).removeAttr(DISABLED)
 		})
 })
 
@@ -43,17 +99,18 @@ $('#core--checkTx').on('click', function () {
 
 	const text = $this.text()
 	const DISABLED = 'disabled'
-	$this.text('Checking...')
+	const restoreBtn = () => {$this.text(text).removeAttr(DISABLED)}
+	$this.text('Checking Tx...')
 		.attr(DISABLED, DISABLED)
 
-	Nasa.checkTx(value)
+	Nasa.checkTx(value, {noWait: true})
 		.then((data) => {
+			restoreBtn()
 			alert(JSON.stringify(data, null, 4))
-			$this.text(text).removeAttr(DISABLED)
 		})
 		.catch((e) => {
+			restoreBtn()
 			alert(e.message)
-			$this.text(text).removeAttr(DISABLED)
 		})
 })
 
