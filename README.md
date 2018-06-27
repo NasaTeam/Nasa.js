@@ -8,8 +8,6 @@
 
 ### 安装
 
-可通过 npm 安装：
-
 ```sh
 npm install nasa.js
 ```
