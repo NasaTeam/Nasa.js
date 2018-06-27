@@ -13,7 +13,7 @@
 	```html
 	<script src='./node_modules/nasa.js/dist/nasa.js'></script>
 	<script>
-	// your can use `Nasa` as a global variant
+	// use `Nasa` as a global variant
 	alert(Nasa.ua.isSupported())
 	</script>
 	```
@@ -24,7 +24,7 @@
 
 * Nasa.js 的源码采用 ES6 模块管理，采用 ES6+ 语法。但并不建议以模块的方式引用其源码，因为 dist 文件包含了所有外部依赖，直接使用源码意味着需要操心外部依赖。建议使用者直接使用 dist 文件，并以全局变更的方式使用它。
 
-* Nasa.js 目前并没有提供任何附合 CommonJS 模块规范的版本，因此不支持以 `require('nasa.js')` 的方式来引用，不支持 Browserify 打包。
+* Nasa.js 目前并没有提供任何符合 CommonJS 模块规范的版本，因此不支持以 `require('nasa.js')` 的方式来引用，不支持 Browserify 打包。
 
 ## 常见问题
 
@@ -37,6 +37,6 @@
 ```js
 import './node_modules/nasa.js/dist/nasa.js'
 	
-// your can use `Nasa` as a global variant
+// use `Nasa` as a global variant
 alert(Nasa.ua.isSupported())
 ```

@@ -4,7 +4,9 @@
 > 
 > 星云链 DApp 客户端开发框架，轻量，易用。
 
-## 安装和使用
+## 使用说明
+
+### 安装
 
 可通过 npm 安装：
 
@@ -12,8 +14,11 @@
 npm install nasa.js
 ```
 
-* 详细的使用说明参见 ~~此文档~~。
-* 完整的 API 文档详见 ~~此文档~~。
+### 文档
+
+* 详细的使用说明参见 [此文档](https://github.com/cssmagic/Nasa.js/issues/1)。
+* 完整的 API 文档详见 [此文档](https://github.com/cssmagic/Nasa.js/issues/2)。
+* 功能演示参见 [此页面](http://dapp.applinzi.com/nasa/)。
 
 ## 价值是什么？
 
@@ -38,7 +43,7 @@ npm install nasa.js
 分析当前浏览器环境 |   |  |  | ✓
 常用工具方法 <sup>[6]</sup> |   |  |  | ✓
 | |
-文件体积 <sup>[9]</sup> | 155 KiB | 9.7 KiB | 21 KiB| ≤ 30 KiB<br><sup>（开发中）</sup>
+文件体积 <sup>[9]</sup> | 155 KiB | 9.7 KiB | 21 KiB| < 30 KiB
 
 > * <sup>[1]</sup> 此功能通过唤起 “星云钱包 Chrome 扩展” 或 “星云手机钱包 App” 来实现。
 > * <sup>[2]</sup> Nasa.js 暂未直接实现此功能。但由于 Nasa.js 打包了完整的 nebPay，开发者目前需要直接使用 nebPay 来实现此功能。
