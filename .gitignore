@@ -27,5 +27,8 @@ package-lock.json
 
 _stuff/
 dist/
+demo/nasa.js
+demo/lib.js
+demo/index.css
 .env
 mix-manifest.json
