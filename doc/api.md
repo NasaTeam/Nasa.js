@@ -52,6 +52,8 @@ Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 * `Nasa.error.TX_REJECTED_BY_USER` -- 交易被用户取消
 * `Nasa.error.EXTENSION_NOT_INSTALLED` -- “星云钱包 Chrome 扩展” 未安装
 * `Nasa.error.EXTENSION_TIMEOUT` -- “星云钱包 Chrome 扩展” 响应超时
+* `Nasa.error.EXTENSION_NO_WALLET` -- “星云钱包 Chrome 扩展” 没有导入钱包
+* ……
 
 ### 环境名 <a name="const--env">&nbsp;</a>
 
@@ -84,11 +86,15 @@ Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 Promise。处理结果如下：
 
 * Fulfilled：字符串。交易流水号，可通过 [`Nasa.checkTx()`](#core--checkTx) 查询交易状态和调用结果。
+
 * Rejected：
-	* 当参数错误时抛 xxx 错误
-	* 用户取消时抛 xxx 错误
-	* 网络错误时抛 xxx 错误
-	* 合约执行错误时抛 xxx 错误
+
+	错误原因 | 错误消息
+	---|---
+	传入的参数无效 | `Nasa.error.INVALID_ARG`
+	用户取消交易 | `Nasa.error.TX_REJECTED_BY_USER`
+	服务器不稳定 | `Nasa.error.SERVER_ERROR`
+	钱包扩展没有导入钱包 | `Nasa.error.EXTENSION_NO_WALLET`
 
 ### `Nasa.query(contract, fnName, args = [])`
 
@@ -96,13 +102,13 @@ Promise。处理结果如下：
 
 #### 参数
 
-（同 [`Nasa.call()`](#core--call) 的参数）
+（同 [`Nasa.call()`](#core--call) 的参数，但没有 `options` 参数。）
 
 #### 返回值
 
 Promise。处理结果如下：
 
-* Fulfilled：合约调用结果。不需要解析 JSON。
+* Fulfilled：合约调用结果。已帮你把 JSON 解析好了。
 
 * Rejected：
 
@@ -154,7 +160,7 @@ Promise。处理结果如下：
 		"timestamp": 1527525664,
 		"execute_result": "{}",	// 合约执行的返回值，JSON 格式。
 		"execute_error": "",
-		"result": {}  // 👉 合约执行的返回值，Nasa.js 已帮你把 JSON 解析好了。
+		"result": {}  // 👉 合约执行的返回值，已帮你把 JSON 解析好了。
 	}
 	```
 
