@@ -64,9 +64,9 @@ Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 * `Nasa.env.TESTNET` -- `Nasa.env.TEST` 的别名
 
 
-## 核心功能 <a name="core">&nbsp;</a>
+## 核心 API <a name="core-api">&nbsp;</a>
 
-### `Nasa.call(contract, fnName, args = [], options = {})` <a name="core--call">&nbsp;</a>
+### `Nasa.call(contract, fnName, args = [], options = {})` <a name="core-api--call">&nbsp;</a>
 
 调用合约方法，并向链写入数据，因此需要以交易的方式实现（一般称作 “写入型调用” 或 “交易型调用”）。
 
@@ -85,7 +85,7 @@ Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 
 Promise。处理结果如下：
 
-* Fulfilled：字符串。交易流水号，可通过 [`Nasa.checkTx()`](#core--checkTx) 查询交易状态和调用结果。
+* Fulfilled：字符串。交易流水号，可通过 [`Nasa.checkTx()`](#core-api--checkTx) 查询交易状态和调用结果。
 
 * Rejected：
 
@@ -102,7 +102,7 @@ Promise。处理结果如下：
 
 #### 参数
 
-（同 [`Nasa.call()`](#core--call) 的参数，但没有 `options` 参数。）
+（同 [`Nasa.call()`](#core-api--call) 的参数，但没有 `options` 参数。）
 
 #### 返回值
 
@@ -126,7 +126,7 @@ Promise。处理结果如下：
 	> * `'insufficient balance'` -- 用户钱包无余额
 	> * `'Call: TypeError: ...'` -- 合约函数运行时错误
 
-### `Nasa.checkTx(payId)` <a name="core--checkTx">&nbsp;</a>
+### `Nasa.checkTx(payId)` <a name="core-api--checkTx">&nbsp;</a>
 
 查询交易结果。
 
@@ -188,7 +188,7 @@ Promise。处理结果如下：
 
 #### 返回值
 
-（同 [`Nasa.call()`](#core--call) 的返回值）
+（同 [`Nasa.call()`](#core-api--call) 的返回值）
 
 ## 合约 <a name="contract">&nbsp;</a>
 
