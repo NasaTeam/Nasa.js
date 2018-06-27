@@ -7,6 +7,12 @@ $('#core--query').on('click', function () {
 	const contract = $this.siblings('input[name="contract"]').val().trim()
 	const fn = $this.siblings('input[name="fn"]').val().trim()
 	const inputArgs = $this.siblings('input[name="args"]').val().trim()
+
+	const text = $this.text()
+	const DISABLED = 'disabled'
+	$this.text('Querying...')
+		.attr(DISABLED, DISABLED)
+
 	// form args
 	let args = []
 	if (inputArgs) {
@@ -22,9 +28,11 @@ $('#core--query').on('click', function () {
 	Nasa.query(contract, fn, args)
 		.then((data) => {
 			alert(JSON.stringify(data, null, 4))
+			$this.text(text).removeAttr(DISABLED)
 		})
 		.catch((e) => {
 			alert(e.message)
+			$this.text(text).removeAttr(DISABLED)
 		})
 })
 
@@ -32,10 +40,12 @@ $('#core--checkTx').on('click', function () {
 	const $this = $(this)
 	const $input = $this.siblings('input[type="text"]')
 	const value = $input.val().trim()
+
 	const text = $this.text()
 	const DISABLED = 'disabled'
 	$this.text('Checking...')
 		.attr(DISABLED, DISABLED)
+
 	Nasa.checkTx(value)
 		.then((data) => {
 			alert(JSON.stringify(data, null, 4))
