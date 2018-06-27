@@ -1,4 +1,4 @@
-import { NebPay } from '../external-dependency'
+/* global NebPay */
 import * as env from '../env/index'
 
 const DEFAULT_ADDR = 'n1bCep7RbeCWQk9EQo48V3TuXEdZLCS7eTn'

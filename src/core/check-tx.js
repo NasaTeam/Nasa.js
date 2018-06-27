@@ -1,5 +1,4 @@
 /* global nebPay */
-import { nebPay } from '../external-dependency'
 import * as config from './config'
 import { isValidPayId } from '../util'
 import * as error from '../const/error'

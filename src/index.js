@@ -1,4 +1,5 @@
-import { NebPay, nebPay, BigNumber, blockies } from './external-dependency'
+/* global NebPay, nebPay, BigNumber, ns */
+
 import { checkTx, query, call } from './core/index'
 import { error } from './const/index'
 import * as ua from './ua/index'
@@ -13,7 +14,6 @@ const Nasa = {
 	NebPay,
 	nebPay,
 	BigNumber,
-	blockies,
 
 	// const
 	error,
@@ -31,5 +31,10 @@ const Nasa = {
 	contract,
 }
 
-// exports
-window.Nasa = Nasa
+// exports to an namespace
+if (typeof ns !== 'undefined') {
+	ns.Nasa = Nasa
+}
+
+// exports as a module
+export default Nasa

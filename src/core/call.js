@@ -1,5 +1,4 @@
 /* global nebPay */
-import { nebPay } from '../external-dependency'
 import * as config from './config'
 import * as ua from '../ua/index'
 import { get as getContract } from '../contract/index'
