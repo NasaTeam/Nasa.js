@@ -142,7 +142,7 @@ Promise。处理结果如下：
 
 * Fulfilled：对象。交易详细信息，基本格式如下：
 
-	```json
+	```js
 	{
 		"data": "...base64...",  // 就是 {Function, Args} 的 JSON 的 base64
 		"contract_address": "",
