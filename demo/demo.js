@@ -10,6 +10,9 @@ $('#core--call').on('click', function () {
 	) {
 		alert('抱歉，暂不支持您当前的浏览器环境！')
 		return
+	} else if (Nasa.ua.isWeChat()) {
+		alert('抱歉，微信浏览器不支持唤起手机钱包 App。\n\n请点右上角菜单，再选择 “在浏览器打开”。')
+		return
 	}
 
 	const $this = $(this)
