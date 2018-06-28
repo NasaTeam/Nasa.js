@@ -1,8 +1,13 @@
 
-// simulate gearbox env
+// simulate gearbox
 const gearbox = window.gearbox || {}
 gearbox.str = gearbox.str || {}
 gearbox.str.includes = gearbox.str.includes || ((str, subStr) => String(str).includes(subStr))
+
+// simulate underscore
+const _ = {
+	compact: (arr) => arr,
+}
 
 /* --------------------------------------------- */
 // https://github.com/CMUI/gearbox/blob/master/src/ua.js
