@@ -33,8 +33,10 @@ mix.options({
 if (program.MIX_PROXY) {
 	mix.browserSync({
 		proxy: program.MIX_PROXY,
-		ui: false,
 		port: 3098,
+		ui: false,
+		ghostMode: false,
+		logLevel: "debug",
 		files: [
 			'./demo/*.html',
 			'./demo/*.css',
