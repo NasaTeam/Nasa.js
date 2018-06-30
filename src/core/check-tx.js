@@ -10,6 +10,17 @@ import * as ua from '../ua/index'
 	"data": {},  // tx data
 	"msg": "success",
 }
+当合约调用错误时：{
+	code : 0,
+	data: {  // tx data
+		...
+		execute_error : "Call: Error: value has been occupied"
+		execute_result : "Error: value has been occupied"
+		status : 0
+		...
+	}
+	msg : "success",
+}
 各种错误情况： {
 	"code": 1,
 	"data": {},
@@ -63,7 +74,8 @@ export function checkTx(sn, options = {}) {
 						// 1: Successful. It means the transaction has been submitted on chain and its execution succeed.
 						// 2: Pending. It means the transaction hasn't been packed into a block.
 						if (txData.status === 0) {
-							const errMsg = data.type === 'call' ? error.CALL_FAILED : error.TX_FAILED
+							let errMsg = txData.type === 'call' ? error.CALL_FAILED : error.TX_FAILED
+							// TODO 拿到精确的合约错误信息
 							reject(new Error(errMsg))
 						} else if (txData.status === 1) {
 							console.log('get tx info: ', txData)
