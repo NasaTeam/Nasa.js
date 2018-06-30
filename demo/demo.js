@@ -1,6 +1,16 @@
 /* global Nasa */
 'use strict'
 
+const ERROR_ARGS = `Error: Syntax error in args field!
+
+* 多个参数之间请用逗号分隔
+* 如果不需要传入参数，则留空即可`
+
+const ERROR_CONTRACT_CONFIG = `Error: Syntax error in your input!
+
+* 请填写一个对象字面量
+* 不需要严格遵守 JSON 规范`
+
 ////////////////////  core  ////////////////////
 $('#core--call').on('click', function () {
 	// check env
@@ -36,7 +46,7 @@ $('#core--call').on('click', function () {
 			eval(input)
 		} catch (e) {
 			restoreBtn()
-			alert('Error: Syntax error in args field!')
+			alert(ERROR_ARGS)
 			return
 		}
 	}
@@ -45,7 +55,9 @@ $('#core--call').on('click', function () {
 		.then((payId) => {
 			restoreBtn()
 			$inputPayId.val(payId)
-			$extra.show()
+			setTimeout(() => {
+				$extra.show()
+			}, 5000)
 		})
 		.catch((e) => {
 			restoreBtn()
@@ -79,7 +91,7 @@ $('#core--query').on('click', function () {
 			eval(input)
 		} catch (e) {
 			restoreBtn()
-			alert('Error: Syntax error in args field!')
+			alert(ERROR_ARGS)
 			return
 		}
 	}
@@ -130,7 +142,7 @@ $('#contract--set').on('click', function () {
 		const input = `config = ${value}`
 		eval(input)
 	} catch (e) {
-		alert('Error: Syntax error in your input!')
+		alert(ERROR_CONTRACT_CONFIG)
 		return
 	}
 

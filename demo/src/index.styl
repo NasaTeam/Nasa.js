@@ -64,16 +64,24 @@ body > section
 		margin-bottom 0.5em
 		font-size 1.1em
 
-	&.intro
+	&.repo-intro
 		padding-top 1.5em
 		text-align center
 		.splitter
 			margin 0 0.5em
 		p
-			margin-bottom 0.5em
+			+ p
+				margin-top 0.5em
 			@media screen and (max-width: 480px)
-				span
+				&.slogan span
 					display block
+
+	&.demo-intro
+		p
+			line-height 1.6
+			+ p
+				margin-top 0.75em
+
 
 .api-descr
 	input[type='text']
