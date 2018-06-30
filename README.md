@@ -52,7 +52,8 @@ npm install nasa.js
 
 ## 谁在用？
 
-* [我是预言帝](http://dapp.applinzi.com/predictor/) —— 基于 Nasa.js 的未发布版本
+* [定时器 - NAS工具箱](https://nastoolkit.com/timer.html)
+* [我是预言帝](http://dapp.applinzi.com/predictor/)
 
 ## 常见问题
 
