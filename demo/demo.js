@@ -12,6 +12,43 @@ const ERROR_CONTRACT_CONFIG = `Error: Syntax error in your input!
 * 不需要严格遵守 JSON 规范`
 
 ////////////////////  core  ////////////////////
+$('#core--query').on('click', function () {
+	const $this = $(this)
+	const contract = $this.siblings('input[name="contract"]').val().trim()
+	const fn = $this.siblings('input[name="fn"]').val().trim()
+	const inputArgs = $this.siblings('input[name="args"]').val().trim()
+
+	const text = $this.text()
+	const DISABLED = 'disabled'
+	const restoreBtn = () => {$this.text(text).removeAttr(DISABLED)}
+	$this.text('Querying contract...')
+		.attr(DISABLED, DISABLED)
+
+	// form args
+	let args = []
+	if (inputArgs) {
+		try {
+			const input = `args = [${inputArgs}]`
+			eval(input)
+		} catch (e) {
+			restoreBtn()
+			alert(ERROR_ARGS)
+			return
+		}
+	}
+
+	Nasa.query(contract, fn, args)
+		.then((data) => {
+			restoreBtn()
+			alert(JSON.stringify(data, null, 4))
+		})
+		.catch((e) => {
+			restoreBtn()
+			alert(e.message)
+		})
+})
+
+
 $('#core--call').on('click', function () {
 	// check env
 	if (
@@ -69,43 +106,6 @@ $('#core--call').on('click', function () {
 		})
 })
 
-
-
-$('#core--query').on('click', function () {
-	const $this = $(this)
-	const contract = $this.siblings('input[name="contract"]').val().trim()
-	const fn = $this.siblings('input[name="fn"]').val().trim()
-	const inputArgs = $this.siblings('input[name="args"]').val().trim()
-
-	const text = $this.text()
-	const DISABLED = 'disabled'
-	const restoreBtn = () => {$this.text(text).removeAttr(DISABLED)}
-	$this.text('Querying contract...')
-		.attr(DISABLED, DISABLED)
-
-	// form args
-	let args = []
-	if (inputArgs) {
-		try {
-			const input = `args = [${inputArgs}]`
-			eval(input)
-		} catch (e) {
-			restoreBtn()
-			alert(ERROR_ARGS)
-			return
-		}
-	}
-
-	Nasa.query(contract, fn, args)
-		.then((data) => {
-			restoreBtn()
-			alert(JSON.stringify(data, null, 4))
-		})
-		.catch((e) => {
-			restoreBtn()
-			alert(e.message)
-		})
-})
 
 $('#core--checkTx').on('click', function () {
 	const $this = $(this)
