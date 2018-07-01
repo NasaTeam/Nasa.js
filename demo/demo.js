@@ -50,6 +50,22 @@ void function () {
 	})
 
 
+	// dynamic args for `Nasa.call()`
+	void function () {
+		let randomStr = Math.random().toString(36).substring(2)
+		const randomLength = 5
+		if (randomStr.length > randomLength) {
+			randomStr = randomStr.substring(0, randomLength)
+		}
+
+		const $input = $('#core--call').siblings('input[name="args"]')
+		let presetArgs = $input.val()
+		const presetKey = 'Nasa-demo'
+		presetArgs = presetArgs.replace(presetKey, presetKey + '-' + randomStr)
+
+		$input.val(presetArgs)
+	}()
+
 	$('#core--call').on('click', function () {
 		// check env
 		if (
