@@ -53,7 +53,7 @@ npm install nasa.js
 ## 谁在用？
 
 * [定时器 - NAS工具箱](https://nastoolkit.com/timer.html)
-* [我是预言帝](http://dapp.applinzi.com/predictor/)
+* [我是预言帝](https://dapp.applinzi.com/predictor/)
 
 ## 常见问题
 
@@ -78,6 +78,19 @@ Nasa.js 的 dist 文件已经把所有外部依赖都打包进来了，因此可
 #### 我需要的某个功能 Nasa.js 还不支持，怎么办？
 
 来给 Nasa.js [提 issue](https://github.com/cssmagic/Nasa.js/issues/new) 吧！
+
+## 社区
+
+#### 活动
+
+* [[公告] 💰 有奖征集 bug：最高奖 5 NAS ](https://github.com/cssmagic/Nasa.js/issues/4)
+
+#### 贡献者
+
+* @smallke(夏日小可) —— 反馈 bug
+* 风 —— 反馈 bug
+* @Heasn —— 建议者
+* 希望之石 —— 建议者
 
 ***
 
