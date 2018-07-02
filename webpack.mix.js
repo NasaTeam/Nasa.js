@@ -18,7 +18,7 @@ mix.options({
 	autoprefixer: {
 		options: {
 			browsers: [
-				'Android >= 4.4',
+				'Android >= 5',
 				'iOS >= 10',
 				'Chrome >= 35',
 				'Firefox >= 56',
@@ -36,7 +36,7 @@ if (program.MIX_PROXY) {
 		port: 3098,
 		ui: false,
 		ghostMode: false,
-		logLevel: "debug",
+		logLevel: 'debug',
 		files: [
 			'./demo/*.html',
 			'./demo/*.css',
