@@ -8,13 +8,13 @@
 
 ### 安装
 
-* 可以使用 npm 安装到本地：
+* 可以使用 npm 下载到本地：
 
 	```sh
 	$ npm install nasa.js
 	```
 
-* 也可以在页面中直接加载脚本：
+* 也可以在页面中直接加载 CDN 版本：
 
 	```html
 	<script src="https://cdn.jsdelivr.net/npm/nasa.js@0.1.2/dist/nasa.min.js"></script>
@@ -82,7 +82,7 @@ Nasa.js 的 dist 文件已经把所有外部依赖都打包进来了，因此可
 
 * 如果你的 DApp 依赖 neb.js 只是因为你需要向合约查询数据，则建议把相关代码迁移到 Nasa.js。这样你的 DApp 就不需要加载 neb.js 了。
 
-* 由于 Nasa.js 本身已经打包了 nebPay 的源码，因此你不需要重复加载 nebPay。使用 `Nasa.nebPay` 即可以取代你代码中的 `nebPay` 实例，详情参见 ~~此文档~~。
+* 由于 Nasa.js 本身已经打包了 nebPay 的源码，因此你不需要重复加载 nebPay。使用 `Nasa.nebPay` 即可以取代你代码中的 `nebPay` 实例，详情参见 [此文档](https://github.com/cssmagic/Nasa.js/issues/2#dependency)。
 
 #### 我需要的某个功能 Nasa.js 还不支持，怎么办？
 
@@ -97,7 +97,7 @@ Nasa.js 的 dist 文件已经把所有外部依赖都打包进来了，因此可
 #### 贡献者
 
 * @smallke(夏日小可) —— 反馈 bug
-* 风 —— 反馈 bug
+* @salmonx(风) —— 反馈 bug
 * @Heasn —— 建议者
 * 希望之石 —— 建议者
 
@@ -107,6 +107,7 @@ Nasa.js 的 dist 文件已经把所有外部依赖都打包进来了，因此可
 
 Nasa.js is based on these open source projects:
 
+* [neb.js](https://github.com/nebulasio/neb.js)
 * [nebPay](https://github.com/nebulasio/nebPay)
 * [Gearbox](https://github.com/CMUI/gearbox)
 
