@@ -14,9 +14,9 @@ npm install nasa.js
 
 ### 文档
 
-* 详细的使用说明参见 [此文档](https://github.com/cssmagic/Nasa.js/issues/1)。
-* 完整的 API 文档详见 [此文档](https://github.com/cssmagic/Nasa.js/issues/2)。
-* 功能演示参见 [此页面](http://dapp.applinzi.com/nasa/)。
+* [安装和使用](https://github.com/cssmagic/Nasa.js/issues/1)
+* [API 文档](https://github.com/cssmagic/Nasa.js/issues/2)
+* [功能演示](http://dapp.applinzi.com/nasa/)
 
 ## 价值是什么？
 
@@ -52,6 +52,7 @@ npm install nasa.js
 
 ## 谁在用？
 
+* [星云 Wiki](https://zoowii.coding.me/nebwiki/)
 * [定时器 - NAS工具箱](https://nastoolkit.com/timer.html)
 * [我是预言帝](https://dapp.applinzi.com/predictor/)
 
