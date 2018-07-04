@@ -8,9 +8,17 @@
 
 ### 安装
 
-```sh
-npm install nasa.js
-```
+* 可以使用 npm 安装到本地：
+
+	```sh
+	$ npm install nasa.js
+	```
+
+* 也可以在页面中直接加载脚本：
+
+	```html
+	<script src="https://cdn.jsdelivr.net/npm/nasa.js@0.1.2/dist/nasa.min.js"></script>
+	```
 
 ### 文档
 
