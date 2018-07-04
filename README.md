@@ -17,7 +17,7 @@
 * 也可以在页面中直接加载 CDN 版本：
 
 	```html
-	<script src="https://cdn.jsdelivr.net/npm/nasa.js@0.1.2/dist/nasa.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/nasa.js@latest/dist/nasa.min.js"></script>
 	```
 
 ### 文档
