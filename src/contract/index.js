@@ -9,7 +9,7 @@ function set(config) {
 		console.error('[Nasa.js] Wrong param!')
 	} else {
 		const contractNames = Object.keys(config)
-		console.log(contractNames)
+		// console.log(contractNames)
 		if (contractNames.indexOf(DEFAULT) === -1 && !_store[DEFAULT]) {
 			console.error('[Nasa.js] Missing default contract!')
 		}
@@ -19,10 +19,11 @@ function set(config) {
 			const item = _store[name] = _store[name] || {}
 			void [env.MAIN, env.TEST, env.LOCAL].forEach((envName) => {
 				const contractAddr = (contractItem[envName] || '').trim()
+				if (!contractAddr) return
 				if (isValidAddr(contractAddr)) {
 					item[envName] = contractAddr
 				} else {
-					console.error(`[Nasa.js] ${name}.${envName}(${contractAddr}) is not valid!`)
+					console.error(`[Nasa.js] ${name}.${envName} (${contractAddr}) is not valid!`)
 				}
 			})
 		})
