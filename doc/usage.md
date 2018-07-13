@@ -35,7 +35,7 @@
 方法二：如果你使用的打包工具支持 ES6 模块规范，可以把 dist 文件当作一个模块来引用，并打包到自己的 bundle 中。具体代码是这样的：
 
 ```js
-import './node_modules/nasa.js/dist/nasa.js'
+import 'nasa.js/dist/nasa.js'
 	
 // use `Nasa` as a global variant
 alert(Nasa.ua.isSupported())
