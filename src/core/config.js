@@ -1,8 +1,6 @@
 /* global NebPay */
 import * as env from '../env/index'
 
-const DEFAULT_ADDR = 'n1bCep7RbeCWQk9EQo48V3TuXEdZLCS7eTn'
-
 const nebConfig = NebPay.config
 
 const NEBULAS = {
@@ -35,7 +33,6 @@ function getNebPayOptions() {
 }
 
 export {
-	DEFAULT_ADDR,
 	getNebPayOptions,
 	get,
 }

@@ -1,6 +1,7 @@
 import * as config from './config'
 import { get as getContract } from '../contract/index'
-import { isValidAddr } from '../util'
+import { isValidAddr } from '../util/index'
+import * as addr from '../util/addr'
 import * as error from '../const/error'
 
 /*
@@ -20,6 +21,10 @@ import * as error from '../const/error'
 	execute_err: "insufficient balance",
 	result: "...json string...",
 }
+
+当请求所用的地址非法：400 error: {
+	error: 'address: invalid address type',
+}
 */
 
 export function query(contractAddr, fnName, args = []) {
@@ -32,9 +37,12 @@ export function query(contractAddr, fnName, args = []) {
 		return Promise.reject(new Error(error.INVALID_ARG))
 	}
 
+	const randomAddr = addr.getAvailableAddr()
+	// console.log(randomAddr)
+
 	const api = config.get('apiBaseUrl') + 'user/call'
 	const txParams = {
-		from: config.DEFAULT_ADDR,
+		from: randomAddr,
 		to: contract,
 		value: '0',
 		nonce: '0',
@@ -57,6 +65,7 @@ export function query(contractAddr, fnName, args = []) {
 			if (res.ok) {
 				return res.json()
 			} else {
+				// TODO 400 响应会进这里，因此错误似乎应该是 RESPONSE_ERROR
 				throw new Error(error.INVALID_RESPONSE)
 			}
 		}, () => {
