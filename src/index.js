@@ -7,6 +7,7 @@ import * as util from './util/index'
 import * as user from './user/index'
 import * as env from './env/index'
 import * as contract from './contract/index'
+import { init } from './util/init'
 
 // ns
 const Nasa = {
@@ -30,6 +31,9 @@ const Nasa = {
 	env,
 	contract,
 }
+
+// init
+init()
 
 // exports to an namespace
 if (typeof ns !== 'undefined') {
