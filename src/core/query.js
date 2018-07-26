@@ -6,25 +6,40 @@ import * as _addr from '../util/addr'
 
 /*
 从接口拿到的结果是一个 JSON 对象。
-当查询成功时： {
+当查询成功时： {result: {
 	estimate_gas: "20490",
 	execute_err: "",
 	result: "...json string...",
-}
-如果合约不存在： {
+}}
+如果合约不存在： {result: {
 	estimate_gas: "20153",
 	execute_err: "contract check failed",
 	result: "",
-}
-如果钱包无余额： {
+}}
+如果钱包无余额： {result: {
 	estimate_gas: "20490",
 	execute_err: "insufficient balance",
 	result: "...json string...",
-}
+}}
+合约代码语法错误（通常是节点不稳定）： {result: {
+	result: '',
+	execute_err: 'contract code syntax error',
+	estimate_gas: 20101,
+}}
 
-当请求所用的地址非法：400 error: {
+当请求所用的地址非法，或请求的合约地址非法（400 error）： {
 	error: 'address: invalid address type',
+} 或 {
+	error: 'address: invalid address checksum',
+} 或 {
+	error: 'address: invalid address format',
 }
+当请求被节点限流（503 error），返回字符串：
+'{"err:","Sorry, we received too many simultaneous requests.
+Please try again later."}'
+
+当服务器故障： 503 Service Unavailable
+
 */
 
 export function query(contractAddr, fnName, args = []) {
@@ -66,10 +81,11 @@ export function query(contractAddr, fnName, args = []) {
 
 				return res.json()
 			} else {
-				// TODO 400 响应会进这里，因此错误似乎应该是 RESPONSE_ERROR
+				// TODO 400 响应会进这里，因此错误似乎应该是 RESPONSE_ERROR 或 REQUEST_ERROR
 				throw new Error(error.INVALID_RESPONSE)
 			}
 		}, () => {
+			// TODO 503 响应会进这里，因此错误似乎应该是 SERVER_ERROR
 			throw new Error(error.NETWORK_ERROR)
 		})
 		.then((res) => {
