@@ -27,8 +27,8 @@ function addAvailableAddr(addr) {
 	// 池子里只有一个备选地址，说明已经获取到用户自己的地址了，就没必要再往池子里加了
 	if (AVAILABLE_ADDR_LIST.length === 1) return
 	if (util.isValidAddr(addr) && !AVAILABLE_ADDR_LIST.includes(addr)) {
-		// 重复加五次，表示随机选取时权重更高
-		for (let i = 0; i < 5; i++) {
+		// 重复加 2 次，表示随机选取时权重更高
+		for (let i = 0; i < 2; i++) {
 			AVAILABLE_ADDR_LIST.push(addr)
 		}
 	}
