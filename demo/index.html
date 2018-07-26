@@ -40,9 +40,9 @@
 					<p>以下预设参数指向 “超级词典” 合约，你可以改成自己的合约并随意尝试。</p>
 				</blockquote>
 			</div>
-			<input type="text" name="contract" placeholder="input your contract addr..." value="n1pbCznWEq8xwyVnJQLUTeHU9XxSoUNHWEt">
-			<input type="text" name="fn" placeholder="input contract function name..." value="get">
-			<input type="text" name="args" placeholder="function args, separated by commas..." value="'Nasa.js'">
+			<input autocomplete="off" type="text" name="contract" placeholder="input your contract addr..." value="n1pbCznWEq8xwyVnJQLUTeHU9XxSoUNHWEt">
+			<input autocomplete="off" type="text" name="fn" placeholder="input contract function name..." value="get">
+			<input autocomplete="off" type="text" name="args" placeholder="function args, separated by commas..." value="'Nasa.js'">
 			<button class="cm-btn" id="core--query">Query</button>
 		</div>
 		<hr>
@@ -59,13 +59,13 @@
 					<p>以下预设参数指向 “超级词典” 合约，你可以改成自己的合约并随意尝试。</p>
 				</blockquote>
 			</div>
-			<input type="text" name="contract" placeholder="input your contract addr..." value="n1pbCznWEq8xwyVnJQLUTeHU9XxSoUNHWEt">
-			<input type="text" name="fn" placeholder="input contract function name..." value="save">
-			<input type="text" name="args" placeholder="function args, separated by commas..." value="'Nasa-demo', 'Posted from Nasa.js demo page.'">
+			<input autocomplete="off" type="text" name="contract" placeholder="input your contract addr..." value="n1pbCznWEq8xwyVnJQLUTeHU9XxSoUNHWEt">
+			<input autocomplete="off" type="text" name="fn" placeholder="input contract function name..." value="save">
+			<input autocomplete="off" type="text" name="args" placeholder="function args, separated by commas..." value="'Nasa-demo', 'Posted from Nasa.js demo page.'">
 			<button class="cm-btn" id="core--call">Call</button>
 			<div class="extra">
 				<p>最后一次交易的流水号如下，您可以通过下面的 <code>Nasa.checkTx()</code> 方法来查询交易结果。</p>
-				<input type="text" name="payId" value="">
+				<input autocomplete="off" type="text" name="payId" value="">
 			</div>
 		</div>
 		<hr>
@@ -77,7 +77,7 @@
 					<p>以下预设参数是一个真实的主网交易流水号，你可以随意修改并尝试。</p>
 				</blockquote>
 			</div>
-			<input type="text" placeholder="input a pay id..." value="BWH1voPIx1737CSlmheV2lzRSgRb6Ohh">
+			<input autocomplete="off" type="text" placeholder="input a pay id..." value="BWH1voPIx1737CSlmheV2lzRSgRb6Ohh">
 			<button class="cm-btn" id="core--checkTx">Check</button>
 		</div>
 	</section>
@@ -91,10 +91,10 @@
 			<div class="text">
 				<p>用于指定你需要的合约地址。</p>
 			</div>
-			<textarea placeholder="input contract addr in specific format...">
+			<textarea autocomplete="off" placeholder="input contract addr in specific format...">
 {
 	"default": {
-		"local":   "n10000contract0000addr0000default01x",
+		"local":   "n10000contract0000addr0000default01",
 		"testnet": "n10000contract0000addr0000default02",
 		"mainnet": "n10000contract0000addr0000default03"
 	},
@@ -117,7 +117,7 @@
 			<div class="text">
 				<p>用于获取你事先指定的合约地址。</p>
 			</div>
-			<input type="text" placeholder="input a contract name..." value="default">
+			<input autocomplete="off" type="text" placeholder="input a contract name..." value="default">
 			<button class="cm-btn" id="contract--get">Get</button>
 		</div>
 	</section>
@@ -131,7 +131,7 @@
 			<div class="text">
 				<p>用于指定当前环境。</p>
 			</div>
-			<select name="env">
+			<select autocomplete="off" name="env">
 				<option value="">Select & set as current...</option>
 				<option value="local"  >Nasa.env.LOCAL</option>
 				<option value="testnet">Nasa.env.TEST</option>
@@ -200,19 +200,19 @@
 	<section>
 		<h3><code>Nasa.util.isValidAddr()</code></h3>
 		<div class="api-descr">
-			<input type="text" placeholder="input an Address..." value="n1bCep7RbeCWQk9EQo48V3TuXEdZLCS7eTn">
+			<input autocomplete="off" type="text" placeholder="input an Address..." value="n1bCep7RbeCWQk9EQo48V3TuXEdZLCS7eTn">
 			<button class="cm-btn" id="util--isValidAddr">Check</button>
 		</div>
 		<hr>
 		<h3><code>Nasa.util.isValidTxHash()</code></h3>
 		<div class="api-descr">
-			<input type="text" placeholder="input a Tx Hash..." value="5b7a9db52a519da277f4ba6799a2ebce18becbbed0c54950cb60b181facf4cfb">
+			<input autocomplete="off" type="text" placeholder="input a Tx Hash..." value="5b7a9db52a519da277f4ba6799a2ebce18becbbed0c54950cb60b181facf4cfb">
 			<button class="cm-btn" id="util--isValidTxHash">Check</button>
 		</div>
 		<hr>
 		<h3><code>Nasa.util.isValidPayId()</code></h3>
 		<div class="api-descr">
-			<input type="text" placeholder="input a Pay Id..." value="BQkcJF1EmXW0RmaHqkFMSPtK7DjtFbY2">
+			<input autocomplete="off" type="text" placeholder="input a Pay Id..." value="BQkcJF1EmXW0RmaHqkFMSPtK7DjtFbY2">
 			<button class="cm-btn" id="util--isValidPayId">Check</button>
 		</div>
 	</section>

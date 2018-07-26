@@ -1,3 +1,4 @@
+/* eslint-disable no-eval */
 /* global Nasa */
 void function () {
 'use strict'
