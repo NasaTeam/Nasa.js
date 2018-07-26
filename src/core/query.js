@@ -1,8 +1,8 @@
 import * as config from './config'
 import { get as getContract } from '../contract/index'
 import { isValidAddr } from '../util/index'
-import * as addr from '../util/addr'
 import * as error from '../const/error'
+import * as _addr from '../util/addr'
 
 /*
 从接口拿到的结果是一个 JSON 对象。
@@ -31,13 +31,11 @@ export function query(contractAddr, fnName, args = []) {
 	// get contract
 	const contract = isValidAddr(contractAddr) ?
 		contractAddr : getContract(contractAddr)
-	if (!contract) return Promise.reject(new Error(error.INVALID_ARG))
-
 	if (!contract || !fnName || !Array.isArray(args)) {
 		return Promise.reject(new Error(error.INVALID_ARG))
 	}
 
-	const randomAddr = addr.getAvailableAddr()
+	const randomAddr = _addr.getAvailableAddr()
 	// console.log(randomAddr)
 
 	const api = config.get('apiBaseUrl') + 'user/call'
@@ -63,6 +61,9 @@ export function query(contractAddr, fnName, args = []) {
 	})
 		.then((res) => {
 			if (res.ok) {
+				// 合法的合约地址也加入备用地址的池子
+				_addr.addAvailableAddr(contractAddr)
+
 				return res.json()
 			} else {
 				// TODO 400 响应会进这里，因此错误似乎应该是 RESPONSE_ERROR

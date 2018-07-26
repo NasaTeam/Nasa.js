@@ -3,8 +3,8 @@ import * as config from './config'
 import { isValidPayId } from '../util'
 import * as error from '../const/error'
 import * as ua from '../ua/index'
-import * as _addr from '../util/addr'
 import * as util from '../util/index'
+import * as _addr from '../util/addr'
 
 /*
 当交易查询成功时，nebPay.queryPayInfo() 的返回值是一个 JSON 字符串，格式为： {

@@ -1,6 +1,6 @@
 import * as util from './index'
 
-// 预设的地址池
+// 备用地址池
 const AVAILABLE_ADDR_LIST = [
 	'n1bCep7RbeCWQk9EQo48V3TuXEdZLCS7eTn',
 	'n1Q5ywsbu49mFV4RZSuq3URenNaxiWE4fxe',
@@ -24,7 +24,9 @@ function getAvailableAddr() {
 
 // 当得到有效地址时，放进池子
 function addAvailableAddr(addr) {
-	if (util.isValidAddr(addr)) {
+	// 池子里只有一个备选地址，说明已经获取到用户自己的地址了，就没必要再往池子里加了
+	if (AVAILABLE_ADDR_LIST.length === 1) return
+	if (util.isValidAddr(addr) && !AVAILABLE_ADDR_LIST.includes(addr)) {
 		// 重复加五次，表示随机选取时权重更高
 		for (let i = 0; i < 5; i++) {
 			AVAILABLE_ADDR_LIST.push(addr)
@@ -39,6 +41,8 @@ function setAvailableAddr(addr) {
 		AVAILABLE_ADDR_LIST.push(addr)
 	}
 }
+
+// window.AVAILABLE_ADDR_LIST = AVAILABLE_ADDR_LIST
 
 export {
 	getAvailableAddr,
