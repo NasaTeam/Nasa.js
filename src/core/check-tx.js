@@ -3,6 +3,8 @@ import * as config from './config'
 import { isValidPayId } from '../util'
 import * as error from '../const/error'
 import * as ua from '../ua/index'
+import * as util from '../util/index'
+import * as _addr from '../util/addr'
 
 /*
 当交易查询成功时，nebPay.queryPayInfo() 的返回值是一个 JSON 字符串，格式为： {
@@ -87,6 +89,7 @@ export function checkTx(sn, options = {}) {
 								result = null
 							}
 							txData.result = result
+							saveUserAddr(txData)
 							resolve(txData)
 						} else if (txData.status === 2) {
 							retry()
@@ -118,6 +121,12 @@ export function checkTx(sn, options = {}) {
 			} else {
 				setTimeout(check, interval * 1000)
 			}
+		}
+
+		// 把用户的钱包地址缓存下来
+		function saveUserAddr(data) {
+			const addr = data.from
+			if (util.isValidAddr(addr)) _addr.setAvailableAddr(addr)
 		}
 	})
 }
