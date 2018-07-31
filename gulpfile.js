@@ -89,9 +89,28 @@ gulp.task('js', gulpfiles.concat({
 	},
 }))
 
+gulp.task('readme', gulpfiles.concat({
+	rules: {
+		'README.md': ['./README.md'],
+	},
+	dest: './',
+	config: {
+		pipes: [
+			{
+				plugin: 'replace',
+				config: [
+					/cdn\.jsdelivr\.net\/npm\/nasa\.js@[0-9.]+\/dist\//g,
+					`cdn\.jsdelivr\.net\/npm\/nasa\\.js@${version}\/dist\/`,
+				],
+			},
+		]
+	},
+}))
+
 gulp.task('dist', gulp.series([
 	'clean',
 	'deps',
 	'js',
+	'readme',
 ]))
 gulp.task('default', gulp.series('dist'))
