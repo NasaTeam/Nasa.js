@@ -22,8 +22,8 @@
 
 ### 文档
 
-* [安装和使用](https://github.com/cssmagic/Nasa.js/issues/1) —— 如何把 Nasa.js 整合到自己的作品中
-* [API 文档](https://github.com/cssmagic/Nasa.js/issues/2) —— 详尽的 API 使用说明
+* [安装和使用](https://github.com/NasaTeam/Nasa.js/issues/1) —— 如何把 Nasa.js 整合到自己的作品中
+* [API 文档](https://github.com/NasaTeam/Nasa.js/issues/2) —— 详尽的 API 使用说明
 * [功能演示](https://dapp.applinzi.com/nasa/) —— 无需安装，在线体验 Nasa.js 的各项功能
 
 ## 价值是什么？
@@ -84,17 +84,17 @@ Nasa.js 的 dist 文件已经把所有外部依赖都打包进来了，因此可
 
 * 如果你的 DApp 依赖 neb.js 只是因为你需要向合约查询数据，则建议把相关代码迁移到 Nasa.js。这样你的 DApp 就不需要加载 neb.js 了。
 
-* 由于 Nasa.js 本身已经打包了 nebPay 的源码，因此你不需要重复加载 nebPay。使用 `Nasa.nebPay` 即可以取代你代码中的 `nebPay` 实例，详情参见 [此文档](https://github.com/cssmagic/Nasa.js/issues/2#dependency)。
+* 由于 Nasa.js 本身已经打包了 nebPay 的源码，因此你不需要重复加载 nebPay。使用 `Nasa.nebPay` 即可以取代你代码中的 `nebPay` 实例，详情参见 [此文档](https://github.com/NasaTeam/Nasa.js/issues/2#dependency)。
 
 #### 我需要的某个功能 Nasa.js 还不支持，怎么办？
 
-来给 Nasa.js [提 issue](https://github.com/cssmagic/Nasa.js/issues/new) 吧！
+来给 Nasa.js [提 issue](https://github.com/NasaTeam/Nasa.js/issues/new) 吧！
 
 ## 社区
 
 #### 活动
 
-* [[公告] 💰 有奖征集 bug：最高奖 5 NAS ](https://github.com/cssmagic/Nasa.js/issues/4)
+* [[公告] 💰 有奖征集 bug：最高奖 5 NAS ](https://github.com/NasaTeam/Nasa.js/issues/4)
 
 #### 贡献者
 

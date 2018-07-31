@@ -419,5 +419,5 @@ Promise。处理结果如下：
 
 ## 事件 <a name="event">&nbsp;</a>
 
-（设计中，欢迎 [提需求](https://github.com/cssmagic/Nasa.js/issues/new)）
+（设计中，欢迎 [提需求](https://github.com/NasaTeam/Nasa.js/issues/new)）
 

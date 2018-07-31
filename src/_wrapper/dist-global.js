@@ -1,4 +1,4 @@
-/*! Nasa.js | LGPL-3.0 | https://github.com/cssmagic/Nasa.js */
+/*! Nasa.js | LGPL-3.0 | https://github.com/NasaTeam/Nasa.js */
 void function (window, document, undefined) {
 
 	// check conflict, and avoid repeated executing
