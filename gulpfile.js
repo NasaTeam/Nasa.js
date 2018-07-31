@@ -30,6 +30,11 @@ Object.keys(deps).forEach(function (key) {
 	scripts[FILENAME + '.js'].unshift(path.join(myPath.temp, key + '.js'))
 })
 
+const fs = require('fs')
+const json = JSON.parse(fs.readFileSync('./package.json'))
+const version = json.version
+// console.log(version)
+
 gulp.task('clean', gulpfiles.del({
 	glob: path.join(myPath.dest, '*.*'),
 }))
@@ -70,12 +75,16 @@ gulp.task('js', gulpfiles.concat({
 			// 	config: [/\/\*\* DEBUG_INFO_END \*\*\//g, '*/'],
 			// },
 			{
+				plugin: 'replace',
+				config: [/{{ version }}/g, version],
+			},
+			{
 				plugin: 'uglify',
 				rename: FILENAME + '.min.js',
 				config: {
 					preserveComments: 'some',
 				},
-			}
+			},
 		]
 	},
 }))

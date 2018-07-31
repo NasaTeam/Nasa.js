@@ -35,6 +35,9 @@ const Nasa = {
 // init
 init()
 
+// version
+Nasa.VERSION = '{{ version }}'
+
 // exports to an namespace
 if (typeof ns !== 'undefined') {
 	ns.Nasa = Nasa
