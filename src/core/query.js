@@ -50,12 +50,11 @@ export function query(contractAddr, fnName, args = []) {
 		return Promise.reject(new Error(error.INVALID_ARG))
 	}
 
-	const randomAddr = _addr.getAvailableAddr()
-	// console.log(randomAddr)
+	const tempAddr = _addr.getAvailableAddr()
 
 	const api = config.get('apiBaseUrl') + 'user/call'
 	const txParams = {
-		from: randomAddr,
+		from: tempAddr,
 		to: contract,
 		value: '0',
 		nonce: '0',
@@ -76,9 +75,6 @@ export function query(contractAddr, fnName, args = []) {
 	})
 		.then((res) => {
 			if (res.ok) {
-				// 合法的合约地址也加入备用地址的池子
-				_addr.addAvailableAddr(contractAddr)
-
 				return res.json()
 			} else {
 				// TODO 400 响应会进这里，因此错误似乎应该是 RESPONSE_ERROR 或 REQUEST_ERROR
