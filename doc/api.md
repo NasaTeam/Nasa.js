@@ -33,6 +33,8 @@
 Nasa.nebPay.pay(to, value, options)
 ```
 
+> ⚠️ Nasa.js v0.1.x 内置的 nebPay 版本为 v0.1.0。
+
 ### `Nasa.BigNumber`
 
 [BigNumber](https://github.com/MikeMcl/bignumber.js) 构造函数。
@@ -45,21 +47,24 @@ const value = Nasa.BigNumber(123.4567)
 Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 ```
 
+> ⚠️ Nasa.js 内置的 BigNumber 为 nebPay v0.1.0 内置的版本。
+
 
 ## 常量 <a name="const">&nbsp;</a>
 
 当你需要输出或匹配一些固定值时，不如直接引用 Nasa.js 帮你定义好的常量，以免拼写错误。
 
+### 版本信息
+
+* `Nasa.VERSION` -- 当前页面加载的 Nasa.js 的版本号，比如 `'0.1.4'`。
+
+> ⚠️ Nasa.js 从 v0.1.4 开始提供此属性。
+
 ### 错误信息
 
 * `Nasa.error.NETWORK_ERROR` -- 网络错误
 * `Nasa.error.SERVER_ERROR` -- 服务器错误
-* `Nasa.error.REQUEST_TIMEOUT` -- 请求超时
-* `Nasa.error.TX_REJECTED_BY_USER` -- 交易被用户取消
-* `Nasa.error.EXTENSION_NOT_INSTALLED` -- “星云钱包 Chrome 扩展” 未安装
-* `Nasa.error.EXTENSION_TIMEOUT` -- “星云钱包 Chrome 扩展” 响应超时
-* `Nasa.error.EXTENSION_NO_WALLET` -- “星云钱包 Chrome 扩展” 没有导入钱包
-* ……
+* …… -- 更多错误信息详见各 API 的描述
 
 ### 环境名 <a name="const--env">&nbsp;</a>
 
