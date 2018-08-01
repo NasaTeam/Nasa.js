@@ -115,6 +115,8 @@ Nasa.js team is using JetBrains IDE (WebStorm) with Open Source License:
 
 * [![WebStorm Logo](https://user-images.githubusercontent.com/5830104/32258214-2f230426-bef4-11e7-8a5f-1b4f9e116e87.png)](https://www.jetbrains.com/webstorm/)
 
+Nasa.js logo is created by [bokehlicia](http://www.iconarchive.com/show/captiva-icons-by-bokehlicia/rocket-icon.html).
+
 ## License
 
 [LGPL-3.0](https://opensource.org/licenses/lgpl-3.0.html)
