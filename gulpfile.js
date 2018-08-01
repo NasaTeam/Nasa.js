@@ -100,7 +100,7 @@ gulp.task('readme', gulpfiles.concat({
 				plugin: 'replace',
 				config: [
 					/cdn\.jsdelivr\.net\/npm\/nasa\.js@[0-9.]+\/dist\//g,
-					`cdn\.jsdelivr\.net\/npm\/nasa\\.js@${version}\/dist\/`,
+					`cdn\.jsdelivr\.net\/npm\/nasa\.js@${version}\/dist\/`,
 				],
 			},
 		]
