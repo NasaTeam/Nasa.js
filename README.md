@@ -23,7 +23,7 @@
 ### 文档
 
 * [安装和使用](https://github.com/NasaTeam/Nasa.js/issues/1) —— 如何把 Nasa.js 整合到自己的作品中
-* [API 文档](https://github.com/NasaTeam/Nasa.js/issues/2) —— 详尽的 API 使用说明
+* [API 文档](https://github.com/NasaTeam/Nasa.js/issues/15) —— 详尽的 API 使用说明
 * [功能演示](https://dapp.applinzi.com/nasa/) —— 无需安装，在线体验 Nasa.js 的各项功能
 
 ## 价值是什么？

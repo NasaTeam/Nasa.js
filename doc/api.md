@@ -1,19 +1,13 @@
-***
+## 概述 <a name="overview">&nbsp;</a>
 
-> ⚠️ 本文档适用于 Nasa.js v0.1.x，可能已过时。
-
-***
-
-## 概述
-
-#### 总体设计
+#### 总体设计 <a name="overview--design">&nbsp;</a>
 
 * 纯静态的 API 设计风格。除了极度常用的几个核心 API 以外，常规 API 都采用 `Nasa.module.method()` 这样的命名方式。
 
 * All-in-One 的打包方式。把所有外部依赖打包到在一起，对外暴露一个全局变量 `Nasa`。
 
-#### 文档约定
-
+#### 文档约定 <a name="overview--convention">&nbsp;</a>
+ 
 * 如果某个 API 未描述 “返回值”，则表示它没有返回值；如果未描述 “参数”，则表示不需要参数。
 
 * 在某个 API（比如 `Nasa.module.method()`）的描述中，当提及自身时，可能会省略其命名空间，只写成 `.method()`。
@@ -25,7 +19,7 @@
 
 所有外部依赖都会被打包进 Nasa.js 的 dist 文件中，你可以通过以下属性引用它们。
 
-### `Nasa.nebPay`
+### `Nasa.nebPay` <a name="dependency--nebPay">&nbsp;</a>
 
 [nebPay](https://github.com/nebulasio/nebPay) 的 API 命名空间。无需实例化，直接使用即可：
 
@@ -33,9 +27,9 @@
 Nasa.nebPay.pay(to, value, options)
 ```
 
-> ⚠️ Nasa.js v0.1.x 内置的 nebPay 版本为 v0.1.0。
+> ⚠️ Nasa.js v0.2.x 内置的 nebPay 版本为 v0.2.x。
 
-### `Nasa.BigNumber`
+### `Nasa.BigNumber` <a name="dependency--BigNumber">&nbsp;</a>
 
 [BigNumber](https://github.com/MikeMcl/bignumber.js) 构造函数。
 
@@ -47,20 +41,18 @@ const value = Nasa.BigNumber(123.4567)
 Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 ```
 
-> ⚠️ Nasa.js 内置的 BigNumber 为 nebPay v0.1.0 内置的版本。
+> ⚠️ Nasa.js 内置的 BigNumber 实际上是内置的 nebPay 所包含的 BigNumber。
 
 
 ## 常量 <a name="const">&nbsp;</a>
 
 当你需要输出或匹配一些固定值时，不如直接引用 Nasa.js 帮你定义好的常量，以免拼写错误。
 
-### 版本信息
+### 版本信息 <a name="const--version">&nbsp;</a>
 
 * `Nasa.VERSION` -- 当前页面加载的 Nasa.js 的版本号，比如 `'0.1.4'`。
 
-> ⚠️ Nasa.js 从 v0.1.4 开始提供此属性。
-
-### 错误信息
+### 错误信息 <a name="const--error">&nbsp;</a>
 
 * `Nasa.error.NETWORK_ERROR` -- 网络错误
 * `Nasa.error.SERVER_ERROR` -- 服务器错误
@@ -90,7 +82,7 @@ Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 	* 传一个参数 `1` -- `[1]`
 	* 传多个参数 `1, 2, 3` -- `[1, 2, 3]`
 * `options` -- 对象。附加选项。可选的 key 如下：
-	* `value` -- 字符串。调用合约同时转账的数额（单位 NAS）。
+	* `value` -- 字符串。默认值为 `'0'` 。调用合约同时转账的数额（单位 NAS）。
 
 #### 返回值
 
@@ -107,7 +99,7 @@ Promise。处理结果如下：
 	服务器不稳定 | `Nasa.error.SERVER_ERROR`
 	钱包扩展没有导入钱包 | `Nasa.error.EXTENSION_NO_WALLET`
 
-### `Nasa.query(contract, fnName, args = [])`
+### `Nasa.query(contract, fnName, args = [])` <a name="core-api--query">&nbsp;</a>
 
 向合约查询数据，不需要向链写入数据，因此不需要发起交易（一般称作 “读取型调用” 或 “查询型调用”）。
 
@@ -147,7 +139,7 @@ Promise。处理结果如下：
 
 * `payId` -- 字符串。交易流水号（亦称 “交易序列号” 或 “serial number”）。<!-- 如果此参数为空值或假值，则取最后一次交易的交易号。-->
 
-> ⚠️ 注意：目前只支持查询 payId，不支持查询 txHash。
+> ⚠️ 注意：暂时只支持查询 payId，不支持查询 txHash。
 
 #### 返回值
 
@@ -182,13 +174,11 @@ Promise。处理结果如下：
 	错误原因 | 错误消息
 	---|---
 	传入的参数无效 | `Nasa.error.INVALID_ARG`
-	交易错误（合约调用错误） | `Nasa.error.CALL_FAILED`
-	交易错误（转账错误） | `Nasa.error.TX_FAILED`
 	交易状态未知 | `Nasa.error.TX_STATUS_UNKNOWN`
 	查询超时（一分钟内都没有得到交易结果） | `Nasa.error.REQUEST_TIMEOUT`
 	网络错误 | `Nasa.error.NETWORK_ERROR`
 
-### ~~`Nasa.pay(addr, value = '0')`~~
+### ~~`Nasa.pay(addr, value = '0', options = {})`~~ <a name="core-api--pay">&nbsp;</a>
 
 > ⚠️ 计划中，暂未实现！
 
@@ -202,6 +192,7 @@ Promise。处理结果如下：
 #### 返回值
 
 （同 [`Nasa.call()`](#core-api--call) 的返回值）
+
 
 ## 合约 <a name="contract">&nbsp;</a>
 
@@ -255,7 +246,8 @@ Nasa.contract.set({
 
 如果该合约未定义当前环境下的地址，则返回空字符串。
 
-## 环境配置
+
+## 环境配置 <a name="env">&nbsp;</a>
 
 ### `Nasa.env.set(envName)` <a name="env--set">&nbsp;</a>
 
@@ -274,7 +266,7 @@ Nasa.contract.set({
 其它 API 会用到此 API，比如 [`Nasa.contract.get()`](#contract--get)。
 
 
-## 用户
+## 用户 <a name="user">&nbsp;</a>
 
 ### `Nasa.user.getAddr()` <a name="user--getAddr">&nbsp;</a>
 
@@ -295,7 +287,7 @@ Promise。处理结果如下：
 	“星云钱包 Chrome 扩展” 没有导入钱包 | `Nasa.error.EXTENSION_TIMEOUT`
 	“星云钱包 Chrome 扩展” 不再支持此功能 | `Nasa.error.EXTENSION_TIMEOUT`
 
-### ~~`Nasa.user.getAvatar(addr)`~~
+### ~~`Nasa.user.getAvatar(addr)`~~ <a name="user--getAvatar">&nbsp;</a>
 
 > ⚠️ 计划中，暂未实现！
 
@@ -309,9 +301,10 @@ Promise。处理结果如下：
 
 * 字符串。采用 Base64 编码的图片数据，并已加 `data:` 协议前缀。可以直接填充到 `<img>` 元素的 `src` 属性，也可以赋值给元素的 `.style.backgroundImage` 属性。
 
-## 浏览器环境
 
-### `Nasa.ua.isSupported()`
+## 浏览器环境 <a name="env">&nbsp;</a>
+
+### `Nasa.ua.isSupported()` <a name="env--isSupported">&nbsp;</a>
 
 #### 返回值
 
@@ -319,7 +312,7 @@ Promise。处理结果如下：
 
 > 注：目前 Ajax 由 `Fetch()` API 实现，可能不支持部分老浏览器。在后续的版本中，可能会把 Ajax 的实现换成 XHR，以提升兼容性。
 
-### `Nasa.ua.isMobileDevice()`
+### `Nasa.ua.isMobileDevice()` <a name="env--isMobileDevice">&nbsp;</a>
 
 #### 返回值
 
@@ -327,7 +320,7 @@ Promise。处理结果如下：
 
 所有 Android 和 iOS 设备（包括 iPad）都会被视为移动设备。
 
-### `Nasa.ua.isDesktopDevice()`
+### `Nasa.ua.isDesktopDevice()` <a name="env--isDesktopDevice">&nbsp;</a>
 
 #### 返回值
 
@@ -335,19 +328,19 @@ Promise。处理结果如下：
 
 非移动设备，即被视为桌面设备。
 
-### `Nasa.ua.isDesktopChrome()`
+### `Nasa.ua.isDesktopChrome()` <a name="env--isDesktopChrome">&nbsp;</a>
 
 #### 返回值
 
 布尔值。当前浏览器是否是桌面版 Chrome。基于 User Agent 字符串来判断。
 
-### `Nasa.ua.isWeChat()`
+### `Nasa.ua.isWeChat()` <a name="env--isWeChat">&nbsp;</a>
 
 #### 返回值
 
 布尔值。当前浏览器是否是微信。基于 User Agent 字符串来判断。
 
-### `Nasa.ua.isWalletExtensionInstalled()`
+### `Nasa.ua.isWalletExtensionInstalled()` <a name="env--isWalletExtensionInstalled">&nbsp;</a>
 
 #### 返回值
 
@@ -355,7 +348,7 @@ Promise。处理结果如下：
 
 > 注：此功能依赖扩展向页面中注入的脚本来判断，而由于扩展注入脚本需要一点点时间，因此，在页面最顶部运行此 API 不一定会得到正确的结果。
 
-### ~~`Nasa.ua.isWalletMobileAppInstalled([status])`~~
+### ~~`Nasa.ua.isWalletMobileAppInstalled([status])`~~ <a name="env--isWalletMobileAppInstalled">&nbsp;</a>
 
 > ⚠️ 计划中，暂未实现！
 
@@ -382,21 +375,21 @@ Promise。处理结果如下：
 > 注：此 API 通过本地存储作为持久化存储。
 
 
-## 工具方法
+## 工具方法 <a name="util">&nbsp;</a>
 
-### `Nasa.util.isValidAddr(str)`
+### `Nasa.util.isValidAddr(str)` <a name="util--isValidAddr">&nbsp;</a>
 
 判断是否是合法的地址（钱包地址或合约地址）。
 
 #### 参数
 
-* `str ` -- 字符串。待检测的地址。
+* `str` -- 字符串。待检测的地址。
 
 #### 返回值
 
 布尔值。是否合法。
 
-### `Nasa.util.isValidTxHash(str)`
+### `Nasa.util.isValidTxHash(str)` <a name="util--isValidTxHash">&nbsp;</a>
 
 判断是否是合法的 TxHash（交易哈希）。
 
@@ -408,7 +401,7 @@ Promise。处理结果如下：
 
 布尔值。是否合法。
 
-### `Nasa.util.isValidPayId(str)`
+### `Nasa.util.isValidPayId(str)` <a name="util--isValidPayId">&nbsp;</a>
 
 判断是否是合法的交易流水号。
 
@@ -421,8 +414,3 @@ Promise。处理结果如下：
 布尔值。是否合法。
 
 ***
-
-## 事件 <a name="event">&nbsp;</a>
-
-（设计中，欢迎 [提需求](https://github.com/NasaTeam/Nasa.js/issues/new)）
-
