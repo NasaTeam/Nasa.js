@@ -232,7 +232,8 @@ void function () {
 	`
 	const jsDev = `
 		<script src="../vendor/nebPay.js"><\/script>
-		<script src="../vendor/_adapter.js"><\/script>
+		<script src="../src/_wrapper/dep-nebpay.js"><\/script>
+		<script>var ns = window<\/script>
 		<script src="../.tmp/nasa-raw.js"><\/script>
 	`
 	document.write(isProduction ? jsProd : jsDev)
