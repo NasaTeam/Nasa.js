@@ -66,14 +66,14 @@ gulp.task('js', gulpfiles.concat({
 				plugin: 'wrap',
 				config: {src: path.join(myPath.src, '_wrapper/dist-global.js')},
 			},
-			// {
-			// 	plugin: 'replace',
-			// 	config: [/\/\*\* DEBUG_INFO_START \*\*\//g, '/*'],
-			// },
-			// {
-			// 	plugin: 'replace',
-			// 	config: [/\/\*\* DEBUG_INFO_END \*\*\//g, '*/'],
-			// },
+			{
+				plugin: 'replace',
+				config: [/\/\*\* DEBUG_INFO_START \*\*\//g, '/*'],
+			},
+			{
+				plugin: 'replace',
+				config: [/\/\*\* DEBUG_INFO_END \*\*\//g, '*/'],
+			},
 			{
 				plugin: 'replace',
 				config: [/{{ version }}/g, version],
