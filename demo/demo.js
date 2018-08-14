@@ -86,6 +86,7 @@ void function () {
 		const inputArgs = $this.siblings('input[name="args"]').val().trim()
 		const $extra = $this.siblings('.extra')
 		const $inputPayId = $extra.find('input[name="payId"]')
+		const $inputTxHash = $extra.find('input[name="txHash"]')
 
 		const text = $this.text()
 		const DISABLED = 'disabled'
@@ -107,9 +108,10 @@ void function () {
 		}
 
 		Nasa.call(contract, fn, args)
-			.then((payId) => {
+			.then(({ payId, txHash }) => {
 				restoreBtn()
-				$inputPayId.val(payId)
+				$inputPayId.val(payId || '')
+				$inputTxHash.val(txHash || '')
 				setTimeout(() => {
 					$extra.show()
 				}, 5000)
