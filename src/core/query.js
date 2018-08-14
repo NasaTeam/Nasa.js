@@ -49,20 +49,25 @@ Please try again later."}'
 	合约执行超时（通常是节点不稳定）： "Error: execution timeout"
 */
 
-export function query(contractAddr, fnName, args = []) {
+export function query(contract, fnName, args = [], options = {}) {
 	// get contract
-	const contract = isValidAddr(contractAddr) ?
-		contractAddr : getContract(contractAddr)
-	if (!contract || !fnName || !Array.isArray(args)) {
+	const contractAddr = isValidAddr(contract) ?
+		contract : getContract(contract)
+	if (!contractAddr || !fnName || !Array.isArray(args)) {
 		return Promise.reject(new Error(error.INVALID_ARG))
 	}
 
-	const tempAddr = _addr.getAvailableAddr()
+	const customAddr = options.from
+	if (isValidAddr(customAddr)) {
+		return Promise.reject(new Error(error.INVALID_ADDR))
+	}
+
+	const fromAddr = customAddr || _addr.getAvailableAddr()
 
 	const api = config.get('apiBaseUrl') + 'user/call'
 	const txParams = {
-		from: tempAddr,
-		to: contract,
+		from: fromAddr,
+		to: contractAddr,
 		value: '0',
 		nonce: '0',
 		gasPrice: '1000000',
