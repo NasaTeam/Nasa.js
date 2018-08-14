@@ -6,6 +6,7 @@ export const INVALID_ADDR = 'invalid addr'
 export const NETWORK_ERROR = 'network error'
 export const SERVER_ERROR = 'server error'
 export const REQUEST_TIMEOUT = 'request timeout'
+export const TX_TIMEOUT = 'tx timeout'
 export const PAY_ID_REG_FAILED = 'pay id reg failed'
 
 export const TX_REJECTED_BY_USER = 'tx rejected by user'

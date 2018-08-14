@@ -1,9 +1,12 @@
 /* global nebPay */
 import * as config from './config'
+import * as error from '../const/error'
 import * as ua from '../ua/index'
 import { get as getContract } from '../contract/index'
-import { isValidAddr } from '../util'
-import * as error from '../const/error'
+import {
+	isValidAddr,
+	stripErrorMsgPrefix,
+} from '../util'
 
 export let _lastPayId = ''
 export let _lastTxHash = ''
@@ -65,7 +68,7 @@ export function call(contractAddr, fnName, args = [], options = {}) {
 						reject(new Error(error.EXTENSION_NO_WALLET))
 					}
 					// 发生其它问题
-					const errMsg = res.replace(/^error:/i, '').trim()
+					const errMsg = stripErrorMsgPrefix(res)
 					reject(new Error(errMsg))
 				}
 

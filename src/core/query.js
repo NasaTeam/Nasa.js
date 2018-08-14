@@ -1,8 +1,11 @@
 import * as config from './config'
-import { get as getContract } from '../contract/index'
-import { isValidAddr } from '../util/index'
 import * as error from '../const/error'
 import * as _addr from '../util/addr'
+import { get as getContract } from '../contract/index'
+import {
+	isValidAddr,
+	stripErrorMsgPrefix,
+} from '../util/index'
 
 /*
 从接口拿到的结果是一个 JSON 对象。
@@ -102,27 +105,18 @@ export function query(contract, fnName, args = [], options = {}) {
 				estimateGas: data.estimate_gas,
 			}
 			// 1. 看服务端有没有返回错误信息
-			let errMsg = data.execute_err
-			// 'insufficient balance' 这个错误是正常的，本来这个内置的默认地址就没钱
+			const errMsg = data.execute_err
+			// 'insufficient balance' 这个错误是正常的，内置的默认地址本来就没钱
 			if (errMsg && errMsg !== 'insufficient balance') {
-				// 去掉错误前缀
-				errMsg = errMsg
-					.replace(/^call:/i, '')
-					.trim()
-					.replace(/^error:/i, '')
-					.trim()
-				// 输出
-				output.execError = errMsg
+				output.execError = stripErrorMsgPrefix(errMsg)
 			}
 
 			// 2. 试图解析服务端返回的数据
 			else {
-				let result = null
+				let result = data.result
 				try {
 					result = JSON.parse(data.result)
-				} catch (e) {
-					result = data.result
-				}
+				} catch (e) {/* do nothing */}
 				output.execResult = result
 			}
 			return output
