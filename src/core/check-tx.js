@@ -1,10 +1,13 @@
 /* global nebPay */
 import * as config from './config'
-import { isValidPayId } from '../util'
 import * as error from '../const/error'
 import * as ua from '../ua/index'
-import * as util from '../util/index'
 import * as _addr from '../util/addr'
+import {
+	isValidAddr,
+	isValidPayId,
+	stripErrorMsgPrefix,
+} from '../util'
 
 /*
 当交易查询成功时，nebPay.queryPayInfo() 的返回值是一个 JSON 字符串，格式为： {
@@ -12,7 +15,7 @@ import * as _addr from '../util/addr'
 	"data": {},  // tx data
 	"msg": "success",
 }
-当合约调用错误时：{
+当合约执行抛错时：{
 	code : 0,
 	data: {  // tx data
 		...
@@ -26,9 +29,9 @@ import * as _addr from '../util/addr'
 各种错误情况： {
 	"code": 1,
 	"data": {},
-	// 交易查询失败
+	// 交易查询失败（可能是服务器错误）
     "msg": "payId ZBTSkk74dB4tPJI9J8FDFMu270h7yaut get transaction error"
-	// 交易不存在，很可能是服务器不稳定
+	// 交易不存在（通常是交易流水号向服务器注册失败）
 	"msg": "payId c978p9tHLVsjseXBQMSUJ0wJAj0s5sfb does not exist"
 	// 请求过于频繁
     "msg": "you are queried more than 20 times per minute, please wait"
@@ -69,36 +72,41 @@ export function checkTx(sn, options = {}) {
 						console.error('JSON parsing error')
 					}
 					lastCheckResult = data
+
+					// 0: Failed. It means the transaction has been submitted on chain but its execution failed.
+					// 1: Successful. It means the transaction has been submitted on chain and its execution succeed.
+					// 2: Pending. It means the transaction hasn't been packed into a block.
+
+					// 本次查询成功
 					if (data.code === 0) {
-						// 本次查询成功
-						const txData = data.data
-						// 0: Failed. It means the transaction has been submitted on chain but its execution failed.
-						// 1: Successful. It means the transaction has been submitted on chain and its execution succeed.
-						// 2: Pending. It means the transaction hasn't been packed into a block.
+						const txData = data.data || {}
+						/** DEBUG_INFO_START **/
+						console.log('get tx info: ', txData)
+						/** DEBUG_INFO_END **/
+
 						if (txData.status === 0) {
-							let errMsg = txData.type === 'call' ? error.CALL_FAILED : error.TX_FAILED
-							// TODO 拿到精确的合约错误信息
-							reject(new Error(errMsg))
+							// 先给个兜底的错误信息
+							let errMsg = error.TX_FAILED
+							if (txData.type === 'call') errMsg = error.CALL_FAILED
+							// 再尝试获取精确的合约错误信息
+							errMsg = stripErrorMsgPrefix(txData.execute_error)
+							resolve(formatTxResult(txData, errMsg))
 						} else if (txData.status === 1) {
-							console.log('get tx info: ', txData)
-							// 处理合约返回值
-							let result = txData.execute_result
-							try {
-								result = JSON.parse(result)
-							} catch (e) {
-								result = null
-							}
-							txData.result = result
-							saveUserAddr(txData)
-							resolve(txData)
+							resolve(formatTxResult(txData))
 						} else if (txData.status === 2) {
 							retry()
 						} else {
 							reject(new Error(error.TX_STATUS_UNKNOWN))
 						}
-					} else {
+
+						// 把用户的钱包地址缓存下来
+						const addr = txData.from
+						if (isValidAddr(addr)) _addr.setAvailableAddr(addr)
+					}
+					// 本次查询出现错误
+					else {
 						// 如果返回错误信息，很可能只是服务器不稳定，所以不放弃，继续重试
-						const msg = data.msg || ''
+						const msg = data.msg || error.SERVER_ERROR
 						console.error(msg)
 						retry()
 					}
@@ -111,22 +119,50 @@ export function checkTx(sn, options = {}) {
 
 		function retry() {
 			const interval = retryIntervals.shift()
-			if (!interval) {
+			if (interval) {
+				setTimeout(check, interval * 1000)
+			} else {
 				// 所有重试机会已用完
-				reject(new Error(error.REQUEST_TIMEOUT))
+				reject(new Error(error.TX_TIMEOUT))
 
 				// TODO 考虑是不是把持续的 "payId 不存在" 也作为一种错误
-				// 通过 lastCheckResult 来获取查询错误信息
 				// TODO 考虑是不是把持续的 "网络错误" 也作为一种错误
-			} else {
-				setTimeout(check, interval * 1000)
+				// TODO 考虑是不是把持续的 "请求过于频繁" 也作为一种错误
+				// 通过 lastCheckResult 来获取查询错误信息
 			}
 		}
 
-		// 把用户的钱包地址缓存下来
-		function saveUserAddr(data) {
-			const addr = data.from
-			if (util.isValidAddr(addr)) _addr.setAvailableAddr(addr)
-		}
 	})
+}
+
+function formatTxResult(txData, errMsg) {
+	// 处理拼写
+	const output = {
+		data:      txData.data,
+		type:      txData.type,
+		nonce:     txData.nonce,
+		gasPrice:  txData.gas_price || txData.gasPrice,
+		gasLimit:  txData.gas_limit || txData.gasLimit,
+		gasUsed:   txData.gas_used || txData.gasUsed,
+		chainId:   txData.chainId,
+		from:      txData.from,
+		to:        txData.to,
+		value:     txData.value,
+		hash:      txData.hash,
+		status:    txData.status,
+		timestamp: txData.timestamp,
+	}
+	// 处理合约返回值
+	if (errMsg) {
+		output.execError = errMsg
+	} else {
+		let result = txData.execute_result
+		try {
+			// `execute_result` 最长 255 字节，超长会被截断，极有可能解析失败
+			// https://github.com/nebulasio/nebPay/issues/50
+			result = JSON.parse(result)
+		} catch (e) {/* do nothing */}
+		output.execResult = result
+	}
+	return output
 }

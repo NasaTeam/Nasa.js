@@ -105,8 +105,8 @@ export function query(contract, fnName, args = [], options = {}) {
 				estimateGas: data.estimate_gas,
 			}
 			// 1. 看服务端有没有返回错误信息
-			let errMsg = data.execute_err
-			// 'insufficient balance' 这个错误是正常的，本来这个内置的默认地址就没钱
+			const errMsg = data.execute_err
+			// 'insufficient balance' 这个错误是正常的，内置的默认地址本来就没钱
 			if (errMsg && errMsg !== 'insufficient balance') {
 				output.execError = stripErrorMsgPrefix(errMsg)
 			}
