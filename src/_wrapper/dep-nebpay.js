@@ -6,7 +6,7 @@
 /* <%= contents %> */
 /* =================  END: source code  ================= */
 
-var BigNumber = require(7)
+var BigNumber = require(8)
 
 var NebPay = require('nebpay')
 var nebPay = new NebPay()

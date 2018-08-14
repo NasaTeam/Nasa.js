@@ -60,6 +60,7 @@ mix.combine([
 	'./node_modules/cmui/dist/cmui.js',
 ], './demo/lib.js')
 mix.copy('./dist/nasa.js', './demo/')
+mix.copy('./node_modules/nebpay.js/dist/nebPay.js', './vendor/')
 
 // task - demo - css
 mix.stylus('./demo/src/index.styl', './demo/')

@@ -64,8 +64,9 @@
 			<input autocomplete="off" type="text" name="args" placeholder="function args, separated by commas..." value="'Nasa-demo', 'Posted from Nasa.js demo page.'">
 			<button class="cm-btn" id="core--call">Call</button>
 			<div class="extra">
-				<p>最后一次交易的流水号如下，您可以通过下面的 <code>Nasa.checkTx()</code> 方法来查询交易结果。</p>
+				<p>最后一次交易的流水号和 txHash 如下，您可以通过下面的 <code>Nasa.checkTx()</code> 方法来查询交易结果。</p>
 				<input autocomplete="off" type="text" name="payId" value="">
+				<input autocomplete="off" type="text" name="txHash" value="">
 			</div>
 		</div>
 		<hr>
@@ -232,7 +233,8 @@ void function () {
 	`
 	const jsDev = `
 		<script src="../vendor/nebPay.js"><\/script>
-		<script src="../vendor/_adapter.js"><\/script>
+		<script src="../src/_wrapper/dep-nebpay.js"><\/script>
+		<script>var ns = window<\/script>
 		<script src="../.tmp/nasa-raw.js"><\/script>
 	`
 	document.write(isProduction ? jsProd : jsDev)
