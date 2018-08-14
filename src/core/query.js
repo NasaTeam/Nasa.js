@@ -21,10 +21,14 @@ import * as _addr from '../util/addr'
 	execute_err: "insufficient balance",
 	result: "...json string...",
 }}
-合约代码语法错误（通常是节点不稳定）： {result: {
-	result: '',
-	execute_err: 'contract code syntax error',
-	estimate_gas: 20101,
+
+合约执行时抛错： {result: {
+	result: "TypeError: Cannot read property 'trim' of undefined",
+	// 运行时错误
+	execute_err: "Call: TypeError: Cannot read property 'trim' of undefined",
+	// 合约主动抛错
+	execute_err: "Call: Error: value has been occupied",
+	estimate_gas: "20138",
 }}
 
 当请求所用的地址非法，或请求的合约地址非法（400 error）： {
@@ -34,12 +38,15 @@ import * as _addr from '../util/addr'
 } 或 {
 	error: 'address: invalid address format',
 }
-当请求被节点限流（503 error），返回字符串：
+
+当服务器过载（503 Service Unavailable），返回字符串：
 '{"err:","Sorry, we received too many simultaneous requests.
 Please try again later."}'
 
-当服务器故障： 503 Service Unavailable
-
+查询失败时，result 为空字符串，execute_err 的值如下：
+	合约不存在（通常是主网和测试网搞混了）： "contract check failed"
+	合约语法错误（通常是节点不稳定）： "contract syntax error"
+	合约执行超时（通常是节点不稳定）： "Error: execution timeout"
 */
 
 export function query(contractAddr, fnName, args = []) {
@@ -86,20 +93,33 @@ export function query(contractAddr, fnName, args = []) {
 		})
 		.then((res) => {
 			const data = res.result || {}
+			const output = {
+				estimateGas: data.estimate_gas,
+			}
 			// 1. 看服务端有没有返回错误信息
-			const exeErr = data.execute_err
+			let errMsg = data.execute_err
 			// 'insufficient balance' 这个错误是正常的，本来这个内置的默认地址就没钱
-			if (exeErr && exeErr !== 'insufficient balance') {
-				throw new Error(exeErr)
+			if (errMsg && errMsg !== 'insufficient balance') {
+				// 去掉错误前缀
+				errMsg = errMsg
+					.replace(/^call:/i, '')
+					.trim()
+					.replace(/^error:/i, '')
+					.trim()
+				// 输出
+				output.execError = errMsg
 			}
 
 			// 2. 试图解析服务端返回的数据
-			let result = null
-			try {
-				result = JSON.parse(data.result)
-			} catch (e) {
-				throw new Error(error.INVALID_JSON)
+			else {
+				let result = null
+				try {
+					result = JSON.parse(data.result)
+				} catch (e) {
+					result = data.result
+				}
+				output.execResult = result
 			}
-			return result
+			return output
 		})
 }
