@@ -13,13 +13,15 @@
   "license": "LGPL-3.0",
   "scripts": {
     "prepublish": "npm run dist",
+    "prewatch": "npm run clean",
     "dist": "npm run dev && npm run wrap",
     "wrap": "gulp",
+    "sync": "cp -rf ./node_modules/nebpay.js/dist/nebPay.js ./vendor/",
     "clean": "rm -rf ./.tmp/*",
     "dev": "npm run development",
     "prod": "npm run production",
     "development": "npm run clean && cross-env NODE_ENV=development npm run mix",
-    "watch": "npm run clean && cross-env NODE_ENV=development npm run mix -- --watch",
+    "watch": "cross-env NODE_ENV=development npm run mix -- --watch",
     "production": "cross-env NODE_ENV=production npm run mix",
     "mix": "webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"

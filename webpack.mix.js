@@ -1,12 +1,9 @@
 const mix = require('laravel-mix')
 
-const envConfig  = require('dotenv').config()
-
-//设置全局参数
-const program = {
-    MIX_PROXY : envConfig.parsed.MIX_PROXY,	// BrowserSync 所用的代理
-    production : process.env.NODE_ENV === 'production',	// 是否生产环境
-}
+// 获取 BrowserSync 要代理的页面
+const envConfig = require('dotenv').config()
+envConfig.parsed = envConfig.parsed || {}
+const MIX_PROXY = envConfig.parsed.MIX_PROXY || ''
 
 mix.disableNotifications()
 mix.options({
@@ -30,9 +27,9 @@ mix.options({
 	processCssUrls: false,
 })
 
-if (program.MIX_PROXY) {
+if (MIX_PROXY) {
 	mix.browserSync({
-		proxy: program.MIX_PROXY,
+		proxy: MIX_PROXY,
 		port: 3098,
 		ui: false,
 		ghostMode: false,
@@ -59,8 +56,6 @@ mix.combine([
 	'./node_modules/cmui-gearbox/dist/gearbox.js',
 	'./node_modules/cmui/dist/cmui.js',
 ], './demo/lib.js')
-mix.copy('./dist/nasa.js', './demo/')
-mix.copy('./node_modules/nebpay.js/dist/nebPay.js', './vendor/')
 
 // task - demo - css
 mix.stylus('./demo/src/index.styl', './demo/')
