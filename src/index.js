@@ -32,6 +32,7 @@ const Nasa = {
 Nasa.query = Nasa.contract.query
 Nasa.call = Nasa.tx.call
 Nasa.checkTx = Nasa.tx.checkTx
+Nasa.ua.isNasNano = Nasa.ua.isWalletMobileApp
 
 // init
 init()

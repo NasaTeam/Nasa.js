@@ -10,6 +10,7 @@ export {
 	isDesktopDevice,
 	isDesktopChrome,
 	isWeChat,
+	isWalletMobileApp,
 } from './detect-ua'
 
 

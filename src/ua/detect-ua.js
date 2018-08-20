@@ -26,9 +26,14 @@ function isWeChat() {
 	return result.browser === 'wechat'
 }
 
+function isWalletMobileApp() {
+	return /nasnanoapp/i.test(ua.str)
+}
+
 export {
 	isMobileDevice,
 	isDesktopDevice,
 	isDesktopChrome,
 	isWeChat,
+	isWalletMobileApp,
 }
