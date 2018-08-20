@@ -1,5 +1,5 @@
 /* global nebPay */
-import * as config from './config'
+import * as config from '../core/index'
 import * as error from '../const/error'
 import * as ua from '../ua/index'
 import * as _addr from '../util/addr'

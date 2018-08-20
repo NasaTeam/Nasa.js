@@ -1,6 +1,6 @@
 /* global NebPay, nebPay, BigNumber, ns */
 
-import { checkTx, query, call } from './core/index'
+import * as tx from './tx/index'
 import { error } from './const/index'
 import * as ua from './ua/index'
 import * as util from './util/index'
@@ -19,18 +19,19 @@ const Nasa = {
 	// const
 	error,
 
-	// core
-	checkTx,
-	query,
-	call,
-
 	// modules
+	tx,
 	ua,
 	util,
 	user,
 	env,
 	contract,
 }
+
+// shortcut
+Nasa.query = Nasa.contract.query
+Nasa.call = Nasa.tx.call
+Nasa.checkTx = Nasa.tx.checkTx
 
 // init
 init()

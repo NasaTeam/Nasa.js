@@ -41,3 +41,4 @@ export {
 	set,
 	get,
 }
+export { query } from './query'

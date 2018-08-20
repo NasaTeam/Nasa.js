@@ -1,4 +1,4 @@
-import * as config from './config'
+import * as config from '../core/index'
 import * as error from '../const/error'
 import * as _addr from '../util/addr'
 import { get as getContract } from '../contract/index'
