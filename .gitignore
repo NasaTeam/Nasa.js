@@ -32,3 +32,4 @@ demo/lib.js
 demo/index.css
 .env
 mix-manifest.json
+hot

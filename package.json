@@ -24,6 +24,7 @@
     "watch": "cross-env NODE_ENV=development npm run mix -- --watch",
     "production": "cross-env NODE_ENV=production npm run mix",
     "mix": "webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --hot --watch-content-base --config=node_modules/laravel-mix/setup/webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {},
@@ -43,6 +44,7 @@
     "stylus-loader": "^3.0.2",
     "underscore": "^1.8.3",
     "webpack": "^3.11.0",
+    "webpack-dev-server": "2",
     "zepto.js": "1.*"
   }
 }

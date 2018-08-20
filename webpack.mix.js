@@ -28,6 +28,16 @@ mix.options({
 })
 
 if (MIX_PROXY) {
+	const port = MIX_PROXY.split(':').pop()
+
+	mix.webpackConfig({
+		devServer: {
+			contentBase: [path.join(__dirname, 'demo'), path.join(__dirname)],
+			compress: true,
+			port,
+		}
+	})
+
 	mix.browserSync({
 		proxy: MIX_PROXY,
 		port: 3098,
