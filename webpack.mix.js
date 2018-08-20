@@ -1,9 +1,10 @@
 const mix = require('laravel-mix')
 
-// 获取 BrowserSync 要代理的页面
+// 获取开发环境所需的端口配置
 const envConfig = require('dotenv').config()
 envConfig.parsed = envConfig.parsed || {}
-const MIX_PROXY = envConfig.parsed.MIX_PROXY || ''
+const WEB_PORT = envConfig.parsed.WEB_PORT || '8888'
+const DEV_PORT = envConfig.parsed.DEV_PORT || '3098'
 
 mix.disableNotifications()
 mix.options({
@@ -27,10 +28,21 @@ mix.options({
 	processCssUrls: false,
 })
 
-if (MIX_PROXY) {
+if (process.env.MIX_MODE === 'watch') {
+	// static web server
+	const express = require('express')
+	const app = express()
+	app.use(express.static('./'))
+	app.get('/', function (req, res) {
+		res.redirect('/demo/')
+	})
+	app.listen(WEB_PORT, function () {
+		console.log(`[Nasa.js] Static web server running on port ${WEB_PORT}!\n`)
+	})
+
 	mix.browserSync({
-		proxy: MIX_PROXY,
-		port: 3098,
+		proxy: 'localhost:' + WEB_PORT,
+		port: DEV_PORT,
 		ui: false,
 		ghostMode: false,
 		logLevel: 'debug',
