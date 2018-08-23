@@ -134,7 +134,7 @@
 			</div>
 			<select autocomplete="off" name="env">
 				<option value="">Select & set as current...</option>
-				<option value="local"  >Nasa.env.LOCAL</option>
+				<option value="local">Nasa.env.LOCAL</option>
 				<option value="testnet">Nasa.env.TEST</option>
 				<option value="mainnet">Nasa.env.MAIN</option>
 			</select>
@@ -226,8 +226,7 @@
 <script>
 void function () {
 	'use strict'
-	let isProduction = location.host === 'dapp.applinzi.com'
-	// isProduction = true
+	let isDev = !!location.port
 	const jsProd = `
 		<script src="./nasa.js"><\/script>
 	`
@@ -237,7 +236,7 @@ void function () {
 		<script>var ns = window<\/script>
 		<script src="../.tmp/nasa-raw.js"><\/script>
 	`
-	document.write(isProduction ? jsProd : jsDev)
+	document.write(isDev ? jsDev : jsProd)
 }()
 </script>
 <script src="./lib.js"></script>
