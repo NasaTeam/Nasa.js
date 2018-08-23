@@ -5,7 +5,7 @@ import { isValidAddr } from '../util'
 function getAddr() {
 	// 环境检测 & 快速失败
 	if (!isDesktopChrome() || !isWalletExtensionInstalled()) {
-		return Promise.reject(error.EXTENSION_NOT_INSTALLED)
+		return Promise.reject(new Error(error.EXTENSION_NOT_INSTALLED))
 	}
 
 	// 每次都要向钱包扩展问一下，因为用户可能会切换钱包
