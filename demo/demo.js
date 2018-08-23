@@ -276,4 +276,11 @@ void function () {
 		alert(Nasa.util.isValidPayId(value))
 	})
 
+
+	////////////////////  const  ////////////////////
+	$('#const--VERSION').on('click', function () {
+		alert(Nasa.VERSION)
+	})
+
+
 }()
