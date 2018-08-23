@@ -1,8 +1,8 @@
 /* global nebPay */
-import * as config from '../core/index'
 import * as error from '../const/error'
 import * as ua from '../ua/index'
-import * as _addr from '../util/addr'
+import { setAvailableAddr } from '../util/addr'
+import { getNebPayOptions } from '../core/_nebulas-config'
 import {
 	isValidAddr,
 	isValidPayId,
@@ -60,7 +60,7 @@ export function checkTx(sn, options = {}) {
 		}
 
 		function check() {
-			nebPay.queryPayInfo(sn, config.getNebPayOptions())
+			nebPay.queryPayInfo(sn, getNebPayOptions())
 				.then((res) => {
 					checkingCount++
 					// console.log(`checkTx result ${checkingCount}: `, typeof res, res)
@@ -101,7 +101,7 @@ export function checkTx(sn, options = {}) {
 
 						// 把用户的钱包地址缓存下来
 						const addr = txData.from
-						if (isValidAddr(addr)) _addr.setAvailableAddr(addr)
+						if (isValidAddr(addr)) setAvailableAddr(addr)
 					}
 					// 本次查询出现错误
 					else {

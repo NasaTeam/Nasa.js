@@ -1,6 +1,6 @@
-import * as config from '../core/index'
 import * as error from '../const/error'
 import * as _addr from '../util/addr'
+import { getNebulasConfig } from '../core/_nebulas-config'
 import { get as getContract } from '../contract/index'
 import {
 	isValidAddr,
@@ -67,7 +67,7 @@ export function query(contract, fnName, args = [], options = {}) {
 
 	const fromAddr = customAddr || _addr.getAvailableAddr()
 
-	const api = config.get('apiBaseUrl') + 'user/call'
+	const api = getNebulasConfig('endpoint') + 'v1/user/call'
 	const txParams = {
 		from: fromAddr,
 		to: contractAddr,

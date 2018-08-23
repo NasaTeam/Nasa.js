@@ -3,36 +3,37 @@ import * as env from '../env/index'
 
 const nebConfig = NebPay.config
 
-const NEBULAS = {
+const NEBULAS_CONFIG = {
 	[env.LOCAL]: {
 		chainId: 100,
-		apiBaseUrl: 'http://localhost:8685/v1/',
+		endpoint: 'http://localhost:8685/',
 		apiPayId: nebConfig.testnetUrl,
 	},
 	[env.TEST]: {
 		chainId: 1001,
-		apiBaseUrl: 'https://testnet.nebulas.io/v1/',
+		endpoint: 'https://testnet.nebulas.io/',
 		apiPayId: nebConfig.testnetUrl,
 	},
 	[env.MAIN]: {
 		chainId: 1,
-		apiBaseUrl: 'https://mainnet.nebulas.io/v1/',
+		endpoint: 'https://mainnet.nebulas.io/',
 		apiPayId: nebConfig.mainnetUrl,
 	},
 }
 
-function get(key) {
+function getNebulasConfig(key) {
 	const currentEnv = env.get()
-	return NEBULAS[currentEnv][key] || ''
+	return NEBULAS_CONFIG[currentEnv][key] || ''
 }
 
 function getNebPayOptions() {
 	const options = {}
-	options.callback = get('apiPayId')
+	options.callback = getNebulasConfig('apiPayId')
 	return options
 }
 
 export {
+	NEBULAS_CONFIG,
+	getNebulasConfig,
 	getNebPayOptions,
-	get,
 }

@@ -1,7 +1,7 @@
 /* global nebPay */
-import * as config from '../core/index'
 import * as error from '../const/error'
 import * as ua from '../ua/index'
+import { getNebPayOptions } from '../core/_nebulas-config'
 import { get as getContract } from '../contract/index'
 import {
 	isValidAddr,
@@ -87,7 +87,7 @@ export function call(contractAddr, fnName, args = [], options = {}) {
 				}
 			},
 		}
-		nebPayOptions = Object.assign({}, config.getNebPayOptions(), nebPayOptions)
+		nebPayOptions = Object.assign({}, getNebPayOptions(), nebPayOptions)
 
 		// 这里的 payId 是由 nebPay 生成的交易流水号，32 位 hash
 		// 对于交易型调用，只能通过这个流水号来查询交易结果
