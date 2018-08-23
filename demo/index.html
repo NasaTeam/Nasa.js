@@ -81,6 +81,27 @@
 			<input autocomplete="off" type="text" placeholder="input a pay id..." value="hFsRrIJ8vtlhEL9ASkEmRikO4r1PRd5T">
 			<button class="cm-btn" id="core--checkTx">Check</button>
 		</div>
+		<hr>
+		<h3><code>Nasa.config()</code></h3>
+		<div class="api-descr">
+			<div class="text">
+				<p>用于自定义 API endpoint 等配置。</p>
+			</div>
+			<textarea autocomplete="off" placeholder="input contract addr in specific format...">
+{
+	"local": {
+		"endpoint": "https://local.foo.bar/",
+	},
+	"testnet": {
+		"endpoint": "https://testnet.foo.bar/",
+	},
+	"mainnet": {
+		"endpoint": "https://mainnet.foo.bar/",
+	},
+}
+			</textarea>
+			<button class="cm-btn" id="core--config">Config</button>
+		</div>
 	</section>
 </section>
 
@@ -108,7 +129,7 @@
 		"local":   "n10000contract0000addr0000comment01",
 		"testnet": "n10000contract0000addr0000comment02",
 		"mainnet": "n10000contract0000addr0000comment03"
-	}
+	},
 }
 			</textarea>
 			<button class="cm-btn" id="contract--set">Set</button>

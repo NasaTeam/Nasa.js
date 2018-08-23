@@ -8,6 +8,11 @@ void function () {
 	* 多个参数之间请用逗号分隔
 	* 如果不需要传入参数，则留空即可`
 
+	const ERROR_CORE_CONFIG = `Error: Syntax error in your input!
+	
+	* 请填写一个对象字面量
+	* 不需要严格遵守 JSON 规范`
+
 	const ERROR_CONTRACT_CONFIG = `Error: Syntax error in your input!
 	
 	* 请填写一个对象字面量
@@ -149,14 +154,36 @@ void function () {
 			})
 	})
 
+
+	// prepare textarea
+	const $textareaConfig = $('#core--config').siblings('textarea')
+	$textareaConfig.html($textareaConfig.html().trim())
+
+	$('#core--config').on('click', function () {
+		const value = $textareaConfig.val().trim()
+		let config
+		try {
+			const input = `config = ${value}`
+			eval(input)
+		} catch (e) {
+			alert(ERROR_CORE_CONFIG)
+			return
+		}
+
+		if (config) {
+			Nasa.config(config)
+			alert(`Did set config.`)
+		}
+	})
+
+
 	////////////////////  contract  ////////////////////
 	// prepare textarea
-	const $textarea = $('#contract--set').siblings('textarea')
-	$textarea.html($textarea.html().trim())
+	const $textareaContract = $('#contract--set').siblings('textarea')
+	$textareaContract.html($textareaContract.html().trim())
 
 	$('#contract--set').on('click', function () {
-		const $textarea = $(this).siblings('textarea')
-		const value = $textarea.val().trim()
+		const value = $textareaContract.val().trim()
 		let config
 		try {
 			const input = `config = ${value}`
@@ -166,11 +193,12 @@ void function () {
 			return
 		}
 
-		if (typeof config !== 'undefined') {
+		if (config) {
 			Nasa.contract.set(config)
 			alert(`Did set contracts.`)
 		}
 	})
+
 	$('#contract--get').on('click', function () {
 		const $input = $(this).siblings('input[type="text"]')
 		const value = $input.val().trim()
