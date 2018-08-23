@@ -6,6 +6,6 @@ export function init() {
 		user.getAddr()
 			.then((addr) => {
 				_addr.setAvailableAddr(addr)
-			})
+			}, () => {})
 	}, false)
 }

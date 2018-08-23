@@ -7,7 +7,7 @@ import * as util from './util/index'
 import * as user from './user/index'
 import * as env from './env/index'
 import * as contract from './contract/index'
-import { init } from './util/init'
+import { init } from './util/_init'
 
 // ns
 const Nasa = {
