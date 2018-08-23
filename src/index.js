@@ -1,5 +1,5 @@
 /* global NebPay, nebPay, BigNumber, ns */
-
+import * as core from './core/index'
 import * as tx from './tx/index'
 import { error } from './const/index'
 import * as ua from './ua/index'
@@ -20,6 +20,7 @@ const Nasa = {
 	error,
 
 	// modules
+	core,
 	tx,
 	ua,
 	util,
@@ -29,9 +30,12 @@ const Nasa = {
 }
 
 // shortcut
+Nasa.config = Nasa.core.config
 Nasa.query = Nasa.contract.query
 Nasa.call = Nasa.tx.call
 Nasa.checkTx = Nasa.tx.checkTx
+
+// alias
 Nasa.ua.isNasNano = Nasa.ua.isWalletMobileApp
 
 // init
