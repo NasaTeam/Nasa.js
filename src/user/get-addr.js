@@ -37,7 +37,7 @@ export function getAddr() {
 
 		// 如果钱包扩展没有导入钱包，会进入这里
 		setTimeout(() => {
-			reject(new Error(error.EXTENSION_TIMEOUT))
+			reject(new Error(error.EXTENSION_NO_WALLET))
 		}, 300)
 	})
 }

@@ -50,24 +50,75 @@ Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 
 ### 版本信息 <a name="const--version">&nbsp;</a>
 
-* `Nasa.VERSION` -- 当前页面加载的 Nasa.js 的版本号，比如 `'0.1.4'`。
+* `Nasa.VERSION` —— 当前页面加载的 Nasa.js 的版本号，比如 `'0.1.4'`。
 
 ### 错误信息 <a name="const--error">&nbsp;</a>
 
-* `Nasa.error.NETWORK_ERROR` -- 网络错误
-* `Nasa.error.SERVER_ERROR` -- 服务器错误
-* …… -- 更多错误信息详见各 API 的描述
+* `Nasa.error.NETWORK_ERROR` —— 网络错误
+* `Nasa.error.SERVER_ERROR` —— 服务器错误
+* `...` —— 更多错误信息详见各 API 的描述
 
 ### 环境名 <a name="const--env">&nbsp;</a>
 
-* `Nasa.env.MAIN` -- `'mainnet'`
-* `Nasa.env.TEST` -- `'testnet'`
-* `Nasa.env.LOCAL` -- `'local'`
-* `Nasa.env.MAINNET` -- `Nasa.env.MAIN` 的别名
-* `Nasa.env.TESTNET` -- `Nasa.env.TEST` 的别名
+* `Nasa.env.MAIN` —— `'mainnet'`
+* `Nasa.env.TEST` —— `'testnet'`
+* `Nasa.env.LOCAL` —— `'local'`
+* `Nasa.env.MAINNET` —— `Nasa.env.MAIN` 的别名
+* `Nasa.env.TESTNET` —— `Nasa.env.TEST` 的别名
 
 
 ## 核心 API <a name="core-api">&nbsp;</a>
+
+### `Nasa.query(contract, fnName, args = [])` <a name="core-api--query">&nbsp;</a>
+
+向合约查询数据，不需要向链写入数据，因此不需要发起交易（一般称作 “读取型调用” 或 “查询型调用”）。
+
+> ⚠️ 注意：如果使用此 API 去调用那些有写数据逻辑的合约方法，并不会实际执行写操作，只是会得到模拟执行的结果，因此此操作也被称作 “simulate call”。
+
+#### 参数
+
+* `contract` —— 字符串。合约地址。如果你用 [`Nasa.contract.set()`](#contract--set) API 配置了合约，则这里也可以传入合约名；如果你配置了默认合约，且此参数为空值或假值时，将取默认合约。
+* `fnName` —— 字符串。合约方法名。
+* `args` —— 数组。传给合约方法的参数。不需要转换成 JSON。示例如下：
+	* 不传参数 —— `[]`
+	* 传一个参数 `1` —— `[1]`
+	* 传多个参数 `1, 2, 3` —— `[1, 2, 3]`
+
+#### 返回值
+
+Promise。处理结果如下：
+
+* Fulfilled：合约调用结果。格式如下：
+
+	```js
+	// 正常调用
+	{
+		execResult: {},  // 注❶
+		estimateGas: "20490",
+	}
+	```
+		
+	> 注❶：合约调用返回值。会自动进行 JSON 反序列化，不需你自己解析；如果 JSON 解析失败，则返回原字符串。
+
+	```js
+	// 调用过程中抛错
+	{
+		execError: 'my error msg',  // 注❷
+		estimateGas: "20335",
+	}
+	```
+	
+	> 注❷：合约调用过程中抛出的错误消息。可能是合约在运行时产生的异常，也可能是合约代码主动抛出的自定义错误。
+
+* Rejected：
+
+	错误原因 | 错误消息
+	---|---
+	合约地址无效 | `Nasa.error.INVALID_CONTRACT_ADDR`
+	传给此 API 的参数无效 | `Nasa.error.INVALID_ARG`
+	传给服务器的参数无效 | `Nasa.error.INVALID_REQUEST`
+	合约无效（未部署） | `Nasa.error.INVALID_CONTRACT`
+	服务器过载（或网络错误） | `Nasa.error.SERVER_ERROR`
 
 ### `Nasa.call(contract, fnName, args = [], options = {})` <a name="core-api--call">&nbsp;</a>
 
@@ -75,59 +126,39 @@ Nasa.BigNumber.config({ ROUNDING_MODE: 0 })
 
 #### 参数
 
-* `contract` -- 字符串。合约地址。如果你用 [`Nasa.contract.set()`](#contract--set) API 配置了合约，则这里也可以传入合约名；如果你配置了默认合约，且此参数为空值或假值时，将取默认合约。
-* `fnName` -- 字符串。合约方法名。
-* `args` -- 数组。传给合约方法的参数。不需要转换成 JSON。示例如下：
-	* 不传参数 -- `[]`
-	* 传一个参数 `1` -- `[1]`
-	* 传多个参数 `1, 2, 3` -- `[1, 2, 3]`
-* `options` -- 对象。附加选项。可选的 key 如下：
-	* `value` -- 字符串。默认值为 `'0'` 。调用合约同时转账的数额（单位 NAS）。
+* `contract` ——（同 [`Nasa.query()`](#core-api--query) 的同名参数）
+* `fnName` ——（同 [`Nasa.query()`](#core-api--query) 的同名参数）
+* `args` ——（同 [`Nasa.query()`](#core-api--query) 的同名参数）
+* `options` —— 对象。附加选项。可选的 key 如下：
+	* `value` —— 字符串。默认值为 `'0'` 。调用合约同时转账的数额（单位 NAS）。
 
 #### 返回值
 
 Promise。处理结果如下：
 
-* Fulfilled：字符串。交易流水号，可通过 [`Nasa.checkTx()`](#core-api--checkTx) 查询交易状态和调用结果。
+* Fulfilled：交易的标识信息。格式如下：
+
+	```js
+	{
+		payId: '...pay...id...',    // 注❶
+		txHash: '...tx...hash...',  // 注❷
+	}
+	```
+
+	> * 注❶：交易流水号，可通过 [`Nasa.checkTx()`](#core-api--checkTx) 查询交易状态和调用结果。
+	> * 注❷：交易哈希，交易在链上的真正标识。⚠️ 注意：
+	> 	* 仅在 Chrome 钱包扩展环境下，才有此字段。
+	> 	* 请留意 txHash 的拼写。
 
 * Rejected：
 
 	错误原因 | 错误消息
 	---|---
-	传入的参数无效 | `Nasa.error.INVALID_ARG`
+	传给此 API 的参数无效 | `Nasa.error.INVALID_ARG`
 	用户取消交易 | `Nasa.error.TX_REJECTED_BY_USER`
 	服务器不稳定 | `Nasa.error.SERVER_ERROR`
 	钱包扩展没有导入钱包 | `Nasa.error.EXTENSION_NO_WALLET`
-
-### `Nasa.query(contract, fnName, args = [])` <a name="core-api--query">&nbsp;</a>
-
-向合约查询数据，不需要向链写入数据，因此不需要发起交易（一般称作 “读取型调用” 或 “查询型调用”）。
-
-#### 参数
-
-（同 [`Nasa.call()`](#core-api--call) 的参数，但没有 `options` 参数。）
-
-#### 返回值
-
-Promise。处理结果如下：
-
-* Fulfilled：合约调用结果。已帮你把 JSON 解析好了。
-
-* Rejected：
-
-	错误原因 | 错误消息
-	---|---
-	传入的参数无效 | `Nasa.error.INVALID_ARG`
-	得到的响应无效 | `Nasa.error.INVALID_RESPONSE`
-	网络错误 | `Nasa.error.NETWORK_ERROR`
-	JSON 解析错误 | `Nasa.error.INVALID_JSON`
-	合约调用错误 | 错误信息 <sup>[*]</sup>
-
-	> <sup>[*]</sup> 可能有以下情况：
-	> 
-	> * `'contract check failed'` -- 合约不存在
-	> * `'insufficient balance'` -- 用户钱包无余额
-	> * `'Call: TypeError: ...'` -- 合约函数运行时错误
+	钱包扩展发送流水号失败 | `Nasa.error.PAY_ID_REG_FAILED`
 
 ### `Nasa.checkTx(payId)` <a name="core-api--checkTx">&nbsp;</a>
 
@@ -137,7 +168,7 @@ Promise。处理结果如下：
 
 #### 参数
 
-* `payId` -- 字符串。交易流水号（亦称 “交易序列号” 或 “serial number”）。<!-- 如果此参数为空值或假值，则取最后一次交易的交易号。-->
+* `payId` —— 字符串。交易流水号（亦称 “交易序列号” 或 “serial number”）。<!-- 如果此参数为空值或假值，则取最后一次交易的交易号。-->
 
 > ⚠️ 注意：暂时只支持查询 payId，不支持查询 txHash。
 
@@ -149,13 +180,11 @@ Promise。处理结果如下：
 
 	```js
 	{
-		"data": "...base64...",  // 就是 {Function, Args} 的 JSON 的 base64
-		"contract_address": "",
 		"type": "call",  // or "binary"
 		"nonce": 7,
-		"gas_price": "1000000",
-		"gas_limit": "200000",
-		"gas_used": "23702",
+		"gasPrice": "1000000",
+		"gasLimit": "200000",
+		"gasUsed": "23702",
 		"chainId": 1001,
 		"from": "...user...addr...",
 		"to": "...contract...addr...",
@@ -163,11 +192,17 @@ Promise。处理结果如下：
 		"hash": "...tx...hash...",
 		"status": 1,	// 0-失败 1-成功 2-待定
 		"timestamp": 1527525664,
-		"execute_result": "{}",	// 合约执行的返回值，JSON 格式。
-		"execute_error": "",
-		"result": {}  // 👉 合约执行的返回值，已帮你把 JSON 解析好了。
+		"execResult": {},  // 注❶
+		"execError": {},   // 注❷
 	}
 	```
+	
+	> * 注❶：（同 [`Nasa.query()`](#core-api--query) 返回值的同名字段）
+	> * 注❷：（同 [`Nasa.query()`](#core-api--query) 返回值的同名字段）
+
+	<!-- -->
+
+	> 	⚠️ 注意：上述数据格式与星云官方 RPC 接口的返回值不完全一致。
 
 * Rejected：
 
@@ -175,8 +210,7 @@ Promise。处理结果如下：
 	---|---
 	传入的参数无效 | `Nasa.error.INVALID_ARG`
 	交易状态未知 | `Nasa.error.TX_STATUS_UNKNOWN`
-	查询超时（一分钟内都没有得到交易结果） | `Nasa.error.REQUEST_TIMEOUT`
-	网络错误 | `Nasa.error.NETWORK_ERROR`
+	交易查询超时（一分钟内没有得到交易结果，或交易状态仍为未完成） | `Nasa.error.TX_TIMEOUT`
 
 ### ~~`Nasa.pay(addr, value = '0', options = {})`~~ <a name="core-api--pay">&nbsp;</a>
 
@@ -186,8 +220,8 @@ Promise。处理结果如下：
 
 #### 参数
 
-* `addr` -- 字符串。接收方的钱包地址。
-* `value` -- 字符串。转账数额（单位 NAS）。
+* `addr` —— 字符串。接收方的钱包地址。
+* `value` —— 字符串。转账数额（单位 NAS）。
 
 #### 返回值
 
@@ -206,7 +240,7 @@ Promise。处理结果如下：
 
 #### 参数
 
-* `config ` -- 对象。具体格式见示例。
+* `config ` —— 对象。具体格式见示例。
 
 #### 示例
 
@@ -238,7 +272,7 @@ Nasa.contract.set({
 
 #### 参数
 
-* `contractName ` -- 字符串。合约名称。如果此参数为空值或假值，则取 `'default'`。
+* `contractName ` —— 字符串。合约名称。如果此参数为空值或假值，则取 `'default'`。
 
 #### 返回值
 
@@ -257,7 +291,7 @@ Nasa.contract.set({
 
 #### 参数
 
-* `envName` -- 字符串。环境名。取值参见 [“常量 → 环境名”](#const--env) 段落。
+* `envName` —— 字符串。环境名。取值参见 [“常量 → 环境名”](#const--env) 段落。
 
 ### `Nasa.env.get()` <a name="env--get">&nbsp;</a>
 
@@ -284,8 +318,7 @@ Promise。处理结果如下：
 	---|---
 	当前浏览器不是桌面版 Chrome | `Nasa.error.EXTENSION_NOT_INSTALLED`
 	当前浏览器没有安装 “星云钱包 Chrome 扩展” | `Nasa.error.EXTENSION_NOT_INSTALLED`
-	“星云钱包 Chrome 扩展” 没有导入钱包 | `Nasa.error.EXTENSION_TIMEOUT`
-	“星云钱包 Chrome 扩展” 不再支持此功能 | `Nasa.error.EXTENSION_TIMEOUT`
+	“星云钱包 Chrome 扩展” 没有导入钱包 | `Nasa.error.EXTENSION_NO_WALLET`
 
 ### ~~`Nasa.user.getAvatar(addr)`~~ <a name="user--getAvatar">&nbsp;</a>
 
@@ -295,7 +328,7 @@ Promise。处理结果如下：
 
 #### 参数
 
-* `addr` -- 字符串。钱包地址。
+* `addr` —— 字符串。钱包地址。
 
 #### 返回值
 
@@ -360,7 +393,7 @@ Promise。处理结果如下：
 
 	保存用户的回答。
 	
-	**参数**： `status` -- 布尔值。用户是否声称自己已安装 “星云手机钱包 App”。
+	**参数**： `status` —— 布尔值。用户是否声称自己已安装 “星云手机钱包 App”。
 
 * Getter： `.isWalletMobileAppInstalled()`
 
@@ -368,9 +401,9 @@ Promise。处理结果如下：
 
 	**返回值**：
 	
-	* `true` -- 之前保存过的用户的回答：已安装
-	* `false` -- 之前保存过的用户的回答：未安装
-	* `undefined` -- 之前没有保存过用户的回答
+	* `true` —— 之前保存过的用户的回答：已安装
+	* `false` —— 之前保存过的用户的回答：未安装
+	* `undefined` —— 之前没有保存过用户的回答
 
 > 注：此 API 通过本地存储作为持久化存储。
 
@@ -383,7 +416,7 @@ Promise。处理结果如下：
 
 #### 参数
 
-* `str` -- 字符串。待检测的地址。
+* `str` —— 字符串。待检测的地址。
 
 #### 返回值
 
@@ -395,7 +428,7 @@ Promise。处理结果如下：
 
 #### 参数
 
-* `str ` -- 字符串。待检测的 TxHash。
+* `str ` —— 字符串。待检测的 TxHash。
 
 #### 返回值
 
@@ -407,7 +440,7 @@ Promise。处理结果如下：
 
 #### 参数
 
-* `str ` -- 字符串。待检测的交易流水号。
+* `str ` —— 字符串。待检测的交易流水号。
 
 #### 返回值
 
