@@ -60,12 +60,10 @@ export function query(contract, fnName, args = [], options = {}) {
 		return Promise.reject(new Error(error.INVALID_ARG))
 	}
 
-	const customAddr = options.from
-	if (isValidAddr(customAddr)) {
+	const fromAddr = options.from || _addr.getAvailableAddr()
+	if (!isValidAddr(fromAddr)) {
 		return Promise.reject(new Error(error.INVALID_ADDR))
 	}
-
-	const fromAddr = customAddr || _addr.getAvailableAddr()
 
 	const api = getNebulasConfig('endpoint') + 'v1/user/call'
 	const txParams = {
