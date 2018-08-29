@@ -53,16 +53,18 @@ Please try again later."}'
 */
 
 export function query(contract, fnName, args = [], options = {}) {
-	// get contract
-	const contractAddr = isValidAddr(contract) ?
-		contract : getContract(contract)
-	if (!contractAddr || !fnName || !Array.isArray(args)) {
+	const contractAddr = isValidAddr(contract) ? contract : getContract(contract)
+	if (!contractAddr) {
+		return Promise.reject(new Error(error.INVALID_CONTRACT_ADDR))
+	}
+
+	if (!fnName || !Array.isArray(args)) {
 		return Promise.reject(new Error(error.INVALID_ARG))
 	}
 
 	const fromAddr = options.from || _addr.getAvailableAddr()
 	if (!isValidAddr(fromAddr)) {
-		return Promise.reject(new Error(error.INVALID_ADDR))
+		return Promise.reject(new Error(error.INVALID_USER_ADDR))
 	}
 
 	const api = getNebulasConfig('endpoint') + 'v1/user/call'
@@ -90,12 +92,12 @@ export function query(contract, fnName, args = [], options = {}) {
 			if (res.ok) {
 				return res.json()
 			} else {
-				// TODO 400 响应会进这里，因此错误似乎应该是 RESPONSE_ERROR 或 REQUEST_ERROR
-				throw new Error(error.INVALID_RESPONSE)
+				// 400 响应会进这里，通常是传给服务器的参数有误
+				throw new Error(error.INVALID_REQUEST)
 			}
 		}, () => {
-			// TODO 503 响应会进这里，因此错误似乎应该是 SERVER_ERROR
-			throw new Error(error.NETWORK_ERROR)
+			// 当服务器过载时会进这里 (?)
+			throw new Error(error.SERVER_ERROR)
 		})
 		.then((res) => {
 			const data = res.result || {}
@@ -104,6 +106,10 @@ export function query(contract, fnName, args = [], options = {}) {
 			}
 			// 1. 看服务端有没有返回错误信息
 			const errMsg = data.execute_err
+			if (errMsg === 'contract check failed') {
+				throw new Error(error.INVALID_CONTRACT)
+			}
+
 			// 'insufficient balance' 这个错误是正常的，内置的默认地址本来就没钱
 			if (errMsg && errMsg !== 'insufficient balance') {
 				output.execError = stripErrorMsgPrefix(errMsg)
