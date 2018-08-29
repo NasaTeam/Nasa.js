@@ -154,7 +154,7 @@ void function () {
 			})
 	})
 
-
+	/*
 	// prepare textarea
 	const $textareaConfig = $('#core--config').siblings('textarea')
 	$textareaConfig.html($textareaConfig.html().trim())
@@ -175,6 +175,7 @@ void function () {
 			alert(`Did set config.`)
 		}
 	})
+	*/
 
 
 	////////////////////  contract  ////////////////////
