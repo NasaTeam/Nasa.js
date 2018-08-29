@@ -3,27 +3,31 @@ import {
 	supportStringIncludes,
 	supportArrayIncludes,
 	supportObjectAssign,
-} from './detect-feature'
-
-export {
-	isMobileDevice,
-	isDesktopDevice,
-	isDesktopChrome,
-	isWeChat,
-	isWalletMobileApp,
-} from './detect-ua'
-
+} from './_detect-feature'
 
 function isSupported() {
 	return supportFetch()
 		&& supportStringIncludes()
+		&& supportArrayIncludes()
 		&& supportObjectAssign()
-		// && supportArrayIncludes()
 }
 
 function isWalletExtensionInstalled() {
+	// See: https://github.com/NasaTeam/Nasa.js/issues/17
+	// new implement
+	if ('NasExtWallet' in window) return true
+
+	// ========== v0.3 删除以下代码 ==========
+	// old implement
 	const beacon = window.webExtensionWallet
 	return !!beacon && String(beacon).includes('nebulas')
+}
+
+// ========== v0.3 删除以下代码 ==========
+// simulate NasExtWallet
+// TODO 这个补丁需要移到 init() 方法里
+if (isWalletExtensionInstalled() && !window.NasExtWallet) {
+	window.NasExtWallet = {}
 }
 
 // TODO
@@ -34,3 +38,10 @@ export {
 	isWalletExtensionInstalled,
 	// isWalletMobileAppInstalled,
 }
+export {
+	isMobileDevice,
+	isDesktopDevice,
+	isDesktopChrome,
+	isWeChat,
+	isWalletMobileApp,
+} from './_detect-ua'

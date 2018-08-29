@@ -17,7 +17,7 @@
 * 也可以在页面中直接加载 CDN 版本：
 
 	```html
-	<script src="https://cdn.jsdelivr.net/npm/nasa.js@0.1.4/dist/nasa.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/nasa.js@0.2.0-beta.1/dist/nasa.min.js"></script>
 	```
 
 ### 文档
@@ -74,7 +74,7 @@ Nasa.js 提供了丰富的 API，你可以把它当作库来用，只在你需�
 
 未来，Nasa.js 将为常见开发场景提供更完整的解决方案，成为一个更加称职的开发框架。
 
-#### 使用 Nasa.js 还需要加载 neb.js 和 nebPay 吗？
+#### Nasa.js 可以独立使用吗？需要同时加载其它依赖吗？
 
 Nasa.js 的 dist 文件已经把所有外部依赖都打包进来了，因此可以独立使用。
 
@@ -82,7 +82,7 @@ Nasa.js 的 dist 文件已经把所有外部依赖都打包进来了，因此可
 
 在同一页面中同时加载这三者，并不会发生冲突，但这样对网页性能并没有好处。优化建议如下：
 
-* 如果你的 DApp 依赖 neb.js 只是因为你需要向合约查询数据，则建议把相关代码迁移到 Nasa.js。这样你的 DApp 就不需要加载 neb.js 了。
+* 如果你的 DApp 加载 neb.js 只是为了向合约查询数据<!--或查询交易结果-->，则建议把相关代码迁移到 Nasa.js。这样你的 DApp 就不需要加载 neb.js 了。
 
 * 由于 Nasa.js 本身已经打包了 nebPay 的源码，因此你不需要重复加载 nebPay。使用 `Nasa.nebPay` 即可以取代你代码中的 `nebPay` 实例，详情参见 [此文档](https://github.com/NasaTeam/Nasa.js/issues/2#dependency)。
 

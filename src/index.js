@@ -1,7 +1,7 @@
 /* global NebPay, nebPay, BigNumber, ns */
+import { error } from './const/index'
 import * as core from './core/index'
 import * as tx from './tx/index'
-import { error } from './const/index'
 import * as ua from './ua/index'
 import * as util from './util/index'
 import * as user from './user/index'

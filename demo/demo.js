@@ -154,7 +154,7 @@ void function () {
 			})
 	})
 
-
+	/*
 	// prepare textarea
 	const $textareaConfig = $('#core--config').siblings('textarea')
 	$textareaConfig.html($textareaConfig.html().trim())
@@ -175,6 +175,7 @@ void function () {
 			alert(`Did set config.`)
 		}
 	})
+	*/
 
 
 	////////////////////  contract  ////////////////////
@@ -275,5 +276,12 @@ void function () {
 		const value = $input.val().trim()
 		alert(Nasa.util.isValidPayId(value))
 	})
+
+
+	////////////////////  const  ////////////////////
+	$('#const--VERSION').on('click', function () {
+		alert(Nasa.VERSION)
+	})
+
 
 }()

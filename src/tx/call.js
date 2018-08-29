@@ -6,7 +6,7 @@ import { get as getContract } from '../contract/index'
 import {
 	isValidAddr,
 	stripErrorMsgPrefix,
-} from '../util'
+} from '../util/index'
 
 export let _lastPayId = ''
 export let _lastTxHash = ''
@@ -34,17 +34,18 @@ listener 拿到的响应（res）：
 }
 */
 
-export function call(contractAddr, fnName, args = [], options = {}) {
-	// get contract
-	const contract = isValidAddr(contractAddr) ?
-		contractAddr : getContract(contractAddr)
+export function call(contract, fnName, args = [], options = {}) {
+	const contractAddr = isValidAddr(contract) ? contract : getContract(contract)
+	if (!contractAddr) {
+		return Promise.reject(new Error(error.INVALID_CONTRACT_ADDR))
+	}
 
-	if (!contract || !fnName || !Array.isArray(args)) {
+	if (!fnName || !Array.isArray(args)) {
 		return Promise.reject(new Error(error.INVALID_ARG))
 	}
 
 	return new Promise((resolve, reject) => {
-		const to = contract
+		const to = contractAddr
 		const value = options.value || '0'
 		let nebPayOptions = {
 			qrcode: { showQRCode: false },
@@ -60,7 +61,7 @@ export function call(contractAddr, fnName, args = [], options = {}) {
 						reject(new Error(error.TX_REJECTED_BY_USER))
 					}
 					// 如果服务器不稳定 (?)
-					if (res.includes('stream terminated') || res.includes('REFUSED_STREAM')) {
+					if (res.includes('stream terminated') || res.includes('refused_stream')) {
 						reject(new Error(error.SERVER_ERROR))
 					}
 					// 如果钱包扩展没有导入钱包
