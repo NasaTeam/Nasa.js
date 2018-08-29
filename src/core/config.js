@@ -17,7 +17,4 @@ export function config(config) {
 		}
 	})
 
-	/** DEBUG_INFO_START **/
-	console.log(NEBULAS_CONFIG)
-	/** DEBUG_INFO_END **/
 }
