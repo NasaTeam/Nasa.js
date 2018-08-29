@@ -1,5 +1,5 @@
 import * as error from '../const/error'
-import * as _addr from '../util/addr'
+import * as _addr from '../util/_addr'
 import { getNebulasConfig } from '../core/_nebulas-config'
 import { get as getContract } from '../contract/index'
 import {

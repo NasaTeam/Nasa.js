@@ -1,7 +1,7 @@
 /* global nebPay */
 import * as error from '../const/error'
 import * as ua from '../ua/index'
-import { setAvailableAddr } from '../util/addr'
+import { setAvailableAddr } from '../util/_addr'
 import { getNebPayOptions } from '../core/_nebulas-config'
 import {
 	isValidAddr,

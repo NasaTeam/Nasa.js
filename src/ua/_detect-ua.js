@@ -1,4 +1,4 @@
-import { ua, _detect } from './gearbox-ua'
+import { ua, _detect } from './_gearbox-ua'
 
 let isDetected = false
 let result

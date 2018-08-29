@@ -3,7 +3,7 @@ import {
 	supportStringIncludes,
 	supportArrayIncludes,
 	supportObjectAssign,
-} from './detect-feature'
+} from './_detect-feature'
 
 function isSupported() {
 	return supportFetch()
@@ -44,4 +44,4 @@ export {
 	isDesktopChrome,
 	isWeChat,
 	isWalletMobileApp,
-} from './detect-ua'
+} from './_detect-ua'
