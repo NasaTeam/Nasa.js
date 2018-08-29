@@ -16,15 +16,16 @@ import {
 	"msg": "success",
 }
 当合约执行抛错时：{
-	code : 0,
+	code: 0,
 	data: {  // tx data
+		data: "...base64...",  // 就是 {FunctionName, Args} 的 JSON 的 base64
 		...
-		execute_error : "Call: Error: value has been occupied"
-		execute_result : "Error: value has been occupied"
-		status : 0
+		execute_error: "Call: Error: value has been occupied"
+		execute_result: "Error: value has been occupied"
+		status: 0,
 		...
-	}
-	msg : "success",
+	},
+	msg: "success",
 }
 各种错误情况： {
 	"code": 1,
@@ -85,11 +86,17 @@ export function checkTx(sn, options = {}) {
 						/** DEBUG_INFO_END **/
 
 						if (txData.status === 0) {
-							// 先给个兜底的错误信息
-							let errMsg = error.TX_FAILED
-							if (txData.type === 'call') errMsg = error.CALL_FAILED
-							// 再尝试获取精确的合约错误信息
-							errMsg = stripErrorMsgPrefix(txData.execute_error)
+							let errMsg
+							// 尝试获取精确的合约错误信息
+							if (txData.execute_error) {
+								errMsg = stripErrorMsgPrefix(txData.execute_error)
+							}
+							// 兜底的错误信息
+							if (!errMsg) {
+								errMsg = error.TX_FAILED
+								if (txData.type === 'call') errMsg = error.CALL_FAILED
+								if (txData.type === 'deploy') errMsg = error.DEPLOY_FAILED
+							}
 							resolve(formatTxResult(txData, errMsg))
 						} else if (txData.status === 1) {
 							resolve(formatTxResult(txData))
@@ -138,7 +145,7 @@ export function checkTx(sn, options = {}) {
 function formatTxResult(txData, errMsg) {
 	// 处理拼写
 	const output = {
-		data:      txData.data,
+		// data:      txData.data,
 		type:      txData.type,
 		nonce:     txData.nonce,
 		gasPrice:  txData.gas_price || txData.gasPrice,
