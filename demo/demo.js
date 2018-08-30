@@ -236,7 +236,7 @@ void function () {
 				alert(addr)
 			})
 			.catch((e) => {
-				alert('Error: ' + e)
+				alert(e.message)
 			})
 	})
 
