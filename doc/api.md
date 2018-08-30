@@ -367,6 +367,16 @@ Promise。处理结果如下：
 
 布尔值。当前浏览器是否是桌面版 Chrome。基于 User Agent 字符串来判断。
 
+### `Nasa.ua.isWalletMobileApp()` <a name="env--isWalletMobileApp">&nbsp;</a>
+
+#### 返回值
+
+布尔值。当前浏览器是否星云手机钱包。基于 User Agent 字符串来判断。
+
+### `Nasa.ua.isNasNano()` <a name="env--isNasNano">&nbsp;</a>
+
+（`Nasa.ua.isWalletMobileApp()` 的别名）
+
 ### `Nasa.ua.isWeChat()` <a name="env--isWeChat">&nbsp;</a>
 
 #### 返回值

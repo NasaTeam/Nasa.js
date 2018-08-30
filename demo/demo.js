@@ -253,6 +253,9 @@ void function () {
 	$('#ua--isDesktopChrome').on('click', function () {
 		alert(Nasa.ua.isDesktopChrome())
 	})
+	$('#ua--isWalletMobileApp').on('click', function () {
+		alert(Nasa.ua.isWalletMobileApp())
+	})
 	$('#ua--isWeChat').on('click', function () {
 		alert(Nasa.ua.isWeChat())
 	})
