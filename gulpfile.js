@@ -107,10 +107,19 @@ gulp.task('readme', gulpfiles.concat({
 	},
 }))
 
+gulp.task('typing', gulpfiles.copy({
+	src: myPath.src + 'index.d.ts',
+	dest: myPath.dest,
+	config: {
+		rename: 'nasa.d.ts'
+	}
+}))
+
 gulp.task('dist', gulp.series([
 	'clean',
 	'deps',
 	'js',
 	'readme',
+	'typing',
 ]))
 gulp.task('default', gulp.series('dist'))
