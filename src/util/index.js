@@ -23,3 +23,4 @@ export {
 	isValidPayId,
 	stripErrorMsgPrefix,
 }
+export { ready } from './ready'
