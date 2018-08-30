@@ -335,9 +335,9 @@ Promise。处理结果如下：
 * 字符串。采用 Base64 编码的图片数据，并已加 `data:` 协议前缀。可以直接填充到 `<img>` 元素的 `src` 属性，也可以赋值给元素的 `.style.backgroundImage` 属性。
 
 
-## 浏览器环境 <a name="env">&nbsp;</a>
+## 浏览器环境 <a name="ua">&nbsp;</a>
 
-### `Nasa.ua.isSupported()` <a name="env--isSupported">&nbsp;</a>
+### `Nasa.ua.isSupported()` <a name="ua--isSupported">&nbsp;</a>
 
 #### 返回值
 
@@ -345,7 +345,7 @@ Promise。处理结果如下：
 
 > 注：目前 Ajax 由 `Fetch()` API 实现，可能不支持部分老浏览器。在后续的版本中，可能会把 Ajax 的实现换成 XHR，以提升兼容性。
 
-### `Nasa.ua.isMobileDevice()` <a name="env--isMobileDevice">&nbsp;</a>
+### `Nasa.ua.isMobileDevice()` <a name="ua--isMobileDevice">&nbsp;</a>
 
 #### 返回值
 
@@ -353,7 +353,7 @@ Promise。处理结果如下：
 
 所有 Android 和 iOS 设备（包括 iPad）都会被视为移动设备。
 
-### `Nasa.ua.isDesktopDevice()` <a name="env--isDesktopDevice">&nbsp;</a>
+### `Nasa.ua.isDesktopDevice()` <a name="ua--isDesktopDevice">&nbsp;</a>
 
 #### 返回值
 
@@ -361,29 +361,29 @@ Promise。处理结果如下：
 
 非移动设备，即被视为桌面设备。
 
-### `Nasa.ua.isDesktopChrome()` <a name="env--isDesktopChrome">&nbsp;</a>
+### `Nasa.ua.isDesktopChrome()` <a name="ua--isDesktopChrome">&nbsp;</a>
 
 #### 返回值
 
 布尔值。当前浏览器是否是桌面版 Chrome。基于 User Agent 字符串来判断。
 
-### `Nasa.ua.isWalletMobileApp()` <a name="env--isWalletMobileApp">&nbsp;</a>
+### `Nasa.ua.isWalletMobileApp()` <a name="ua--isWalletMobileApp">&nbsp;</a>
 
 #### 返回值
 
 布尔值。当前浏览器是否星云手机钱包。基于 User Agent 字符串来判断。
 
-### `Nasa.ua.isNasNano()` <a name="env--isNasNano">&nbsp;</a>
+### `Nasa.ua.isNasNano()` <a name="ua--isNasNano">&nbsp;</a>
 
 （`Nasa.ua.isWalletMobileApp()` 的别名）
 
-### `Nasa.ua.isWeChat()` <a name="env--isWeChat">&nbsp;</a>
+### `Nasa.ua.isWeChat()` <a name="ua--isWeChat">&nbsp;</a>
 
 #### 返回值
 
 布尔值。当前浏览器是否是微信。基于 User Agent 字符串来判断。
 
-### `Nasa.ua.isWalletExtensionInstalled()` <a name="env--isWalletExtensionInstalled">&nbsp;</a>
+### `Nasa.ua.isWalletExtensionInstalled()` <a name="ua--isWalletExtensionInstalled">&nbsp;</a>
 
 #### 返回值
 
@@ -391,7 +391,7 @@ Promise。处理结果如下：
 
 > 注：此功能依赖扩展向页面中注入的脚本来判断，而由于扩展注入脚本需要一点点时间，因此，在页面最顶部运行此 API 不一定会得到正确的结果。
 
-### ~~`Nasa.ua.isWalletMobileAppInstalled([status])`~~ <a name="env--isWalletMobileAppInstalled">&nbsp;</a>
+### ~~`Nasa.ua.isWalletMobileAppInstalled([status])`~~ <a name="ua--isWalletMobileAppInstalled">&nbsp;</a>
 
 > ⚠️ 计划中，暂未实现！
 
