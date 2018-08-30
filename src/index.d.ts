@@ -25,7 +25,7 @@ interface ErrorConstants {
 
 // core - config
 
-type Config = <T extends object>(T) => void
+type Config = <T extends object>(config: T) => void
 
 // core
 
