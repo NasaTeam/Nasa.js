@@ -15,7 +15,9 @@ function isSupported() {
 function isWalletExtensionInstalled() {
 	// See: https://github.com/NasaTeam/Nasa.js/issues/17
 	// new implement
-	if ('NasExtWallet' in window) return true
+	if (typeof NasExtWallet === 'object') {
+		return true
+	}
 
 	// ========== v0.3 删除以下代码 ==========
 	// old implement
@@ -24,7 +26,7 @@ function isWalletExtensionInstalled() {
 }
 
 // ========== v0.3 删除以下代码 ==========
-// simulate NasExtWallet
+// simulate NasExtWallet, for low version NasExtWallet + high version nebPay
 // TODO 这个补丁需要移到 init() 方法里
 if (isWalletExtensionInstalled() && !window.NasExtWallet) {
 	window.NasExtWallet = {}
