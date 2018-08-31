@@ -66,12 +66,15 @@ interface Contract {
 // tx - call
 
 interface CallResult {
-	txhash: string
-	contract_address: string
-	error: string
+	txHash: string
+	payId: string
 }
 
-type Call = (contract: string, fnName: string, args?: any[], options?: object) => Promise<CallResult>
+interface CallOptions {
+	value?: string
+}
+
+type Call = (contract: string, fnName: string, args?: any[], options?: CallOptions) => Promise<CallResult>
 
 // tx - checkTx
 
