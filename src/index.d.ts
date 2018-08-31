@@ -1,3 +1,5 @@
+import BigNumber from 'bignumber.js'
+
 // error constants
 
 interface ErrorConstants {
@@ -166,6 +168,10 @@ interface Env extends EnvNames {
 
 interface NasaInstance {
 	VERSION: string
+
+	BigNumber: BigNumber
+	nebPay: any
+
 	config: Config
 	query: Query
 	call: Call
