@@ -1,11 +1,11 @@
 function isValidAddr(str) {
-	return /^n\d\w{33}$/.test(str)
+	return /^n\d[0-9a-zA-Z]{33}$/.test(str)
 }
 function isValidTxHash(str) {
-	return /^\w{64}$/.test(str)
+	return /^[0-9a-zA-Z]{64}$/.test(str)
 }
 function isValidPayId(str) {
-	return /^\w{32}$/.test(str)
+	return /^[0-9a-zA-Z]{32}$/.test(str)
 }
 
 export {
