@@ -55,8 +55,16 @@ type Query = (contract: string, fnName: string, args?: any[], options?: QueryOpt
 
 // contract
 
+interface ContractSetConfig {
+	[key: string]: {
+		local?: string
+		testnet?: string
+		mainnet?: string
+	}
+}
+
 interface Contract {
-	set<T extends object>(config: T): void
+	set(config: ContractSetConfig): void
 
 	get(contractName?: string): string
 
@@ -144,18 +152,18 @@ interface User {
 
 // env
 
-type EnvName = 'mainnet' | 'testnet' | 'local'
-
-interface Env {
-	set(envName: EnvName): void
-
-	get(): EnvName
-
+interface EnvNames {
 	MAIN: string
 	TEST: string
 	LOCAL: string
 	MAINNET: string
 	TESTNET: string
+}
+
+interface Env extends EnvNames {
+	set(envName: keyof EnvNames): void
+
+	get(): keyof EnvNames
 }
 
 interface NasaInstance {
