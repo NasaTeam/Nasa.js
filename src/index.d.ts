@@ -47,7 +47,11 @@ interface QueryResult {
 	execResult: ExecResult
 }
 
-type Query = (contract: string, fnName: string, args?: any[], options?: object) => Promise<QueryResult>
+interface QueryOptions {
+	from?: string
+}
+
+type Query = (contract: string, fnName: string, args?: any[], options?: QueryOptions) => Promise<QueryResult>
 
 // contract
 
@@ -67,7 +71,7 @@ interface CallResult {
 	error: string
 }
 
-type Call = <R extends CallResult>(contract: string, fnName: string, args?: any[], options?: object) => Promise<R>
+type Call = (contract: string, fnName: string, args?: any[], options?: object) => Promise<CallResult>
 
 // tx - checkTx
 
