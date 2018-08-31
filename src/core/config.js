@@ -1,5 +1,5 @@
 import * as env from '../env/index'
-import { each } from '../_helper/index'
+import { each } from '../util/_object'
 import { NEBULAS_CONFIG } from './_nebulas-config'
 
 export function config(config) {
