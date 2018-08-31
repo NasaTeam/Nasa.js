@@ -35,16 +35,10 @@ interface Core {
 
 // contract - query
 
-interface ExecResult {
-	key: string
-	value: string
-	author: string
-}
-
 interface QueryResult {
 	estimateGas: string
 	execError: string
-	execResult: ExecResult
+	execResult: any
 }
 
 interface QueryOptions {
