@@ -2,10 +2,8 @@ import * as error from '../const/error'
 import * as _addr from '../util/_addr'
 import { getNebulasConfig } from '../core/_nebulas-config'
 import { get as getContract } from '../contract/index'
-import {
-	isValidAddr,
-	stripErrorMsgPrefix,
-} from '../util/index'
+import { isValidAddr } from '../util/index'
+import { stripErrorMsgPrefix } from '../util/_string'
 
 /*
 从接口拿到的结果是一个 JSON 对象。

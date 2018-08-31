@@ -140,8 +140,6 @@ interface Util {
 	isValidTxHash(str: string): boolean
 
 	isValidPayId(str: string): boolean
-
-	stripErrorMsgPrefix(str: string): string
 }
 
 // user

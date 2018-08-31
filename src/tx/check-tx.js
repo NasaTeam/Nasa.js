@@ -3,11 +3,8 @@ import * as error from '../const/error'
 import * as ua from '../ua/index'
 import { setAvailableAddr } from '../util/_addr'
 import { getNebPayOptions } from '../core/_nebulas-config'
-import {
-	isValidAddr,
-	isValidPayId,
-	stripErrorMsgPrefix,
-} from '../util'
+import { isValidAddr, isValidPayId } from '../util/index'
+import { stripErrorMsgPrefix } from '../util/_string'
 
 /*
 当交易查询成功时，nebPay.queryPayInfo() 的返回值是一个 JSON 字符串，格式为： {

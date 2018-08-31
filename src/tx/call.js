@@ -3,10 +3,8 @@ import * as error from '../const/error'
 import * as ua from '../ua/index'
 import { getNebPayOptions } from '../core/_nebulas-config'
 import { get as getContract } from '../contract/index'
-import {
-	isValidAddr,
-	stripErrorMsgPrefix,
-} from '../util/index'
+import { isValidAddr } from '../util/index'
+import { stripErrorMsgPrefix } from '../util/_string'
 
 export let _lastPayId = ''
 export let _lastTxHash = ''
