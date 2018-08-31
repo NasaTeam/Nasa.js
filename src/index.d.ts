@@ -129,7 +129,9 @@ interface Ua {
 
 	isDesktopChrome(): boolean
 
-	isWeChatisWalletMobileApp(): boolean
+	isWeChat(): boolean
+
+	isWalletMobileApp(): boolean
 }
 
 // util
