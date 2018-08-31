@@ -111,6 +111,26 @@
 		</div>
 		-->
 
+		<hr>
+		<h3><code>Nasa.ready()</code></h3>
+		<div class="api-descr">
+			<div class="text">
+				<p>用于自定义 API endpoint 等配置。</p>
+			</div>
+			<textarea autocomplete="off" placeholder="input contract addr in specific format...">
+Nasa.ready(() => {
+	if (!Nasa.ua.isWalletExtensionInstalled()) {
+		alert('请先安装星云钱包 Chrome 扩展！')
+	} else {
+		Nasa.user.getAddr().then((addr) => {
+			alert('您的钱包地址是：\n' + addr)
+		})
+	}
+})
+			</textarea>
+			<button class="cm-btn" id="core--ready">Try</button>
+		</div>
+
 	</section>
 </section>
 

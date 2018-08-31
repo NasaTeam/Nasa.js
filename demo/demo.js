@@ -3,20 +3,33 @@
 void function () {
 'use strict'
 
-	const ERROR_ARGS = `Error: Syntax error in args field!
-	
-	* 多个参数之间请用逗号分隔
-	* 如果不需要传入参数，则留空即可`
+	const ERROR_ARGS = `
+Error: Syntax error in args field!
 
-	const ERROR_CORE_CONFIG = `Error: Syntax error in your input!
-	
-	* 请填写一个对象字面量
-	* 不需要严格遵守 JSON 规范`
+* 多个参数之间请用逗号分隔
+* 如果不需要传入参数，则留空即可
+`.trim()
 
-	const ERROR_CONTRACT_CONFIG = `Error: Syntax error in your input!
-	
-	* 请填写一个对象字面量
-	* 不需要严格遵守 JSON 规范`
+	const ERROR_CORE_CONFIG = `
+Error: Syntax error in your input!
+
+* 请填写一个对象字面量
+* 不需要严格遵守 JSON 规范
+`.trim()
+
+	const ERROR_CORE_READY = `
+Error: Syntax error in your input!
+
+* Runtime Error: {{ RUNTIME_ERROR }}
+* 请填写一段合法的 JS 代码
+`.trim()
+
+	const ERROR_CONTRACT_CONFIG = `
+Error: Syntax error in your input!
+
+* 请填写一个对象字面量
+* 不需要严格遵守 JSON 规范
+`.trim()
 
 	////////////////////  core  ////////////////////
 	$('#core--query').on('click', function () {
@@ -176,6 +189,21 @@ void function () {
 		}
 	})
 	*/
+
+	// prepare textarea
+	const $textareaReady = $('#core--ready').siblings('textarea')
+	$textareaReady.html($textareaReady.html().trim())
+
+	$('#core--ready').on('click', function () {
+		const value = $textareaReady.val().trim()
+		try {
+			eval(value)
+		} catch (e) {
+			const msg = e.message
+			alert(ERROR_CORE_READY.replace('{{ RUNTIME_ERROR }}', msg))
+			return
+		}
+	})
 
 
 	////////////////////  contract  ////////////////////
