@@ -107,11 +107,45 @@ gulp.task('readme', gulpfiles.concat({
 	},
 }))
 
-gulp.task('typing', gulpfiles.copy({
-	src: myPath.src + 'index.d.ts',
-	dest: myPath.dest,
+gulp.task('typing', gulpfiles.concat({
+	rules: {
+		'nasa.d.ts': [
+			'./node_modules/bignumber.js/bignumber.d.ts',
+			path.join(myPath.src, 'index.d.ts'),
+		]
+	},
+	dest: './dist',
 	config: {
-		rename: 'nasa.d.ts'
+		pipes: [
+			{
+				plugin: 'replace',
+				config: [
+					'import BigNumber from \'bignumber.js\'',
+					'',
+				],
+			},
+			{
+				plugin: 'replace',
+				config: [
+					'export default BigNumber;',
+					'',
+				],
+			},
+			{
+				plugin: 'replace',
+				config: [
+					/export interface/g,
+					'interface',
+				],
+			},
+			{
+				plugin: 'replace',
+				config: [
+					/export class/g,
+					'declare class',
+				],
+			}
+		]
 	}
 }))
 
