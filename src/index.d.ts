@@ -78,13 +78,28 @@ type Call = (contract: string, fnName: string, args?: any[], options?: CallOptio
 
 // tx - checkTx
 
-interface CheckTxResult<T extends object = {}> {
-	code: number
-	data: T
-	msg: string
+interface CheckTxResult {
+	type: 'call' | 'binary'
+	nonce: number
+	gasPrice: string
+	gasLimit: string
+	gasUsed: string
+	chainId: string
+	from: string
+	to: string
+	value: string
+	hash: string
+	status: 0 | 1 | 2
+	timestamp: number
+	execResult: any
+	execError: string
 }
 
-type CheckTx = <R extends CheckTxResult, T extends object>(sn: string, options?: T) => Promise<CheckTxResult>
+interface CheckTxOptions {
+	noWait?: boolean
+}
+
+type CheckTx = (sn: string, options?: CheckTxOptions) => Promise<CheckTxResult>
 
 // tx
 
