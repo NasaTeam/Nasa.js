@@ -125,6 +125,12 @@ interface Env {
 	set(envName: EnvName): void
 
 	get(): EnvName
+
+	MAIN: string
+	TEST: string
+	LOCAL: string
+	MAINNET: string
+	TESTNET: string
 }
 
 interface NasaInstance {
