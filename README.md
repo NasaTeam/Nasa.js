@@ -85,7 +85,7 @@ Nasa.js 的 dist 文件已经把所有外部依赖都打包进来了，因此可
 
 * 如果你的 DApp 加载 neb.js 只是为了向合约查询数据<!--或查询交易结果-->，则建议把相关代码迁移到 Nasa.js。这样你的 DApp 就不需要加载 neb.js 了。
 
-* 由于 Nasa.js 本身已经打包了 nebPay 的源码，因此你不需要重复加载 nebPay。使用 `Nasa.nebPay` 即可以取代你代码中的 `nebPay` 实例，详情参见 [此文档](https://github.com/NasaTeam/Nasa.js/issues/2#dependency)。
+* 由于 Nasa.js 本身已经打包了 nebPay 的源码，因此你不需要重复加载 nebPay。使用 `Nasa.nebPay` 即可以取代你代码中的 `nebPay` 实例，详情参见 [此文档](https://github.com/NasaTeam/Nasa.js/issues/15#dependency)。
 
 #### 我需要的某个功能 Nasa.js 还不支持，怎么办？
 
