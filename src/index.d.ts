@@ -35,16 +35,19 @@ interface Core {
 
 // contract - query
 
-interface QueryResult {
-	result: {
-		estimate_gas: string
-		execute_err: string
-		result: string
-	}
-	error: string
+interface ExecResult {
+	key: string
+	value: string
+	author: string
 }
 
-type Query = <R extends QueryResult>(contract: string, fnName: string, args?: any[], options?: object) => Promise<R>
+interface QueryResult {
+	estimateGas: string
+	execError: string
+	execResult: ExecResult
+}
+
+type Query = (contract: string, fnName: string, args?: any[], options?: object) => Promise<QueryResult>
 
 // contract
 
