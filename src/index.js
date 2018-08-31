@@ -34,6 +34,7 @@ Nasa.config = Nasa.core.config
 Nasa.query = Nasa.contract.query
 Nasa.call = Nasa.tx.call
 Nasa.checkTx = Nasa.tx.checkTx
+Nasa.ready = Nasa.util.ready
 
 // alias
 Nasa.ua.isNasNano = Nasa.ua.isWalletMobileApp
