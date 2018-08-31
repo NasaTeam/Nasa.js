@@ -132,6 +132,8 @@ interface Ua {
 	isWeChat(): boolean
 
 	isWalletMobileApp(): boolean
+
+	isNasNano(): boolean
 }
 
 // util
