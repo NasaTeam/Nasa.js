@@ -149,6 +149,27 @@ gulp.task('typing', gulpfiles.concat({
 	}
 }))
 
+// for demo page
+gulp.task('lib', gulpfiles.concat({
+	rules: {
+		'lib.js': [
+			'./node_modules/underscore/underscore.js',
+			'./node_modules/zepto.js/dist/zepto.js',
+			'./node_modules/cmui-gearbox/dist/gearbox.js',
+			'./node_modules/cmui/dist/cmui.js',
+		],
+	},
+	dest: './demo/',
+	config: {
+		pipes: [
+			{
+				plugin: 'uglify',
+				config: {},
+			},
+		]
+	},
+}))
+
 gulp.task('dist', gulp.series([
 	'clean',
 	'deps',

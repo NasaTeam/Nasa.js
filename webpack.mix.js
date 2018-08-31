@@ -61,14 +61,6 @@ if (process.env.MIX_MODE === 'watch') {
 // tasks - js
 mix.js('./src/index.js', './.tmp/nasa-raw.js')
 
-// task - demo - js
-mix.combine([
-	'./node_modules/underscore/underscore.js',
-	'./node_modules/zepto.js/dist/zepto.js',
-	'./node_modules/cmui-gearbox/dist/gearbox.js',
-	'./node_modules/cmui/dist/cmui.js',
-], './demo/lib.js')
-
 // task - demo - css
 mix.stylus('./demo/src/index.styl', './demo/')
 
