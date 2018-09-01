@@ -1,14 +1,14 @@
 import {
 	supportFetch,
-	supportStringIncludes,
-	supportArrayIncludes,
+	supportStringProtoIncludes,
+	supportArrayProtoIncludes,
 	supportObjectAssign,
 } from './_detect-feature'
 
 function isSupported() {
 	return supportFetch()
-		&& supportStringIncludes()
-		&& supportArrayIncludes()
+		&& supportStringProtoIncludes()
+		&& supportArrayProtoIncludes()
 		&& supportObjectAssign()
 }
 

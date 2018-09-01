@@ -1,19 +1,22 @@
 function supportFetch() {
 	return typeof window.fetch === 'function'
 }
-function supportStringIncludes() {
+function supportStringProtoIncludes() {
 	return typeof String.prototype.includes === 'function'
 }
-function supportArrayIncludes() {
+function supportArrayProtoIncludes() {
 	return typeof Array.prototype.includes === 'function'
 }
 function supportObjectAssign() {
 	return typeof Object.assign === 'function'
 }
 
+// TODO Promise
+// TODO ArrayIsArray
+
 export {
 	supportFetch,
-	supportStringIncludes,
-	supportArrayIncludes,
+	supportStringProtoIncludes,
+	supportArrayProtoIncludes,
 	supportObjectAssign,
 }
