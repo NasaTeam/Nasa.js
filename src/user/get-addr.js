@@ -8,7 +8,7 @@ export function getAddr() {
 	if (!isWalletExtensionInstalled()) {
 		return Promise.reject(new Error(error.EXTENSION_NOT_INSTALLED))
 	}
-	// 注意：每次都要向钱包扩展问一下，因为用户可能会切换钱包
+	// 注意：每次都要向钱包扩展问一下，因为用户随时可能更换钱包
 
 	// See: https://github.com/NasaTeam/Nasa.js/issues/17
 	// new implement

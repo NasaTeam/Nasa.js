@@ -27,7 +27,6 @@ function isWalletExtensionInstalled() {
 
 // ========== v0.3 删除以下代码 ==========
 // simulate NasExtWallet, for low version NasExtWallet + high version nebPay
-// TODO 这个补丁需要移到 init() 方法里
 if (isWalletExtensionInstalled() && !window.NasExtWallet) {
 	window.NasExtWallet = {}
 }
