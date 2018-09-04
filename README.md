@@ -101,12 +101,21 @@ Nasa.js 的 dist 文件已经把所有外部依赖都打包进来了，因此可
 
 #### 活动
 
-* [[公告] 💰 有奖征集 bug：最高奖 5 NAS ](https://github.com/NasaTeam/Nasa.js/issues/4)
+* [[公告] 💰 有奖征集 bug：最高奖 5 NAS](https://github.com/NasaTeam/Nasa.js/issues/4)
 
-#### 贡献者
+#### 贡献者 <a name="contributors">&nbsp;</a>
 
-* Bug 反馈者：@salmonx(风)、@smallke(夏日小可)
-* 建议者：希望之石、@Heasn、@newraina
+姓名 | 贡献 <sup>[*]</sup> | 备注
+:---:|---|---
+@cssmagic | 💻 🚇 ⚠️ 📖 ✅ ... | 创始人
+@newraina | 💻 🚇 👀 🤔 | 开发团队成员
+@salmonx(风) | 🐛
+@smallke(夏日小可) | 🐛
+希望之石 | 🤔
+@Heasn |🤔
+bokehlicia | [🎨](http://www.iconarchive.com/show/captiva-icons-by-bokehlicia/rocket-icon.html) | Logo 设计师
+
+> <sup>[*]</sup> These legends follow the [emoji-key](https://github.com/kentcdodds/all-contributors#emoji-key) of "all-contributors" specification. Contributions of any kind are welcome!
 
 ## 参与开发
 
@@ -126,8 +135,6 @@ Nasa.js is based on these open source projects:
 Nasa.js team is using JetBrains IDE (WebStorm) with Open Source License:
 
 * [![WebStorm Logo](https://user-images.githubusercontent.com/5830104/32258214-2f230426-bef4-11e7-8a5f-1b4f9e116e87.png)](https://www.jetbrains.com/webstorm/)
-
-Nasa.js logo is created by [bokehlicia](http://www.iconarchive.com/show/captiva-icons-by-bokehlicia/rocket-icon.html).
 
 ## License
 
