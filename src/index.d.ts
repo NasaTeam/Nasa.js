@@ -140,6 +140,8 @@ interface Util {
 	isValidTxHash(str: string): boolean
 
 	isValidPayId(str: string): boolean
+
+	ready(fn: (...args: any[]) => any): void
 }
 
 // user
@@ -174,6 +176,7 @@ interface NasaInstance {
 	query: Query
 	call: Call
 	checkTx: CheckTx
+	ready: Util['ready']
 
 	error: ErrorConstants
 	core: Core
