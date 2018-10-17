@@ -93,6 +93,11 @@ Nasa.js 的 dist 文件已经把所有外部依赖都打包进来了，因此可
 
 ***
 
+## 参与开发
+
+* [如何搭建开发环境](https://github.com/NasaTeam/Nasa.js/issues/22)
+* [如何构建](https://github.com/NasaTeam/Nasa.js/issues/21)
+
 ## 社区
 
 #### 微信群
@@ -113,14 +118,9 @@ Nasa.js 的 dist 文件已经把所有外部依赖都打包进来了，因此可
 @smallke(夏日小可) | 🐛
 希望之石 | 🤔
 @Heasn |🤔
-bokehlicia | [🎨](http://www.iconarchive.com/show/captiva-icons-by-bokehlicia/rocket-icon.html) | Logo 设计师
+bokehlicia | [🎨](http://www.iconarchive.com/show/captiva-icons-by-bokehlicia/rocket-icon.html) | Logo 图片作者
 
 > <sup>[*]</sup> These legends follow the [emoji-key](https://github.com/kentcdodds/all-contributors#emoji-key) of "all-contributors" specification. Contributions of any kind are welcome!
-
-## 参与开发
-
-* [搭建开发环境](https://github.com/NasaTeam/Nasa.js/issues/22)
-* [构建](https://github.com/NasaTeam/Nasa.js/issues/21)
 
 ***
 
