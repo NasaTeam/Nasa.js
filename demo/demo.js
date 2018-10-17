@@ -145,7 +145,7 @@ Error: Syntax error in your input!
 	})
 
 
-	$('#core--checkTx').on('click', function () {
+	$('#core--getTxResult').on('click', function () {
 		const $this = $(this)
 		const $input = $this.siblings('input[type="text"]')
 		const value = $input.val().trim()
@@ -156,7 +156,7 @@ Error: Syntax error in your input!
 		$this.text('Checking Tx...')
 			.attr(DISABLED, DISABLED)
 
-		Nasa.checkTx(value, {noWait: true})
+		Nasa.getTxResult(value, {noWait: true})
 			.then((data) => {
 				restoreBtn()
 				alert(JSON.stringify(data, null, 4))

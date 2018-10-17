@@ -36,7 +36,7 @@ import { stripErrorMsgPrefix } from '../util/_string'
 }
  */
 
-export function checkTx(sn, options = {}) {
+export function getTxResult(sn, options = {}) {
 	if (!isValidPayId(sn)) return Promise.reject(new Error(error.INVALID_ARG))
 
 	return new Promise((resolve, reject) => {
@@ -61,7 +61,7 @@ export function checkTx(sn, options = {}) {
 			nebPay.queryPayInfo(sn, getNebPayOptions())
 				.then((res) => {
 					checkingCount++
-					// console.log(`checkTx result ${checkingCount}: `, typeof res, res)
+					// console.log(`get tx result (try ${checkingCount}): `, typeof res, res)
 
 					let data = {}
 					try {

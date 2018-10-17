@@ -145,7 +145,7 @@ Promise。处理结果如下：
 	}
 	```
 
-	> * 注❶：交易流水号，可通过 [`Nasa.checkTx()`](#core-api--checkTx) 查询交易状态和调用结果。
+	> * 注❶：交易流水号，可通过 [`Nasa.getTxResult()`](#core-api--getTxResult) 查询交易状态和调用结果。
 	> * 注❷：交易哈希，交易在链上的真正标识。⚠️ 注意：
 	> 	* 仅在 Chrome 钱包扩展环境下，才有此字段。
 	> 	* 请留意 txHash 的拼写。
@@ -160,7 +160,7 @@ Promise。处理结果如下：
 	钱包扩展没有导入钱包 | `Nasa.error.EXTENSION_NO_WALLET`
 	钱包扩展发送流水号失败 | `Nasa.error.PAY_ID_REG_FAILED`
 
-### `Nasa.checkTx(payId)` <a name="core-api--checkTx">&nbsp;</a>
+### `Nasa.getTxResult(payId)` <a name="core-api--getTxResult">&nbsp;</a>
 
 查询交易结果。
 

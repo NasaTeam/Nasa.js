@@ -80,9 +80,9 @@ interface CallOptions {
 
 type Call = (contract: string, fnName: string, args?: any[], options?: CallOptions) => Promise<CallResult>
 
-// tx - checkTx
+// tx - getTxResult
 
-interface CheckTxResult {
+interface TxResult {
 	type: 'call' | 'binary'
 	nonce: number
 	gasPrice: string
@@ -99,16 +99,16 @@ interface CheckTxResult {
 	execError: string
 }
 
-interface CheckTxOptions {
+interface GetTxResultOptions {
 	noWait?: boolean
 }
 
-type CheckTx = (sn: string, options?: CheckTxOptions) => Promise<CheckTxResult>
+type GetTxResult = (sn: string, options?: GetTxResultOptions) => Promise<TxResult>
 
 // tx
 
 interface Tx {
-	checkTx: CheckTx
+	checkTx: GetTxResult
 	call: Call
 }
 
@@ -175,7 +175,8 @@ interface NasaInstance {
 	config: Config
 	query: Query
 	call: Call
-	checkTx: CheckTx
+	getTxResult: GetTxResult
+	checkTx: GetTxResult	// deprecated
 	ready: Util['ready']
 
 	error: ErrorConstants

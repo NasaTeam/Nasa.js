@@ -65,14 +65,14 @@
 			<input autocomplete="off" type="text" name="args" placeholder="function args, separated by commas..." value="'Nasa-demo', 'Posted from Nasa.js demo page.'">
 			<button class="cm-btn" id="core--call">Call</button>
 			<div class="extra">
-				<p>最后一次交易的流水号和 txHash 如下，您可以通过下面的 <code>Nasa.checkTx()</code> 方法来查询交易结果。</p>
+				<p>最后一次交易的流水号<!--和 txHash -->如下，您可以通过下面的 <code>Nasa.getTxResult()</code> 方法来查询交易结果。</p>
 				<input autocomplete="off" type="text" name="payId" value="">
-				<input autocomplete="off" type="text" name="txHash" value="">
+				<!--<input autocomplete="off" type="text" name="txHash" value="">-->
 			</div>
 		</div>
 
 		<hr>
-		<h3><code>Nasa.checkTx()</code></h3>
+		<h3><code>Nasa.getTxResult()</code></h3>
 		<div class="api-descr">
 			<div class="text">
 				<p>用于查询交易结果。</p>
@@ -81,7 +81,7 @@
 				</blockquote>
 			</div>
 			<input autocomplete="off" type="text" placeholder="input a pay id..." value="hFsRrIJ8vtlhEL9ASkEmRikO4r1PRd5T">
-			<button class="cm-btn" id="core--checkTx">Check</button>
+			<button class="cm-btn" id="core--getTxResult">Check</button>
 		</div>
 
 		<!--
@@ -115,7 +115,7 @@
 		<h3><code>Nasa.ready()</code></h3>
 		<div class="api-descr">
 			<div class="text">
-				<p>用于自定义 API endpoint 等配置。</p>
+				<p>用于在合适的时机执行应用的初始化函数。</p>
 			</div>
 			<textarea autocomplete="off" placeholder="input contract addr in specific format...">
 Nasa.ready(() => {
