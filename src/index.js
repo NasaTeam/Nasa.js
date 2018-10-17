@@ -33,11 +33,17 @@ const Nasa = {
 Nasa.config = Nasa.core.config
 Nasa.query = Nasa.contract.query
 Nasa.call = Nasa.tx.call
-Nasa.checkTx = Nasa.tx.checkTx
+Nasa.getTxResult = Nasa.tx.getTxResult
 Nasa.ready = Nasa.util.ready
 
 // alias
 Nasa.ua.isNasNano = Nasa.ua.isWalletMobileApp
+
+// deprecated api
+Nasa.checkTx = function (arg1, arg2) {
+	console.warn('[Nasa.js] `.checkTx()` is deprecated, use `.getTxResult()` instead!')
+	return Nasa.tx.getTxResult(arg1, arg2)
+}
 
 // init
 init()
