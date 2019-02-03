@@ -191,4 +191,8 @@ interface NasaInstance {
 
 declare const Nasa: NasaInstance
 
+declare global {
+    	const Nasa: NasaInstance
+}
+
 export default Nasa
