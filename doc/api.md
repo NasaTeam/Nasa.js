@@ -304,7 +304,7 @@ Nasa.contract.set({
 
 #### 参数
 
-* `contractName ` —— 字符串。合约名称。如果此参数为空值或假值，则取 `'default'`。
+* `contractName` —— 字符串。合约名称。如果此参数为空值或假值，则取 `'default'`。
 
 #### 返回值
 
